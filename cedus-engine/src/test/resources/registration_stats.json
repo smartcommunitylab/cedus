@@ -1,0 +1,36 @@
+[
+	{
+		"year": "2016",
+		"values": [
+			{
+				"name": "Primaria",
+				"value": 100
+			},
+			{
+				"name": "Secondaria di primo grado",
+				"value": 200
+			},
+			{
+				"name": "Secondaria di secondo grado",
+				"value": 300
+			}
+		]
+	},
+	{
+		"year": "2017",
+		"values": [
+			{
+				"name": "Primaria",
+				"value": 300
+			},
+			{
+				"name": "Secondaria di primo grado",
+				"value": 200
+			},
+			{
+				"name": "Secondaria di secondo grado",
+				"value": 100
+			}
+		]
+	}
+]
