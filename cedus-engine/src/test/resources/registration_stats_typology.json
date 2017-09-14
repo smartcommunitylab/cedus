@@ -1,0 +1,36 @@
+[
+	{
+		"year": "2016",
+		"values": [
+			{
+				"name": "LICEO LINGUISTICO",
+				"value": 100
+			},
+			{
+				"name": "ISTITUTO D'ARTE",
+				"value": 200
+			},
+			{
+				"name": "ISTITUTO TECNICO INDUSTRIALE",
+				"value": 300
+			}
+		]
+	},
+	{
+		"year": "2017",
+		"values": [
+			{
+				"name": "IST.PROF.PER L'AGRICOLTURA",
+				"value": 300
+			},
+			{
+				"name": "LICEO SCIENTIFICO",
+				"value": 200
+			},
+			{
+				"name": "ISTITUTO TECNICO AGRARIO",
+				"value": 100
+			}
+		]
+	}
+]

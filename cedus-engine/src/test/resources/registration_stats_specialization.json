@@ -1,0 +1,36 @@
+[
+	{
+		"year": "2016",
+		"values": [
+			{
+				"name": "LICEO DELLE SCIENZE SOCIALI",
+				"value": 100
+			},
+			{
+				"name": "TECNOLOGICO",
+				"value": 200
+			},
+			{
+				"name": "CFP",
+				"value": 300
+			}
+		]
+	},
+	{
+		"year": "2017",
+		"values": [
+			{
+				"name": "ISTITUTO ENOTECNICO",
+				"value": 300
+			},
+			{
+				"name": "ARTISTICO",
+				"value": 200
+			},
+			{
+				"name": "ECONOMICO",
+				"value": 100
+			}
+		]
+	}
+]

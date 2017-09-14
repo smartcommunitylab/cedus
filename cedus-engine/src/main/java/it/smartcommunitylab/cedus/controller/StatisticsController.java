@@ -8,6 +8,7 @@ import it.smartcommunitylab.cedus.model.stats.RegistrationStats;
 import it.smartcommunitylab.cedus.storage.RepositoryManager;
 
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -47,24 +48,45 @@ public class StatisticsController {
 			@RequestParam(required=false) String tipologia,
 			@RequestParam(required=false) String indirizzo,
 			HttpServletRequest request) throws Exception {
-		List<RegistrationStats> result = getMockupStats(mockupDir);
+		List<RegistrationStats> result = new ArrayList<RegistrationStats>();
+		if(Utils.isNotEmpty(ordine)) {
+			result = getMockupStatsByOrder(ordine);
+		} else if(Utils.isNotEmpty(tipologia)) {
+			result = getMockupStatsByTypology(tipologia);
+		} else if(Utils.isNotEmpty(indirizzo)) {
+			result = getMockupStatsBySpecialization(indirizzo);
+		}
 		if(logger.isInfoEnabled()) {
 			logger.info(String.format("getRegistrationStats: %s - %s - %s => %s", 
 					ordine, tipologia, indirizzo, result.size()));
 		}
 		return result;
-
 	}
 
-	private List<RegistrationStats> getMockupStats(String mockupDir) throws Exception {
-		FileReader fileReader = new FileReader(mockupDir + "/registration_stats.json");
+	private List<RegistrationStats> getMockupStatsByOrder(String ordine) throws Exception {
+		String path = mockupDir + "/registration_stats_order.json";
+		return getRegistrationStatsFromJson(path);
+	}
+	
+	private List<RegistrationStats> getMockupStatsByTypology(String tipologia) throws Exception {
+		String path = mockupDir + "/registration_stats_typology.json";
+		return getRegistrationStatsFromJson(path);
+	}
+	
+	private List<RegistrationStats> getMockupStatsBySpecialization(String tipologia) throws Exception {
+		String path = mockupDir + "/registration_stats_specialization.json";
+		return getRegistrationStatsFromJson(path);
+	}
+	
+	private List<RegistrationStats> getRegistrationStatsFromJson(String path) throws Exception {
+		FileReader fileReader = new FileReader(path);
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		List<RegistrationStats> result = objectMapper.readValue(fileReader, 
 				new TypeReference<List<RegistrationStats>>() {});
 		return result;
 	}
-	
+
 	@ExceptionHandler({EntityNotFoundException.class, StorageException.class})
 	@ResponseStatus(value=HttpStatus.BAD_REQUEST)
 	@ResponseBody
