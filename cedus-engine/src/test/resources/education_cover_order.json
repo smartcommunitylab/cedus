@@ -1,0 +1,32 @@
+{
+	"tuList": [
+		{
+    	"id" : "86f0c66a-a2ec-4aff-9b08-c92ab04ab421",
+    	"name" : "ISTITUTO TECNICO PER IL SETTORE ECONOMICO - PREDAZZO",
+    	"description" : "SETTORE ECONOMICO",
+    	"address" : "CORSO A.DEGASPERI 14   PREDAZZO (TN)",
+    	"instituteId" : "310df7bf-89e7-4336-bd21-3126c8c4be7e",
+    	"origin" : "INFOTNISTRUZIONE",
+    	"extId" : "2239057",
+    	"codiceIstat": "022147",
+    	"geocode": [11.598851, 46.311343]
+		}
+	],
+	"districtMap": {
+		"022147": {
+			"codiceIstat": "022147",
+			"carDistance": 27.5,
+			"transitDistance": 31.7
+		},
+		"022205": {
+			"codiceIstat": "022205",
+			"carDistance": 45.5,
+			"transitDistance": 48.7
+		},
+		"022050": {
+			"codiceIstat": "022050",
+			"carDistance": 38.5,
+			"transitDistance": 42.7
+		}		
+	}
+}
