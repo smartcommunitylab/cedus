@@ -16,8 +16,6 @@
 
 package it.smartcommunitylab.cedus.config;
 
-import it.smartcommunitylab.cedus.storage.RepositoryManager;
-
 import java.net.UnknownHostException;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,22 +27,29 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.mongodb.MongoException;
+
+import it.smartcommunitylab.cedus.storage.RepositoryManager;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import com.mongodb.MongoException;
-
 @Configuration
 @EnableAsync
 @EnableScheduling
 @EnableSwagger2
 public class AppConfig extends WebMvcConfigurerAdapter {
+
+	private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
+			"classpath:/META-INF/resources/", "classpath:/resources/",
+			"classpath:/static/", "classpath:/public/" };	
+
 
 	@Autowired
 	@Value("${swagger.title}")
@@ -82,10 +87,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		return new RepositoryManager();
 	}
 	
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-	    registry.addViewController("/").setViewName("redirect:/index.html");
-	}
 	
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
@@ -113,4 +114,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     return result;
   }
 	
+
+	 @Override
+	 public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		 registry.addResourceHandler("/**").addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);		 
+	 }
+
 }
