@@ -1,6 +1,5 @@
 package it.smartcommunitylab.cedus.controller;
 
-import java.io.FileReader;
 import java.util.List;
 import java.util.Map;
 
@@ -24,8 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 
@@ -53,6 +50,10 @@ public class EducationController {
 	private String csUrl;	
 	
 	@Autowired
+	@Value("${cedusToken}")	
+	private String token;		
+	
+	@Autowired
 	private RepositoryManager dataManager;
 	
 	@Autowired
@@ -67,14 +68,14 @@ public class EducationController {
 			HttpServletRequest request) throws Exception {
 		EducationCover result = new EducationCover();
 
-		String bearer = request.getHeader("Authorization");
+//		String bearer = request.getHeader("Authorization");
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String url = csUrl + "/api/tu?";
 		url += "ordine=" + ((ordine != null) ? ordine : "");
 		url += "&tipologia=" + ((tipologia != null) ? tipologia : "");
 		url += "&indirizzo=" + ((indirizzo != null) ? indirizzo : "");
-		ResponseEntity<String> res = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<Object>(null, createHeaders(bearer)), String.class);	
+		ResponseEntity<String> res = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<Object>(null, createHeaders()), String.class);	
 
 		String data = res.getBody();	
 		
@@ -88,40 +89,38 @@ public class EducationController {
 		}
 		result.setTuList(tuList);
 		
+		townsData.fillTeachingUnitCoords(tuList);
 		Map<String, DistrictDistance> districtMap = townsData.fillDistrictMap(tuList, filter);
 		result.setDistrictMap(districtMap);
 		
 		return result;
 	}
 	
-	private void completeDistances(EducationCover ec, SeparationType filter) {
-		Map<String, DistrictDistance> districtMap = townsData.fillDistrictMap(ec.getTuList(), filter);
-		ec.setDistrictMap(districtMap);
-	}
 
-	private EducationCover getMockupStatsByOrder(String ordine) throws Exception {
-		String path = mockupDir + "/education_cover_order.json";
-		return getEducationCoverStatsFromJson(path);
-	}
-	
-	private EducationCover getMockupStatsByTypology(String tipologia) throws Exception {
-		String path = mockupDir + "/education_cover_order.json";
-		return getEducationCoverStatsFromJson(path);
-	}
-	
-	private EducationCover getMockupStatsBySpecialization(String tipologia) throws Exception {
-		String path = mockupDir + "/education_cover_order.json";
-		return getEducationCoverStatsFromJson(path);
-	}
-	
-	private EducationCover getEducationCoverStatsFromJson(String path) throws Exception {
-		FileReader fileReader = new FileReader(path);
-		ObjectMapper objectMapper = new ObjectMapper();
-		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		EducationCover result = objectMapper.readValue(fileReader, 
-				new TypeReference<EducationCover>() {});
-		return result;
-	}
+
+//	private EducationCover getMockupStatsByOrder(String ordine) throws Exception {
+//		String path = mockupDir + "/education_cover_order.json";
+//		return getEducationCoverStatsFromJson(path);
+//	}
+//	
+//	private EducationCover getMockupStatsByTypology(String tipologia) throws Exception {
+//		String path = mockupDir + "/education_cover_order.json";
+//		return getEducationCoverStatsFromJson(path);
+//	}
+//	
+//	private EducationCover getMockupStatsBySpecialization(String tipologia) throws Exception {
+//		String path = mockupDir + "/education_cover_order.json";
+//		return getEducationCoverStatsFromJson(path);
+//	}
+//	
+//	private EducationCover getEducationCoverStatsFromJson(String path) throws Exception {
+//		FileReader fileReader = new FileReader(path);
+//		ObjectMapper objectMapper = new ObjectMapper();
+//		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//		EducationCover result = objectMapper.readValue(fileReader, 
+//				new TypeReference<EducationCover>() {});
+//		return result;
+//	}
 
 	@ExceptionHandler({EntityNotFoundException.class, StorageException.class})
 	@ResponseStatus(value=HttpStatus.BAD_REQUEST)
@@ -147,13 +146,21 @@ public class EducationController {
 		return Utils.handleError(exception);
 	}	
 	
-	HttpHeaders createHeaders(String bearer) {
+	HttpHeaders createHeaders() {
 		return new HttpHeaders() {
 			{
-				set("Authorization", bearer);
+				set("Authorization", "Bearer " + token);
 			}
 		};
-	}	
+	}		
+	
+//	HttpHeaders createHeaders(String bearer) {
+//		return new HttpHeaders() {
+//			{
+//				set("Authorization", bearer);
+//			}
+//		};
+//	}	
 	
 	
 }
