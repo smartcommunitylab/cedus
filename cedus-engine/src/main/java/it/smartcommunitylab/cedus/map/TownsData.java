@@ -204,6 +204,18 @@ public class TownsData {
 		}
 	}
 
+	public void fillTeachingUnitCoords(List<TeachingUnit> tu) {
+		tu.forEach(x -> {
+			Town town = townsByIstat.get(x.getCodiceIstat());
+			if (town != null) {
+				Double[] coords = new Double[2];
+				coords[0] = town.getLon();
+				coords[1] = town.getLat();
+				x.setGeocode(coords);
+			}
+		});
+	}
+	
 	public Map<String, DistrictDistance> fillDistrictMap(List<TeachingUnit> tu, SeparationType filter) {
 		Map<String, DistrictDistance> districtMap = Maps.newTreeMap();
 		List<Town> tuTowns = Lists.newArrayList();
