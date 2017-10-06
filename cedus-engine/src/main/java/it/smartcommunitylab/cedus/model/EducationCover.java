@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class EducationCover {
 	private List<TeachingUnit> tuList = new ArrayList<TeachingUnit>();
-	private Map<String, DisctrictDistance> districtMap = new HashMap<String, DisctrictDistance>();
+	private Map<String, DistrictDistance> districtMap = new HashMap<String, DistrictDistance>();
 	
 	public List<TeachingUnit> getTuList() {
 		return tuList;
@@ -15,10 +15,10 @@ public class EducationCover {
 	public void setTuList(List<TeachingUnit> tuList) {
 		this.tuList = tuList;
 	}
-	public Map<String, DisctrictDistance> getDistrictMap() {
+	public Map<String, DistrictDistance> getDistrictMap() {
 		return districtMap;
 	}
-	public void setDistrictMap(Map<String, DisctrictDistance> districtMap) {
+	public void setDistrictMap(Map<String, DistrictDistance> districtMap) {
 		this.districtMap = districtMap;
 	}
 	
