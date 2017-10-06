@@ -1,9 +1,11 @@
 package it.smartcommunitylab.cedus.model;
 
-public class DisctrictDistance {
+public class DistrictDistance {
 	private String codiceIstat;
 	private Double carDistance;
 	private Double transitDistance;
+	private Double carTime;
+	private Double transitTime;	
 	
 	public String getCodiceIstat() {
 		return codiceIstat;
@@ -22,5 +24,17 @@ public class DisctrictDistance {
 	}
 	public void setTransitDistance(Double transitDistance) {
 		this.transitDistance = transitDistance;
+	}
+	public Double getCarTime() {
+		return carTime;
+	}
+	public void setCarTime(Double carTime) {
+		this.carTime = carTime;
+	}
+	public Double getTransitTime() {
+		return transitTime;
+	}
+	public void setTransitTime(Double transitTime) {
+		this.transitTime = transitTime;
 	}
 }
