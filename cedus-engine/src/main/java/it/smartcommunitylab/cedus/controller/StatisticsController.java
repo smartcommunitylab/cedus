@@ -1,12 +1,5 @@
 package it.smartcommunitylab.cedus.controller;
 
-import it.smartcommunitylab.cedus.common.Utils;
-import it.smartcommunitylab.cedus.exception.EntityNotFoundException;
-import it.smartcommunitylab.cedus.exception.StorageException;
-import it.smartcommunitylab.cedus.exception.UnauthorizedException;
-import it.smartcommunitylab.cedus.model.stats.RegistrationStats;
-import it.smartcommunitylab.cedus.storage.RepositoryManager;
-
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +24,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import it.smartcommunitylab.cedus.common.Utils;
+import it.smartcommunitylab.cedus.exception.EntityNotFoundException;
+import it.smartcommunitylab.cedus.exception.StorageException;
+import it.smartcommunitylab.cedus.exception.UnauthorizedException;
+import it.smartcommunitylab.cedus.model.stats.RegistrationStats;
+import it.smartcommunitylab.cedus.storage.RepositoryManager;
 
 @Controller
 public class StatisticsController {
@@ -49,11 +50,11 @@ public class StatisticsController {
 			@RequestParam(required=false) String indirizzo,
 			HttpServletRequest request) throws Exception {
 		List<RegistrationStats> result = new ArrayList<RegistrationStats>();
-		if(Utils.isNotEmpty(ordine)) {
+		if(!StringUtils.isEmpty(ordine)) {
 			result = getMockupStatsByOrder(ordine);
-		} else if(Utils.isNotEmpty(tipologia)) {
+		} else if(!StringUtils.isEmpty(tipologia)) {
 			result = getMockupStatsByTypology(tipologia);
-		} else if(Utils.isNotEmpty(indirizzo)) {
+		} else if(!StringUtils.isEmpty(indirizzo)) {
 			result = getMockupStatsBySpecialization(indirizzo);
 		}
 		if(logger.isInfoEnabled()) {

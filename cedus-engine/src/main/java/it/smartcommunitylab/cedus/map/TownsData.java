@@ -206,6 +206,10 @@ public class TownsData {
 
 	public void fillTeachingUnitCoords(List<TeachingUnit> tu) {
 		tu.forEach(x -> {
+			if (x.getCodiceIstat() == null) {
+				logger.error("No Comune ISTAT code: "+x.getName());
+				return;
+			}
 			Town town = townsByIstat.get(x.getCodiceIstat());
 			if (town != null) {
 				Double[] coords = new Double[2];

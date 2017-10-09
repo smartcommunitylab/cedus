@@ -1,11 +1,10 @@
 package it.smartcommunitylab.cedus.model;
 
-import it.smartcommunitylab.cedus.common.Utils;
-
 import java.util.Date;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.util.StringUtils;
 
 public class BaseObject {
 	@Id
@@ -51,7 +50,7 @@ public class BaseObject {
 		boolean result = false; 
 		if(o instanceof BaseObject) {
 			BaseObject object = (BaseObject) o;
-			if(Utils.isNotEmpty(object.getId())) {
+			if(!StringUtils.isEmpty(object.getId())) {
 				if(object.getId().equals(id)) {
 					result = true;
 				}
