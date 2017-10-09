@@ -2,15 +2,225 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Stats</title>
-
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Stats</title>
+	
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="../css/customStats.css"/>
+	
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>	
+	
+	<script type="text/javascript" src="../js/gstaticChart.js"></script>
+	<script type="text/javascript" src="../js/customStats.js"></script>
 </head>
 
 <body>
-    Statistiche
+
+<nav class="navbar navbar-inverse" style='background-color: #FFC300;border-color: #FFC300;'>
+	
+   	<div class="row">
+		 <div class="col-md-2" style='padding-left: 13%'>
+		 		<img src='../images/logo.png' style='max-width: 150px; max-height: 80px'/>
+		 </div>
+		 <div class="col-md-10" style='padding-left: 8%;padding-top: 3%;'> 
+		 		<p>ISTITUTI SCOLASTICI IN TRENTINO-STATISTICHE</p>
+		 </div>
+	  
+	</div>
+	   
+</nav>
+  
+<div class="container">
+	<ul class="nav nav-pills orange1">
+	    <li class="active"><a data-toggle="pill" href="#tabs_1">Istituti Scolastici</a></li>
+	    <li><a data-toggle="pill" href="#tabs_2">Andamento Classi</a></li>
+	    <li><a data-toggle="pill" href="#tabs_3">Verieta' Indirizzi Scolastici</a></li>
+	</ul>
+	<div class="tab-content">
+		<!--tab1 for Istituti Scolastici -->
+    	<div id="tabs_1" class="tab-pane fade in active">
+    		<div class="row" style='padding-left: 1.5%;padding-top: 3%;'>
+		  		<div class="col-md-6">
+		  			<div class="row" id='tab1level'>
+		  				<b>INPOSTA FILTRI</b>
+	  					<div class="checkbox">
+							 <label>
+							     <input type="checkbox" name="" value="" id="tab1checkbox1" checked="checked" onchange="levelModification(this,'tab1','tab1checkbox1')"/>
+							     <i class="helper"></i>Istituti Primari 
+							 </label>
+						</div>
+						<div class="checkbox">
+							<label>
+							    <input type="checkbox" name="" value="" id="tab1checkbox2" checked="checked"/>
+							    <i class="helper"></i>Istituti Secondari Primo Grado
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+							    <input type="checkbox" name="" value="" id="tab1checkbox3" checked="checked"/>
+							    <i class="helper"></i>Istituti Secondari Secondo Grado
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+							     <input type="checkbox" name="" value="" id="tab1checkbox4" checked="checked"/>
+							     <i class="helper"></i>Formazione Professionale
+							 </label>
+						</div>
+		  			</div>
+		  			<div class="row">
+		  				<b>Anni Scolastici:</b>
+		  				<div class="row" id="tab1AnniList" style='padding-left: 5%'></div>
+		  				
+						<div class="row">
+							<div class="col-md-1" id="tab1Plus" onclick="anniModification('tab1','plus')"><p style="font-size: 35px;color:#FFC300; cursor: pointer;"><b>+</b></p></div>
+							<div class="col-md-1" id="tab1Minus" onclick="anniModification('tab1','minus')"><p style="font-size: 35px;color:#FFC300; cursor: pointer;"><b>-</b></p></div>
+							<div class="col-md-10"></div>
+						</div>
+		  			</div>
+		  		</div>
+		  		<div class="col-md-6">
+		  			<div class="row" >
+		  				<div class="col-md-12" id="tab1_barChart1">
+		  				</div>
+		  				
+		  			</div>
+		  		</div>
+		  	</div>
+    		
+    	</div>
+    	<!--tab2 for Andamento Classi -->
+    	<div id="tabs_2" class="tab-pane fade">
+    		<div class="row" style='padding-left: 1.5%;padding-top: 3%;'>
+		  		<div class="col-md-6">
+		  			<div class="row">
+		  				<b>INPOSTA FILTRI</b>
+		  				<div class="checkbox">
+							 <label>
+							     <input type="checkbox" name="" value="" id="tab2checkbox1" checked="checked"/>
+							     <i class="helper"></i>Istituti Primari 
+							 </label>
+						</div>
+						<div class="checkbox">
+							<label>
+							    <input type="checkbox" name="" value="" id="tab2checkbox2" checked="checked"/>
+							    <i class="helper"></i>Istituti Secondari Primo Grado
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+							    <input type="checkbox" name="" value="" id="tab2checkbox3" checked="checked"/>
+							    <i class="helper"></i>Istituti Secondari Secondo Grado
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+							     <input type="checkbox" name="" value="" id="tab2checkbox4" checked="checked"/>
+							     <i class="helper"></i>Formazione Professionale
+							 </label>
+						</div>
+		  			</div>
+		  			<div class="row">
+		  				<b>Anni Scolastici:</b>
+		  				<div class="row" id="tab2AnniList" style='padding-left: 5%'>
+		  					
+		  				</div>
+		  				
+						<div class="row">
+							<div class="col-md-1" id="tab2Plus" onclick="anniModification('tab2','plus')"><p style="font-size: 35px;color:#FFC300; cursor: pointer;"><b>+</b></p></div>
+							<div class="col-md-1" id="tab2Minus" onclick="anniModification('tab2','minus')"><p style="font-size: 35px;color:#FFC300; cursor: pointer;"><b>-</b></p></div>
+							<div class="col-md-10"></div>
+						</div>
+		  			</div>
+		  		</div>
+		  		<div class="col-md-6">
+		  			<div class="row" >
+		  				<div class="col-md-4" id="tab2_pieChart1">  <!-- style="border: 1px solid #ccc;padding-right: 25%;" --> 
+		  				</div>
+		  				<div class="col-md-4" id="tab2_pieChart2"  >
+		  				</div>
+		  				<div class="col-md-4" id="tab2_pieChart3"  >
+		  				</div>
+		  			</div>
+		  		</div>
+		  	</div>
+    	</div>
+    	<!--tab3 for Verieta' Indirizzi Scolastici -->
+    	<div id="tabs_3" class="tab-pane fade">
+    		<div class="row" style='padding-left: 1.5%;padding-top: 3%;'>
+		  		<div class="col-md-6">
+		  			<div class="row">
+		  				<b>INPOSTA FILTRI</b>
+		  				<div class="checkbox">
+							 <label>
+							     <input type="checkbox" name="" value="" id="tab3checkbox1" checked="checked"/>
+							     <i class="helper"></i>Istituti Tecnici 
+							 </label>
+						</div>
+						<div class="checkbox">
+							<label>
+							    <input type="checkbox" name="" value="" id="tab3checkbox2" checked="checked"/>
+							    <i class="helper"></i>Istituti Linguistic
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+							    <input type="checkbox" name="" value="" id="tab3checkbox3" checked="checked"/>
+							    <i class="helper"></i>Istituti Umanistici
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+							     <input type="checkbox" name="" value="" id="tab3checkbox4" checked="checked"/>
+							     <i class="helper"></i>Istituti Professionali Formazione Professionale
+							 </label>
+						</div>
+						<div class="checkbox">
+							<label>
+							     <input type="checkbox" name="" value="" id="tab3checkbox5" checked="checked"/>
+							     <i class="helper"></i>Licei
+							 </label>
+						</div>
+						<div class="checkbox">
+							<label>
+							     <input type="checkbox" name="" value="" id="tab3checkbox6" checked="checked"/>
+							     <i class="helper"></i>Istruzione e Formazione Professionale
+							 </label>
+						</div>
+		  			</div>
+		  			<div class="row">
+		  				<b>Anni Scolastici:</b>
+		  				<div class="row" id="tab3AnniList" style='padding-left: 5%'></div>
+		  				
+						<div class="row">
+							<div class="col-md-1" id="tab3Plus" onclick="anniModification('tab3','plus')"><p style="font-size: 35px;color:#FFC300;cursor: pointer;"><b>+</b></p></div>
+							<div class="col-md-1" id="tab3Minus" onclick="anniModification('tab3','minus')"><p style="font-size: 35px;color:#FFC300;cursor: pointer;"><b>-</b></p></div>
+							<div class="col-md-10"></div>
+						</div>
+		  			</div>
+		  		</div>
+		  		<div class="col-md-6"  >
+		  			<div class="row"   >
+		  				<div class="col-md-4" id="tab3_pieChart1"  >
+		  				</div>
+		  				<div class="col-md-4" id="tab3_pieChart2">
+		  				</div>
+		  				<div class="col-md-4" id="tab3_pieChart3">
+		  				</div>
+		  			</div>
+		  		</div>
+		  	</div>
+    	</div>
+    </div>
+	
+</div>
 </body>
+	
 
 </html>
