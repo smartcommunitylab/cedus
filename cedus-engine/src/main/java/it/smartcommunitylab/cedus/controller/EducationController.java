@@ -62,6 +62,7 @@ public class EducationController {
 		EducationCover result = new EducationCover();
 
 		List<TeachingUnit> tuList = tuManager.getTeachingUnits(ordine, tipologia, indirizzo);
+		result.setTuList(tuList);
 		
 		Map<String, DistrictDistance> districtMap = townsData.fillDistrictMap(tuList, filter);
 		result.setDistrictMap(districtMap);
