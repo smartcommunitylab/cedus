@@ -7,9 +7,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Studente</title>
 
+<script th:inline="javascript">
+/*<![CDATA[*/
+	
+  var aacUrl = [[${aacUrl}]];	
+  var clientId = [[${clientId}]];
+  var redirectUri = [[${redirectUri}]];
+  
+  var apiUri = [[${apiUri}]];
+	
+  function init() {
+    var queryString = location.hash.substring(1);
+    var params = {};
+    var regex = /([^&=]+)=([^&]*)/g, m;
+    
+    var passedToken = null;
+    
+    while (m = regex.exec(queryString)) {
+      params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+      // Try to exchange the param values for an access token.
+      if (params['access_token']) {
+    	  passedToken = params['access_token'];
+    	  break;
+      }
+    }
+    
+    if (passedToken == null) {
+   	   var token = sessionStorage.access_token;
+   	    if (!token || token == 'null' || token == 'undefined') {
+   	        window.location = aacUrl + '/eauth/authorize?client_id='+clientId+'&redirect_uri='+redirectUri+'&response_type=token';      
+   	    }
+    } else {
+        sessionStorage.access_token = passedToken;
+        window.location.hash = '/';
+        window.location.reload();
+    }
+  } 
+/*]]>*/
+</script>  
 </head>
 
-<body>
+<body onload="init()">
     Studente
 </body>
 

@@ -15,6 +15,8 @@
  ******************************************************************************/
 package it.smartcommunitylab.cedus.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +28,19 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class WebController {
+
+	@Autowired
+	@Value("${aac.serverUrl}")	
+	private String aacUrl;
+	@Autowired
+	@Value("${aac.clientId}")	
+	private String clientId;
+	@Autowired
+	@Value("${aac.redirectUri}")	
+	private String redirectUri;
+	@Autowired
+	@Value("${csUrl}")	
+	private String csUrl;
 
 	@RequestMapping(value="/web/stats", method=RequestMethod.GET)
 	public ModelAndView getStats() {
@@ -41,6 +56,10 @@ public class WebController {
 	@RequestMapping(value="/web/student", method=RequestMethod.GET)
 	public ModelAndView getStudentPage() {
 		ModelAndView mv = new ModelAndView("student");
+		mv.addObject("aacUrl", aacUrl);
+		mv.addObject("clientId", clientId);
+		mv.addObject("redirectUri", redirectUri);
+		mv.addObject("apiUri", csUrl);
 		return mv;
 	}
 }
