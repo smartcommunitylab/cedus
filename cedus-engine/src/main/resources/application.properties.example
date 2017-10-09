@@ -1,0 +1,26 @@
+spring.data.mongodb.host=127.0.0.1
+spring.data.mongodb.port=27017
+spring.data.mongodb.database=Cedus
+
+server.port=6050
+server.contextPath=/cedus
+
+aac.serverUrl=https://am-dev.smartcommunitylab.it/aac
+aac.clientId=
+aac.clientSecret=
+aac.redirectUri=http://localhost:6050/cedus/web/student
+
+mockup.dir=
+towndata.dir=map_data
+
+csUrl=https://api-dev.smartcommunitylab.it/t/sco.cartella/cartella/1.0
+cedusToken=
+
+springfox.documentation.swagger.v2.path=/v2/api-docs
+swagger.title=CEDUS Project
+swagger.desc=description here
+swagger.version=1.0
+swagger.tos.url=
+swagger.contact=info@smartcommunity.it
+swagger.license=Apache License, Version 2.0
+swagger.license.url=http://www.apache.org/licenses/LICENSE-2.0
