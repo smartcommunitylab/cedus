@@ -1,6 +1,24 @@
 $(document).ready(function() {
 	initMap();
-	
+	$.ajax
+	({
+		type: "GET",
+		//dataType : 'json',
+		url: 'http://localhost:6050/cedus/api/params/ordini',
+		data: '' ,
+		success: function (data) {
+		console.log("data name:",data);
+		$.each(data,function(key, val){
+			console.log('dd:',val);
+			var strVal="\"change_div('"+val+"')\"";
+			console.log('strVal:',strVal)
+			$('#select_btn').append("<div class='row'><button type='button' class='btn btn-primary btn-block' style='width:90%' onclick="+strVal+" >"+val+"</button></div><br/>");
+		});
+		
+		//initMap(markers);	
+		},
+		failure: function() {console.log("Error!");}
+	});
 });
 function change_div(level_text){
 	var markers = [];
@@ -13,11 +31,11 @@ function change_div(level_text){
 		type: "GET",
 		//dataType : 'json',
 		url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
-		data: {ordine:1} ,
+		data: {ordine:level_text,filter:'TRANSIT_DISTANCE'} ,
 		success: function (data) {
 		console.log("data name:",data['tuList']);
 		$.each(data['tuList'],function(key, val){
-			console.log("data geocode:",val['geocode'][0]);
+			//console.log("data geocode:",val['geocode'][0]);
 			markers.push({
 			  lat: val['geocode'][1],
 			  lng: val['geocode'][0],
@@ -26,6 +44,23 @@ function change_div(level_text){
 		});
 		
 		initMap(markers);	
+		},
+		failure: function() {alert("Error!");}
+	});
+	//ajax call for tipologia
+	$.ajax
+	({
+		type: "GET",
+		//dataType : 'json',
+		url: 'https://dev.smartcommunitylab.it/cedus/api/params/Tipologie',
+		data: '' ,
+		success: function (data) {
+		console.log("data tipologia:",data);
+		$.each(data,function(key, val){
+			//console.log("data geocode:",val);
+			$("#dropdownList").append("<li><a href='#'>"+val+"</a></li>");
+		});
+			
 		},
 		failure: function() {alert("Error!");}
 	});
@@ -69,15 +104,34 @@ function initMap(markers) {
 	// Define the LatLng coordinates for the polygon's path.
 	
 	var decode=[];
+	var arrColor=[];
+	//test color
+	/*
+	var polygons = new google.maps.Polygon({
+	    //paths: decode,
+	    strokeColor: '#FFFFFF',
+	    strokeOpacity: 0.8,
+	    strokeWeight: 2,
+	    fillColor: '#494949',
+	    fillOpacity: 1
+  	});
+  	*/
+	//end test color
 	$.each(allGeoData,function(key, val){
 		decode.push(google.maps.geometry.encoding.decodePath(val['enString'][0]));
+		//polygons.setPath(google.maps.geometry.encoding.decodePath(val['enString'][0]));
+		//polygons.setMap(map);
+		arrColor.push("#ffffff");
 		if(val['enString'][1]){
 			decode.push(google.maps.geometry.encoding.decodePath(val['enString'][1]));
+			//polygons.setPath(google.maps.geometry.encoding.decodePath(val['enString'][1]))
+			//polygons.setMap(map);
 			//console.log('key: ',key,'.enString: ',val['enString'][1]);
+			arrColor.push("#494949");
 		}
 		
 	});
-
+	
 	// Construct the polygon.
   	var polygons = new google.maps.Polygon({
 	    paths: decode,
@@ -87,7 +141,9 @@ function initMap(markers) {
 	    fillColor: '#000000',
 	    fillOpacity: 1
   	});
+  	
   	polygons.setMap(map);
+  	
 	google.maps.event.trigger(map, 'resize');
   
 	}

@@ -87,10 +87,27 @@
 		</nav>
 		<div class="tab-content">
 			<!--tab1 for Percorso Formativo -->
-    		<div id="tabs_1" class="tab-pane fade in active">
+    		<div id="tabs_1" class="tab-pane fade in active" onload="initMapPointer()">
     			<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-8">
 						<div id="mapPointer" >
+						</div>
+					</div>
+					<div class="col-md-4"  >
+						<div class='row'>
+							<p><b>Il tuo percorso formativo su mappa</b></p>
+						</div><br/>
+						<div class='row'>
+							<p><b>Nome Istituto Superiore1</b></p>
+						</div>
+						<div class='row'>
+							<p><b>Nome Istituto Superiore2</b></p>
+						</div>
+						<div class='row'>
+							<p><b>Nome Istituto Superiore3</b></p>
+						</div>
+						<div class='row'>
+							<p><b>Nome Istituto Superiore4</b></p>
 						</div>
 					</div>
 				</div>
@@ -105,22 +122,24 @@
 					</div>
 					<div class="col-md-4"  >
 						<div class="row" id="select_btn">
-							<p><b>Selezione il livallo di intruzione</b></p>
+							<p><b>Scopri I'offerta formativa in Trentino</b></p>
+							<!-- 
 							<div class="row">
-								<button type="button" class="btn btn-success btn-block" onclick="change_div('Istituto Primario')">
+								<button type="button" class="btn btn-success btn-block" style="width:90%" onclick="change_div('Istituto Primario')" >
 									Istituto Primario
 								</button>
 							</div><br/>
 							<div class="row">
-								<button type="button" class="btn btn-success btn-block" onclick="change_div('Istituto Secondario Primo Grado')">
+								<button type="button" class="btn btn-success btn-block" style="width:90%" onclick="change_div('Istituto Secondario Primo Grado')">
 									Istituto Secondario Primo Grado
 								</button>
 							</div><br/>
 							<div class="row">
-								<button type="button" class="btn btn-success btn-block" onclick="change_div('Istituto Secondario Secondo Grado')">
+								<button type="button" class="btn btn-success btn-block" style="width:90%" onclick="change_div('Istituto Secondario Secondo Grado')">
 									Istituto Secondario Secondo Grado
 								</button>
 							</div>
+							 -->
 						</div>
 						<div class="row" id="select_type"  style="display: none">
 							
@@ -142,25 +161,31 @@
 										<button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Ist. Tecnico
 											<span class="caret"></span>
 										</button>
-										<ul class="dropdown-menu">
-											<li><a href="#">Ist. Tecnico</a></li>
-											<li><a href="#">Ist. Tecnico</a></li>
-											<li><a href="#">Ist. Tecnico</a></li>
+										<ul class="dropdown-menu" id="dropdownList">
+											
 										</ul>
 									</div>
 								</div>
 							</div>
+							<br/>
 							<div class='row'>
-								<div class="col-md-2"  >
+								<div class="col-md-2" style="max-width:70%;" >
 									<p>Distanza:</p>
 								</div>
-								<div class="col-md-8"  >
+								<div class="col-md-8"  style="max-width:50%;">
 									<div class="">
 										<input type="input" name="" value="" id="distanza"/>
 									</div>
 								</div>
-								<div class="col-md-2"  >
-									<p>+ - </p>
+								<div class="col-md-2"  style='padding-right: 1%;'  >
+									<div class="row">
+										<div class="col-md-6"  >
+											<p style="font-size: 35px;color:#3AAF3E;cursor: pointer;"><b>+</b></p>
+										</div>
+										<div class="col-md-6"  >
+											<p style="font-size: 35px;color:#3AAF3E;cursor: pointer;"><b>-</b></p>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class='row'>
