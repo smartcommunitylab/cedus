@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	initMap();
+	//ajax call for level
 	$.ajax
 	({
 		type: "GET",
@@ -19,13 +20,40 @@ $(document).ready(function() {
 		},
 		failure: function() {console.log("Error!");}
 	});
+	//change the map on change of dropdown value
+	$("#dropdownList").change(function(){
+		var markers = [];
+        //console.log("level data:", $('#levelText').text());
+        //ajax call for markers (filter by tipologia)
+    	$.ajax
+    	({
+    		type: "GET",
+    		//dataType : 'json',
+    		url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
+    		data: {ordine:$('#levelText').text(),tipologia:$(this).val(),filter:'TRANSIT_DISTANCE'} ,
+    		success: function (data) {
+    		console.log("data name:",data['tuList']);
+    		$.each(data['tuList'],function(key, val){
+    			//console.log("data geocode:",val['geocode'][0]);
+    			markers.push({
+    			  lat: val['geocode'][1],
+    			  lng: val['geocode'][0],
+    			  name: val['name']
+    			});
+    		});
+    		
+    		initMap(markers);	
+    		},
+    		failure: function() {console.log("Error!");}
+    	});
+    });
 });
 function change_div(level_text){
 	var markers = [];
 	$('#select_btn').hide();
 	$('#select_type').show();
 	$('#levelText').text(level_text);
-	
+	//ajax call for markers filter by level(on click level button)
 	$.ajax
 	({
 		type: "GET",
@@ -33,7 +61,7 @@ function change_div(level_text){
 		url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
 		data: {ordine:level_text,filter:'TRANSIT_DISTANCE'} ,
 		success: function (data) {
-		console.log("data name:",data['tuList']);
+		//console.log("data name:",data['tuList']);
 		$.each(data['tuList'],function(key, val){
 			//console.log("data geocode:",val['geocode'][0]);
 			markers.push({
@@ -43,11 +71,11 @@ function change_div(level_text){
 			});
 		});
 		
-		initMap(markers);	
+		initMap(markers,data['districtMap']);	
 		},
 		failure: function() {alert("Error!");}
 	});
-	//ajax call for tipologia
+	//ajax call for tipologia (fullfill the dropdown box)
 	$.ajax
 	({
 		type: "GET",
@@ -58,7 +86,8 @@ function change_div(level_text){
 		console.log("data tipologia:",data);
 		$.each(data,function(key, val){
 			//console.log("data geocode:",val);
-			$("#dropdownList").append("<li><a href='#'>"+val+"</a></li>");
+			//$("#dropdownList").append("<li><a href='#'>"+val+"</a></li>");
+			$("#dropdownList").append("<option value='"+val+"'>"+val+"</option>");
 		});
 			
 		},
@@ -72,7 +101,7 @@ function back_div(){
 	initMap();	
 }
 
-function initMap(markers) {
+function initMap(markers,districtMap) {
 	var map = new google.maps.Map(document.getElementById('map'), {
 	    zoom: 09,
 	    center: {
@@ -91,7 +120,7 @@ function initMap(markers) {
 	    <!-- mapTypeId: google.maps.MapTypeId.TERRAIN -->
 	});
 	if(markers){
-		console.log("markers:",markers);
+		//console.log("markers:",markers);
 		$.each(markers,function(key, val){
 			var marker = new google.maps.Marker({
 				position: {lat:val['lat'],lng:val['lng']},
@@ -104,32 +133,60 @@ function initMap(markers) {
 	// Define the LatLng coordinates for the polygon's path.
 	
 	var decode=[];
-	var arrColor=[];
-	//test color
-	/*
-	var polygons = new google.maps.Polygon({
-	    //paths: decode,
-	    strokeColor: '#FFFFFF',
-	    strokeOpacity: 0.8,
-	    strokeWeight: 2,
-	    fillColor: '#494949',
-	    fillOpacity: 1
-  	});
-  	*/
-	//end test color
+	var polygons = new Array();
+	
 	$.each(allGeoData,function(key, val){
+		var polyColor;
 		decode.push(google.maps.geometry.encoding.decodePath(val['enString'][0]));
-		//polygons.setPath(google.maps.geometry.encoding.decodePath(val['enString'][0]));
-		//polygons.setMap(map);
-		arrColor.push("#ffffff");
+		if(districtMap){
+			var codiceIstat="0"+val['PRO_COM'];
+			console.log("data 4 local file:",val['PRO_COM']);
+			console.log("districtMap:",districtMap[codiceIstat]);
+			
+		}
+		//console.log("districtMap:",districtMap);
+		/*
+		if(markers){
+			//console.log("markers:",markers);
+			$.each(markers,function(key2, val2){
+				//check  lat:val['lat'],lng:val['lng'] is in map and put color
+				var coord1 = new google.maps.LatLng(val2['lat'],val2['lng']);
+				var bermudaTriangle = new google.maps.Polygon({paths: google.maps.geometry.encoding.decodePath(val['enString'][0])});
+				if (google.maps.geometry.poly.containsLocation(coord1, bermudaTriangle)) {
+					console.log("marker is inside the polygon");
+					polyColor="#000000";
+					return false; 
+				} else {
+					console.log("marker is not inside the polygon");
+					polyColor="#878787";
+				}
+			});
+			
+		}
+		polygons[key] = new google.maps.Polygon({
+		    paths: google.maps.geometry.encoding.decodePath(val['enString'][0]),
+		    strokeColor: '#FFFFFF',
+		    strokeOpacity: 0.8,
+		    strokeWeight: 2,
+		    fillColor: polyColor,
+		    fillOpacity: 1
+	  	});
+		polygons[key].setMap(map);
+		*/
 		if(val['enString'][1]){
 			decode.push(google.maps.geometry.encoding.decodePath(val['enString'][1]));
-			//polygons.setPath(google.maps.geometry.encoding.decodePath(val['enString'][1]))
-			//polygons.setMap(map);
-			//console.log('key: ',key,'.enString: ',val['enString'][1]);
-			arrColor.push("#494949");
-		}
-		
+			/*
+			polygons[key] = new google.maps.Polygon({
+			    paths: google.maps.geometry.encoding.decodePath(val['enString'][1]),
+			    strokeColor: '#FFFFFF',
+			    strokeOpacity: 0.8,
+			    strokeWeight: 2,
+			    fillColor: polyColor,
+			    fillOpacity: 1
+		  	});
+			polygons[key].setMap(map);
+			*/
+		}		
 	});
 	
 	// Construct the polygon.

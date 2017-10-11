@@ -6,17 +6,21 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Studente</title>
-
-	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
 	
 	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="../css/customCoverage.css" />
-
+	<!-- Latest compiled and minified CSS 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css"/>
+	-->
 	
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
 	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+	<!-- Latest compiled and minified JavaScript 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+	-->
 	<script type="text/javascript" src="../js/allGeoEnString.js"></script>	
 	<script type="text/javascript" src="../js/customStudent.js"></script>
 <script th:inline="javascript">
@@ -157,6 +161,7 @@
 									<p>Tipologia:</p>
 								</div>
 								<div class="col-md-10"  >
+									<!-- 
 									<div class="dropdown">
 										<button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Ist. Tecnico
 											<span class="caret"></span>
@@ -165,6 +170,9 @@
 											
 										</ul>
 									</div>
+									 -->
+									 <select id="dropdownList" class="selectpicker" data-live-search="true">
+									 </select>
 								</div>
 							</div>
 							<br/>

@@ -6,6 +6,7 @@ $(document).ready(function() {
 		console.log("call initMapPointer");
 	});
 	$('#pill2').click(function(e) {
+		$('#select_btn').empty();
 		//ajax call and get level list for set button
 		$.ajax
 		({
@@ -28,15 +29,48 @@ $(document).ready(function() {
 		});
 		setTimeout(initMap, 200);
 	});
+	//change the map on change of dropdown value
+	$("#dropdownList").change(function(){
+		var markers = [];
+        console.log("level data:", $('#levelText').text());
+        //ajax call for markers (filter by tipologia)
+    	$.ajax
+    	({
+    		type: "GET",
+    		//dataType : 'json',
+    		url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
+    		data: {ordine:$('#levelText').text(),tipologia:$(this).val(),filter:'TRANSIT_DISTANCE'} ,
+    		success: function (data) {
+    		console.log("data name:",data['tuList']);
+    		$.each(data['tuList'],function(key, val){
+    			//console.log("data geocode:",val['geocode'][0]);
+    			markers.push({
+    			  lat: val['geocode'][1],
+    			  lng: val['geocode'][0],
+    			  name: val['name']
+    			});
+    		});
+    		
+    		initMap(markers);	
+    		},
+    		failure: function() {console.log("Error!");}
+    	});
+    });
 	
 });
-
+/*
+$('.selectpicker').selectpicker({
+	liveSearch: true, 
+	showTick: true, 
+	width: 'auto'
+});
+*/
 function change_div(level_text){
 	var markers = [];
 	$('#select_btn').hide();
 	$('#select_type').show();
 	$('#levelText').text(level_text);
-	
+	//ajax call for markers (filter by level)
 	$.ajax
 	({
 		type: "GET",
@@ -46,7 +80,7 @@ function change_div(level_text){
 		success: function (data) {
 		console.log("data name:",data['tuList']);
 		$.each(data['tuList'],function(key, val){
-			console.log("data geocode:",val['geocode'][0]);
+			//console.log("data geocode:",val['geocode'][0]);
 			markers.push({
 			  lat: val['geocode'][1],
 			  lng: val['geocode'][0],
@@ -58,7 +92,7 @@ function change_div(level_text){
 		},
 		failure: function() {console.log("Error!");}
 	});
-	//ajax call for tipologia
+	//ajax call for tipologia in dropdown box
 	$.ajax
 	({
 		type: "GET",
@@ -69,7 +103,8 @@ function change_div(level_text){
 		console.log("data tipologia:",data);
 		$.each(data,function(key, val){
 			//console.log("data geocode:",val);
-			$("#dropdownList").append("<li><a href='#'>"+val+"</a></li>");
+			//$("#dropdownList").append("<li><a href='#'>"+val+"</a></li>");
+			$("#dropdownList").append("<option value='"+val+"'>"+val+"</option>");
 		});
 			
 		},
