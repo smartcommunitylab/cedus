@@ -42,7 +42,7 @@ $(document).ready(function() {
     			});
     		});
     		
-    		initMap(markers);	
+    		initMap(markers,data['districtMap']);	
     		},
     		failure: function() {console.log("Error!");}
     	});
@@ -137,12 +137,29 @@ function initMap(markers,districtMap) {
 	
 	$.each(allGeoData,function(key, val){
 		var polyColor;
-		decode.push(google.maps.geometry.encoding.decodePath(val['enString'][0]));
+		var decodePaths=[];
+		//decode.push(google.maps.geometry.encoding.decodePath(val['enString'][0]));
+		decodePaths.push(google.maps.geometry.encoding.decodePath(val['enString'][0]));
 		if(districtMap){
 			var codiceIstat="0"+val['PRO_COM'];
 			console.log("data 4 local file:",val['PRO_COM']);
 			console.log("districtMap:",districtMap[codiceIstat]);
-			
+			if(districtMap[codiceIstat]){
+				if(districtMap[codiceIstat]['carDistance']<50){
+					polyColor="#000000";
+				}else if(districtMap[codiceIstat]['carDistance']>50 && districtMap[codiceIstat]['carDistance']<100){
+					polyColor="#555555";
+				}else if(districtMap[codiceIstat]['carDistance']>100 && districtMap[codiceIstat]['carDistance']<150){
+					polyColor="#";
+				}else if(districtMap[codiceIstat]['carDistance']>150 && districtMap[codiceIstat]['carDistance']<200){
+					polyColor="#777777";
+				}else{
+					polyColor="#999999";
+				}
+			}else{
+				//close to white color
+				polyColor="#800000";
+			}
 		}
 		//console.log("districtMap:",districtMap);
 		/*
@@ -174,21 +191,21 @@ function initMap(markers,districtMap) {
 		polygons[key].setMap(map);
 		*/
 		if(val['enString'][1]){
-			decode.push(google.maps.geometry.encoding.decodePath(val['enString'][1]));
-			/*
-			polygons[key] = new google.maps.Polygon({
-			    paths: google.maps.geometry.encoding.decodePath(val['enString'][1]),
-			    strokeColor: '#FFFFFF',
-			    strokeOpacity: 0.8,
-			    strokeWeight: 2,
-			    fillColor: polyColor,
-			    fillOpacity: 1
-		  	});
-			polygons[key].setMap(map);
-			*/
-		}		
+			//decode.push(google.maps.geometry.encoding.decodePath(val['enString'][1]));
+			decodePaths.push(google.maps.geometry.encoding.decodePath(val['enString'][1]));
+						
+		}
+		polygons[key] = new google.maps.Polygon({
+		    paths: decodePaths,
+		    strokeColor: '#FFFFFF',
+		    strokeOpacity: 0.8,
+		    strokeWeight: 2,
+		    fillColor: polyColor,
+		    fillOpacity: 1
+	  	});
+		polygons[key].setMap(map);
 	});
-	
+	/*
 	// Construct the polygon.
   	var polygons = new google.maps.Polygon({
 	    paths: decode,
@@ -200,7 +217,7 @@ function initMap(markers,districtMap) {
   	});
   	
   	polygons.setMap(map);
-  	
+  	*/
 	google.maps.event.trigger(map, 'resize');
   
 	}

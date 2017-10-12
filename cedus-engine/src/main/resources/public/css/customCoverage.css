@@ -4,3 +4,28 @@
 	width: 100%;
 	height:100%;
 }
+
+.polyColor {
+  //float: left;
+  width: 20px;
+  height: 15px;
+  //margin: 0px;
+  //padding-left: 15%;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.less50 {
+  background: #000000;
+}
+
+.less100 {
+  background: #555555;
+}
+
+.less150 {
+  background: #777777;
+}
+
+.less200 {
+  background: #999999;
+}
