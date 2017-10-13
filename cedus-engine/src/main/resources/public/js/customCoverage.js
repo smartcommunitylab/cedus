@@ -146,13 +146,13 @@ function initMap(markers,districtMap) {
 			console.log("data 4 local file:",val['PRO_COM']);
 			console.log("districtMap:",districtMap[codiceIstat]);
 			if(districtMap[codiceIstat]){
-				if(districtMap[codiceIstat]['carDistance']<50){
+				if(districtMap[codiceIstat]['carDistance']<=50){
 					polyColor="#000000";
-				}else if(districtMap[codiceIstat]['carDistance']>50 && districtMap[codiceIstat]['carDistance']<100){
+				}else if(districtMap[codiceIstat]['carDistance']>50 && districtMap[codiceIstat]['carDistance']<=100){
 					polyColor="#555555";
-				}else if(districtMap[codiceIstat]['carDistance']>100 && districtMap[codiceIstat]['carDistance']<150){
-					polyColor="#";
-				}else if(districtMap[codiceIstat]['carDistance']>150 && districtMap[codiceIstat]['carDistance']<200){
+				}else if(districtMap[codiceIstat]['carDistance']>100 && districtMap[codiceIstat]['carDistance']<=150){
+					polyColor="#666666";
+				}else if(districtMap[codiceIstat]['carDistance']>150 && districtMap[codiceIstat]['carDistance']<=200){
 					polyColor="#777777";
 				}else{
 					polyColor="#999999";
