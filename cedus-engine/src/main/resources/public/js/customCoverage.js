@@ -123,6 +123,7 @@ function initMap(markers,districtMap) {
 		//console.log("markers:",markers);
 		$.each(markers,function(key, val){
 			var marker = new google.maps.Marker({
+				animation: google.maps.Animation.DROP,
 				position: {lat:val['lat'],lng:val['lng']},
 				map: map,
 				title: val['name']
