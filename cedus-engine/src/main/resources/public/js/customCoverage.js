@@ -125,10 +125,26 @@ function initMap(markers,districtMap) {
 		
 		],
 		*/
+	    
 	    styles: [
 	    	{
-	    		featureType: 'poi.business',
-	    		stylers: [{visibility: 'off'}]
+	    	    featureType: "administrative",
+	    	    elementType: "all",
+	    	    stylers: [
+	    	      { visibility: "off" }
+	    	    ]
+	    	},{
+	    	    featureType: "landscape.man_made",
+	    	    elementType: "all",
+	    	    stylers: [
+	    	      { visibility: "off" }
+	    	    ]
+	    	},{
+	    	    featureType: "poi.attraction",
+	    	    elementType: "all",
+	    	    stylers: [
+	    	      { visibility: "off" }
+	    	    ]
 	    	},
 	    	{
 	    		featureType: 'transit',
@@ -142,12 +158,32 @@ function initMap(markers,districtMap) {
 	    	      { visibility: "off" }
 	    	    ]
 	    	},
+	    	{
+	    	    featureType: "poi",
+	    	    elementType: "labels",
+	    	    stylers: [
+	    	      { visibility: "off" }
+	    	    ]
+	    	},
+	    	{
+	    	    featureType: "landscape",
+	    	    elementType: "labels",
+	    	    stylers: [
+	    	      { visibility: "off" }
+	    	    ]
+	    	},
 	    	{elementType: 'geometry', stylers: [{color: '#FFFFFF'}]},
 			{elementType: 'labels.text.stroke', stylers: [{color: '#FFFFFF'}]},
 	        {elementType: 'labels.text.fill', stylers: [{color: '#FFFFFF'}]}
+	        
 	    ],
+	    
 	    fullscreenControl: false,
+	    streetViewControl: false,
+	    mapTypeControl: false,
 	    disableDefaultUI: true,
+	    zoomControl: true,
+	    directionsDisplay:false,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	    //<!-- mapTypeId: google.maps.MapTypeId.TERRAIN -->
 	});
@@ -175,8 +211,8 @@ function initMap(markers,districtMap) {
 		decodePaths.push(google.maps.geometry.encoding.decodePath(val['enString'][0]));
 		if(districtMap){
 			var codiceIstat="0"+val['PRO_COM'];
-			console.log("data 4 local file:",val['PRO_COM']);
-			console.log("districtMap:",districtMap[codiceIstat]);
+			//console.log("data 4 local file:",val['PRO_COM']);
+			//console.log("districtMap:",districtMap[codiceIstat]);
 			if(districtMap[codiceIstat]){
 				if(districtMap[codiceIstat]['carDistance']<=50){
 					polyColor="#000000";
@@ -191,7 +227,7 @@ function initMap(markers,districtMap) {
 				}
 			}else{
 				//close to white color
-				polyColor="#800000";
+				polyColor="#FFFFFF";
 			}
 		}
 		//console.log("districtMap:",districtMap);
