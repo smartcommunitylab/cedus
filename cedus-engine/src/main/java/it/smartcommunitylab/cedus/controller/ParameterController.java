@@ -42,7 +42,7 @@ public class ParameterController {
 	public @ResponseBody Set<String> getIndirizzi() {
 		return tuManager.getIndirizzi();
 	}
-	@GetMapping(value = "/api/params/Tipologie")
+	@GetMapping(value = "/api/params/tipologie")
 	public @ResponseBody Set<String> getTipologie() {
 		return tuManager.getTipologie();
 	}
