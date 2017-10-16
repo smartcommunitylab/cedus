@@ -8,7 +8,7 @@ $(document).ready(function() {
 		url: 'http://localhost:6050/cedus/api/params/ordini',
 		data: '' ,
 		success: function (data) {
-		console.log("data name:",data);
+		//console.log("data name:",data);
 		$.each(data,function(key, val){
 			console.log('dd:',val);
 			var strVal="\"change_div('"+val+"')\"";
@@ -25,27 +25,29 @@ $(document).ready(function() {
 		var markers = [];
         //console.log("level data:", $('#levelText').text());
         //ajax call for markers (filter by tipologia)
-    	$.ajax
-    	({
-    		type: "GET",
-    		//dataType : 'json',
-    		url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
-    		data: {ordine:$('#levelText').text(),tipologia:$(this).val(),filter:'TRANSIT_DISTANCE'} ,
-    		success: function (data) {
-    		console.log("data name:",data['tuList']);
-    		$.each(data['tuList'],function(key, val){
-    			//console.log("data geocode:",val['geocode'][0]);
-    			markers.push({
-    			  lat: val['geocode'][1],
-    			  lng: val['geocode'][0],
-    			  name: val['name']
-    			});
-    		});
-    		
-    		initMap(markers,data['districtMap']);	
-    		},
-    		failure: function() {console.log("Error!");}
-    	});
+		if($(this).val()){
+	    	$.ajax
+	    	({
+	    		type: "GET",
+	    		//dataType : 'json',
+	    		url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
+	    		data: {ordine:$('#levelText').text(),tipologia:$(this).val(),filter:'TRANSIT_DISTANCE'} ,
+	    		success: function (data) {
+	    		console.log("data name:",data['tuList']);
+	    		$.each(data['tuList'],function(key, val){
+	    			//console.log("data geocode:",val['geocode'][0]);
+	    			markers.push({
+	    			  lat: val['geocode'][1],
+	    			  lng: val['geocode'][0],
+	    			  name: val['name']
+	    			});
+	    		});
+	    		
+	    		initMap(markers,data['districtMap']);	
+	    		},
+	    		failure: function() {console.log("Error!");}
+	    	});
+		}
     });
 });
 function change_div(level_text){
@@ -53,13 +55,14 @@ function change_div(level_text){
 	$('#select_btn').hide();
 	$('#select_type').show();
 	$('#levelText').text(level_text);
+	console.log("dropdown value:",$("#dropdownList").val());
 	//ajax call for markers filter by level(on click level button)
 	$.ajax
 	({
 		type: "GET",
 		//dataType : 'json',
 		url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
-		data: {ordine:level_text,filter:'TRANSIT_DISTANCE'} ,
+		data: {ordine:level_text,tipologia:$("#dropdownList").val(),filter:'TRANSIT_DISTANCE'} ,
 		success: function (data) {
 		//console.log("data name:",data['tuList']);
 		$.each(data['tuList'],function(key, val){
@@ -83,7 +86,8 @@ function change_div(level_text){
 		url: 'https://dev.smartcommunitylab.it/cedus/api/params/Tipologie',
 		data: '' ,
 		success: function (data) {
-		console.log("data tipologia:",data);
+		//console.log("data tipologia:",data);
+		$("#dropdownList").append("<option value=''>Tipologia di selezione</option>");
 		$.each(data,function(key, val){
 			//console.log("data geocode:",val);
 			//$("#dropdownList").append("<li><a href='#'>"+val+"</a></li>");
@@ -109,6 +113,10 @@ function initMap(markers,districtMap) {
 	  		lng: 11.16226884897163
 	    },
 		//autoResize: false,
+	    /*
+	    stroke: false,
+		color: '#fff',
+		fillOpacity: 1,
 		
 		styles: [
 		{elementType: 'geometry', stylers: [{color: '#FFFFFF'}]},
@@ -116,8 +124,68 @@ function initMap(markers,districtMap) {
         {elementType: 'labels.text.fill', stylers: [{color: '#FFFFFF'}]}            
 		
 		],
+		*/
+	    
+	    styles: [
+	    	{
+	    	    featureType: "administrative",
+	    	    elementType: "all",
+	    	    stylers: [
+	    	      { visibility: "off" }
+	    	    ]
+	    	},{
+	    	    featureType: "landscape.man_made",
+	    	    elementType: "all",
+	    	    stylers: [
+	    	      { visibility: "off" }
+	    	    ]
+	    	},{
+	    	    featureType: "poi.attraction",
+	    	    elementType: "all",
+	    	    stylers: [
+	    	      { visibility: "off" }
+	    	    ]
+	    	},
+	    	{
+	    		featureType: 'transit',
+	    		elementType: 'labels.icon',
+	    		stylers: [{visibility: 'off'}]
+	    	},
+	    	{
+	    	    featureType: "road",
+	    	    elementType: "all",
+	    	    stylers: [
+	    	      { visibility: "off" }
+	    	    ]
+	    	},
+	    	{
+	    	    featureType: "poi",
+	    	    elementType: "labels",
+	    	    stylers: [
+	    	      { visibility: "off" }
+	    	    ]
+	    	},
+	    	{
+	    	    featureType: "landscape",
+	    	    elementType: "labels",
+	    	    stylers: [
+	    	      { visibility: "off" }
+	    	    ]
+	    	},
+	    	{elementType: 'geometry', stylers: [{color: '#FFFFFF'}]},
+			{elementType: 'labels.text.stroke', stylers: [{color: '#FFFFFF'}]},
+	        {elementType: 'labels.text.fill', stylers: [{color: '#FFFFFF'}]}
+	        
+	    ],
+	    
+	    fullscreenControl: false,
+	    streetViewControl: false,
+	    mapTypeControl: false,
+	    disableDefaultUI: true,
+	    zoomControl: true,
+	    directionsDisplay:false,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
-	    <!-- mapTypeId: google.maps.MapTypeId.TERRAIN -->
+	    //<!-- mapTypeId: google.maps.MapTypeId.TERRAIN -->
 	});
 	if(markers){
 		//console.log("markers:",markers);
@@ -143,8 +211,8 @@ function initMap(markers,districtMap) {
 		decodePaths.push(google.maps.geometry.encoding.decodePath(val['enString'][0]));
 		if(districtMap){
 			var codiceIstat="0"+val['PRO_COM'];
-			console.log("data 4 local file:",val['PRO_COM']);
-			console.log("districtMap:",districtMap[codiceIstat]);
+			//console.log("data 4 local file:",val['PRO_COM']);
+			//console.log("districtMap:",districtMap[codiceIstat]);
 			if(districtMap[codiceIstat]){
 				if(districtMap[codiceIstat]['carDistance']<=50){
 					polyColor="#000000";
@@ -159,7 +227,7 @@ function initMap(markers,districtMap) {
 				}
 			}else{
 				//close to white color
-				polyColor="#800000";
+				polyColor="#FFFFFF";
 			}
 		}
 		//console.log("districtMap:",districtMap);

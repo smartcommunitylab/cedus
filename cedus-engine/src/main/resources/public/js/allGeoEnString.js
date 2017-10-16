@@ -1,7 +1,7 @@
 
 var allGeoData = [
 		
-	{"NOME_COM":"Bresimo",
+	{	"NOME_COM":"Bresimo",
 		"PRO_COM":"22026",
 		"SHAPE_Leng":"30341.126281",
 		"SHAPE_Area":"41013912.5126",
@@ -911,6 +911,7 @@ var allGeoData = [
 		"SHAPE_Leng":"18967.987385",
 		"SHAPE_Area":"16747362.9548",
 		"enString":{"0":"_ubxGs|ueA|FjB|ILdGzFdVtMlKxA~GDfEEpBcDbJ}f@fD_@xJrBbF_EdL{Gd]}w@bMfJnXzU`IrEt[xM|KpE~KzF|NxIrP~HhFdMhFhXlGpJ`D~OaGvLYvH~FrIe@~O_GlIK`LoCdFyCvIwExLgGjLyB~De@fFrCjE?`FmC~Lb@|KiAlIoLeHwUiFeMuAyOMiVMcQnCmP}@gm@aCiPuE}S`[iEyDmCiUaDkTqCmEqB{EyB{IyAwGqAeGaByFwA{GaB{GeCqEgDsFoDkFoBgEeDuGuCwE}C{G}DiHuCyFwCuDaCcHyCeGkDiIwA{F\\kNpFgEhQ_F"
-		}}
+		}
+	}
 
-	];
+];
