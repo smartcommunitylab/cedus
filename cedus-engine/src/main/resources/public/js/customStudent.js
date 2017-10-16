@@ -13,7 +13,7 @@ $(document).ready(function() {
 		({
 			type: "GET",
 			//dataType : 'json',
-			//url: 'http://localhost:6050/cedus/api/params/ordini',
+			//url: 'https://dev.smartcommunitylab.it/cedus/api/params/ordini',
 			url:'http://localhost:6050/cedus/api/params/ordini',
 			data: '' ,
 			success: function (data) {
@@ -40,7 +40,8 @@ $(document).ready(function() {
 	    	({
 	    		type: "GET",
 	    		//dataType : 'json',
-	    		url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
+	    		//url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
+	    		url:'http://localhost:6050/cedus/api/cover/education',
 	    		data: {ordine:$('#levelText').text(),tipologia:$(this).val(),filter:'TRANSIT_DISTANCE'} ,
 	    		success: function (data) {
 	    		//console.log("data name:",data['tuList']);
@@ -49,7 +50,10 @@ $(document).ready(function() {
 	    			markers.push({
 	    			  lat: val['geocode'][1],
 	    			  lng: val['geocode'][0],
-	    			  name: val['name']
+	    			  name: val['name'],
+	    			  codiceIstat: val['codiceIstat'],
+	    			  address: val['address'],
+	    			  description: val['description']
 	    			});
 	    		});
 	    		
@@ -106,16 +110,20 @@ function change_div(level_text){
 	({
 		type: "GET",
 		//dataType : 'json',
-		url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
+		//url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
+		url:'http://localhost:6050/cedus/api/cover/education',
 		data: {ordine:level_text,filter:'TRANSIT_DISTANCE'} ,
 		success: function (data) {
-		console.log("data name:",data['tuList']);
+		console.log("data :",data);
 		$.each(data['tuList'],function(key, val){
 			//console.log("data geocode:",val['geocode'][0]);
 			markers.push({
 			  lat: val['geocode'][1],
 			  lng: val['geocode'][0],
-			  name: val['name']
+			  name: val['name'],
+			  codiceIstat: val['codiceIstat'],
+			  address: val['address'],
+			  description: val['description']
 			});
 		});
 		
@@ -128,7 +136,8 @@ function change_div(level_text){
 	({
 		type: "GET",
 		//dataType : 'json',
-		url: 'https://dev.smartcommunitylab.it/cedus/api/params/Tipologie',
+		//url: 'https://dev.smartcommunitylab.it/cedus/api/params/Tipologie',
+		url:'http://localhost:6050/cedus/api/params/tipologie',
 		data: '' ,
 		success: function (data) {
 		//console.log("data tipologia:",data);
@@ -173,46 +182,52 @@ function initMap(markers) {
 	if(markers){
 		console.log("markers:",markers);
 		$.each(markers,function(key, val){
+			var infoWindowMarkers = new google.maps.InfoWindow;
 			var marker = new google.maps.Marker({
 				position: {lat:val['lat'],lng:val['lng']},
 				map: map,
 				title: val['name']
 			});
+			marker.addListener('click', function() {
+            	infoWindow.setPosition({lat:val['lat'],lng:val['lng']});
+                infoWindow.setContent("<b>"+val['name']+".</b><br/>Indirizzo: "+val['address']+"<br/>Descrizione: "+val['description']+"<br/><i class='material-icons'>directions_car</i><br/><i class='material-icons'>directions_bus</i><br/><i class='material-icons'>directions_railway</i>");
+                infoWindow.open(map, marker);
+            });
 		});
 		
-	}else{
-		//current position
-		// Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-            /*
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
-            */
-            var marker = new google.maps.Marker({
-				position: pos,
-				map: map,
-				title: 'user'
-			});
-			
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
 	}
+	//current position
+	// Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+       
+        var marker = new google.maps.Marker({
+			position: pos,
+			map: map,
+			//title: 'user',
+			icon:"../images/marker_green.png"
+		});
+		
+        map.setCenter(pos);
+        marker.addListener('click', function() {
+        	infoWindow.setPosition(pos);
+            infoWindow.setContent("<b>La Tua Posizione.</b><br/>Lat: "+pos['lat']+"<br/>Lng: "+pos['lng']);
+            infoWindow.open(map, marker);
+        });
+      }, function() {
+        handleLocationError(true, infoWindow, map.getCenter());
+      });
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+	
 	// Define the LatLng coordinates for the polygon's path.
-	
-	
-	
+
 	var decode=[];
 	
 	$.each(allGeoData,function(key, val){

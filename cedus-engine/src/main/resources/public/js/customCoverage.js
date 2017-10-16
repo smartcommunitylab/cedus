@@ -5,6 +5,7 @@ $(document).ready(function() {
 	({
 		type: "GET",
 		//dataType : 'json',
+		//url:'https://dev.smartcommunitylab.it/cedus/api/params/ordini',
 		url: 'http://localhost:6050/cedus/api/params/ordini',
 		data: '' ,
 		success: function (data) {
@@ -30,10 +31,11 @@ $(document).ready(function() {
 	    	({
 	    		type: "GET",
 	    		//dataType : 'json',
-	    		url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
+	    		//url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
+	    		url:'http://localhost:6050/cedus/api/cover/education',
 	    		data: {ordine:$('#levelText').text(),tipologia:$(this).val(),filter:'TRANSIT_DISTANCE'} ,
 	    		success: function (data) {
-	    		console.log("data name:",data['tuList']);
+	    		//console.log("data name:",data['tuList']);
 	    		$.each(data['tuList'],function(key, val){
 	    			//console.log("data geocode:",val['geocode'][0]);
 	    			markers.push({
@@ -55,13 +57,14 @@ function change_div(level_text){
 	$('#select_btn').hide();
 	$('#select_type').show();
 	$('#levelText').text(level_text);
-	console.log("dropdown value:",$("#dropdownList").val());
+	//console.log("dropdown value:",$("#dropdownList").val());
 	//ajax call for markers filter by level(on click level button)
 	$.ajax
 	({
 		type: "GET",
 		//dataType : 'json',
-		url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
+		//url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
+		url:'http://localhost:6050/cedus/api/cover/education',
 		data: {ordine:level_text,tipologia:$("#dropdownList").val(),filter:'TRANSIT_DISTANCE'} ,
 		success: function (data) {
 		//console.log("data name:",data['tuList']);
@@ -83,7 +86,8 @@ function change_div(level_text){
 	({
 		type: "GET",
 		//dataType : 'json',
-		url: 'https://dev.smartcommunitylab.it/cedus/api/params/Tipologie',
+		//url: 'https://dev.smartcommunitylab.it/cedus/api/params/Tipologie',
+		url:'http://localhost:6050/cedus/api/params/tipologie',
 		data: '' ,
 		success: function (data) {
 		//console.log("data tipologia:",data);
