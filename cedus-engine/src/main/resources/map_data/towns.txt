@@ -1,488 +1,488 @@
 [ {
+  "name" : "Trento",
+  "istat" : "205",
+  "lat" : 46.0664228,
+  "lon" : 11.1257601,
+  "index" : 0
+}, {
+  "name" : "Canazei",
+  "istat" : "39",
+  "lat" : 46.476408682156546,
+  "lon" : 11.768701672554016,
+  "index" : 1
+}, {
   "name" : "Vignola-falesina",
   "istat" : "216",
   "lat" : 46.0444545,
   "lon" : 11.2776917,
-  "index" : 0
+  "index" : 2
 }, {
   "name" : "Bondone",
   "istat" : "21",
   "lat" : 45.8062305,
   "lon" : 10.5515367,
-  "index" : 1
+  "index" : 3
 }, {
   "name" : "Vigo Di Fassa",
   "istat" : "217",
   "lat" : 46.4204045,
   "lon" : 11.6726135,
-  "index" : 2
+  "index" : 4
 }, {
   "name" : "Vermiglio",
   "istat" : "213",
   "lat" : 46.296905,
   "lon" : 10.691365,
-  "index" : 3
+  "index" : 5
 }, {
   "name" : "Vallarsa",
   "istat" : "210",
   "lat" : 45.8033548,
   "lon" : 11.1051097,
-  "index" : 4
+  "index" : 6
 }, {
   "name" : "Varena",
   "istat" : "211",
   "lat" : 46.3035045,
   "lon" : 11.4565952,
-  "index" : 5
+  "index" : 7
 }, {
   "name" : "Palu' Del Fersina",
   "istat" : "133",
   "lat" : 46.1297953,
   "lon" : 11.3522176,
-  "index" : 6
+  "index" : 8
 }, {
   "name" : "Garniga Terme",
   "istat" : "91",
   "lat" : 46.0026491,
   "lon" : 11.0870545,
-  "index" : 7
+  "index" : 9
 }, {
   "name" : "Ossana",
   "istat" : "131",
   "lat" : 46.3064533,
   "lon" : 10.7377007,
-  "index" : 8
+  "index" : 10
 }, {
   "name" : "Ospedaletto",
   "istat" : "130",
   "lat" : 46.0435948,
   "lon" : 11.5525092,
-  "index" : 9
+  "index" : 11
 }, {
   "name" : "Pellizzano",
   "istat" : "137",
   "lat" : 46.3097017,
   "lon" : 10.7596278,
-  "index" : 10
+  "index" : 12
 }, {
   "name" : "Peio",
   "istat" : "136",
   "lat" : 46.3628864,
   "lon" : 10.6732435,
-  "index" : 11
+  "index" : 13
 }, {
   "name" : "Ronzo-chienis",
   "istat" : "135",
   "lat" : 45.889597,
   "lon" : 10.950079,
-  "index" : 12
+  "index" : 14
 }, {
   "name" : "Panchia'",
   "istat" : "134",
   "lat" : 46.2856525,
   "lon" : 11.542874,
-  "index" : 13
+  "index" : 15
 }, {
   "name" : "Pergine Valsugana",
   "istat" : "139",
   "lat" : 46.0603525,
   "lon" : 11.2405019,
-  "index" : 14
+  "index" : 16
 }, {
   "name" : "Pelugo",
   "istat" : "138",
   "lat" : 46.0885,
   "lon" : 10.72387,
-  "index" : 15
+  "index" : 17
 }, {
   "name" : "Zambana",
   "istat" : "225",
   "lat" : 46.1520425,
   "lon" : 11.0962106,
-  "index" : 16
+  "index" : 18
 }, {
   "name" : "Brentonico",
   "istat" : "25",
   "lat" : 45.8187739,
   "lon" : 10.9560131,
-  "index" : 17
+  "index" : 19
 }, {
   "name" : "Bresimo",
   "istat" : "26",
   "lat" : 46.4118101,
   "lon" : 10.9706855,
-  "index" : 18
+  "index" : 20
 }, {
   "name" : "Brez",
   "istat" : "27",
   "lat" : 46.4309755,
   "lon" : 11.1082429,
-  "index" : 19
+  "index" : 21
 }, {
   "name" : "Borgo Valsugana",
   "istat" : "22",
   "lat" : 46.053192,
   "lon" : 11.4561278,
-  "index" : 20
+  "index" : 22
 }, {
   "name" : "Grigno",
   "istat" : "95",
   "lat" : 46.0170354,
   "lon" : 11.6359415,
-  "index" : 21
+  "index" : 23
 }, {
   "name" : "Caderzone Terme",
   "istat" : "29",
   "lat" : 46.130202,
   "lon" : 10.75747,
-  "index" : 22
+  "index" : 24
 }, {
   "name" : "Rovereto",
   "istat" : "161",
   "lat" : 45.886548,
   "lon" : 11.0452369,
-  "index" : 23
+  "index" : 25
 }, {
   "name" : "Ruffre' - Mendola",
   "istat" : "162",
   "lat" : 46.414813,
   "lon" : 11.177774,
-  "index" : 24
+  "index" : 26
 }, {
   "name" : "Folgaria",
   "istat" : "87",
   "lat" : 45.9149727,
   "lon" : 11.173015,
-  "index" : 25
+  "index" : 27
 }, {
   "name" : "Molveno",
   "istat" : "120",
   "lat" : 46.1421057,
   "lon" : 10.9637773,
-  "index" : 26
+  "index" : 28
 }, {
   "name" : "Mori",
   "istat" : "123",
   "lat" : 45.8524443,
   "lon" : 10.9782754,
-  "index" : 27
+  "index" : 29
 }, {
   "name" : "Nago-torbole",
   "istat" : "124",
   "lat" : 45.8693034,
   "lon" : 10.876398,
-  "index" : 28
+  "index" : 30
 }, {
   "name" : "Nave San Rocco",
   "istat" : "126",
   "lat" : 46.166355,
   "lon" : 11.1072621,
-  "index" : 29
+  "index" : 31
 }, {
   "name" : "Nogaredo",
   "istat" : "127",
   "lat" : 45.9120887,
   "lon" : 11.0230464,
-  "index" : 30
+  "index" : 32
 }, {
   "name" : "Nomi",
   "istat" : "128",
   "lat" : 45.928599,
   "lon" : 11.071881,
-  "index" : 31
+  "index" : 33
 }, {
   "name" : "Albiano",
   "istat" : "2",
   "lat" : 46.144906,
   "lon" : 11.193479,
-  "index" : 32
+  "index" : 34
 }, {
   "name" : "Cinte Tesino",
   "istat" : "59",
   "lat" : 46.0568247,
   "lon" : 11.6147665,
-  "index" : 33
+  "index" : 35
 }, {
   "name" : "Cimone",
   "istat" : "58",
   "lat" : 45.978766,
   "lon" : 11.0697807,
-  "index" : 34
+  "index" : 36
 }, {
   "name" : "Cavizzana",
   "istat" : "54",
   "lat" : 46.3675013,
   "lon" : 10.957923,
-  "index" : 35
+  "index" : 37
 }, {
   "name" : "Cavareno",
   "istat" : "51",
   "lat" : 46.408412,
   "lon" : 11.138073,
-  "index" : 36
+  "index" : 38
 }, {
   "name" : "Cavalese",
   "istat" : "50",
   "lat" : 46.291187,
   "lon" : 11.4604681,
-  "index" : 37
+  "index" : 39
 }, {
   "name" : "Cavedine",
   "istat" : "53",
   "lat" : 45.9952,
   "lon" : 10.973577,
-  "index" : 38
+  "index" : 40
 }, {
   "name" : "Cavedago",
   "istat" : "52",
   "lat" : 46.1852103,
   "lon" : 11.0314805,
-  "index" : 39
+  "index" : 41
 }, {
   "name" : "Frassilongo",
   "istat" : "90",
   "lat" : 46.0884823,
   "lon" : 11.296537,
-  "index" : 40
+  "index" : 42
 }, {
   "name" : "Tione Di Trento",
   "istat" : "199",
   "lat" : 46.0363045,
   "lon" : 10.7269092,
-  "index" : 41
+  "index" : 43
 }, {
   "name" : "Predazzo",
   "istat" : "147",
   "lat" : 46.3123614,
   "lon" : 11.6026938,
-  "index" : 42
+  "index" : 44
 }, {
   "name" : "Terzolas",
   "istat" : "195",
   "lat" : 46.3616048,
   "lon" : 10.9260882,
-  "index" : 43
+  "index" : 45
 }, {
   "name" : "Tesero",
   "istat" : "196",
   "lat" : 46.290416,
   "lon" : 11.511977,
-  "index" : 44
+  "index" : 46
 }, {
   "name" : "Tenno",
   "istat" : "191",
   "lat" : 45.918797,
   "lon" : 10.832775,
-  "index" : 45
+  "index" : 47
 }, {
   "name" : "Tenna",
   "istat" : "190",
   "lat" : 46.015703,
   "lon" : 11.264283,
-  "index" : 46
+  "index" : 48
 }, {
   "name" : "Terragnolo",
   "istat" : "193",
   "lat" : 45.8790891,
   "lon" : 11.1520583,
-  "index" : 47
+  "index" : 49
 }, {
   "name" : "Mezzano",
   "istat" : "115",
   "lat" : 46.154712,
   "lon" : 11.807993,
-  "index" : 48
+  "index" : 50
 }, {
   "name" : "Mezzana",
   "istat" : "114",
   "lat" : 46.3173162,
   "lon" : 10.8010074,
-  "index" : 49
+  "index" : 51
 }, {
   "name" : "Fondo",
   "istat" : "88",
   "lat" : 46.4400263,
   "lon" : 11.1365613,
-  "index" : 50
+  "index" : 52
 }, {
   "name" : "Mezzocorona",
   "istat" : "116",
   "lat" : 46.2154357,
   "lon" : 11.1207858,
-  "index" : 51
+  "index" : 53
 }, {
   "name" : "Malosco",
   "istat" : "111",
   "lat" : 46.4365287,
   "lon" : 11.143523,
-  "index" : 52
+  "index" : 54
 }, {
   "name" : "Male'",
   "istat" : "110",
   "lat" : 46.3516068,
   "lon" : 10.9128757,
-  "index" : 53
+  "index" : 55
 }, {
   "name" : "Mazzin",
   "istat" : "113",
   "lat" : 46.4701147,
   "lon" : 11.7296877,
-  "index" : 54
+  "index" : 56
 }, {
   "name" : "Massimeno",
   "istat" : "112",
   "lat" : 46.1417556,
   "lon" : 10.773134,
-  "index" : 55
-}, {
-  "name" : "Trento",
-  "istat" : "205",
-  "lat" : 46.0664228,
-  "lon" : 11.1257601,
-  "index" : 56
+  "index" : 57
 }, {
   "name" : "Faedo",
   "istat" : "80",
   "lat" : 46.1922976,
   "lon" : 11.1618628,
-  "index" : 57
+  "index" : 58
 }, {
   "name" : "Fai Della Paganella",
   "istat" : "81",
   "lat" : 46.1793313,
   "lon" : 11.0689304,
-  "index" : 58
+  "index" : 59
 }, {
   "name" : "Moena",
   "istat" : "118",
   "lat" : 46.3768554,
   "lon" : 11.6591816,
-  "index" : 59
+  "index" : 60
 }, {
   "name" : "Samone",
   "istat" : "165",
   "lat" : 46.081607,
   "lon" : 11.522588,
-  "index" : 60
+  "index" : 61
 }, {
   "name" : "Fierozzo",
   "istat" : "85",
   "lat" : 46.1111194,
   "lon" : 11.3184352,
-  "index" : 61
+  "index" : 62
 }, {
   "name" : "Calliano",
   "istat" : "35",
   "lat" : 45.9338514,
   "lon" : 11.0937583,
-  "index" : 62
+  "index" : 63
 }, {
   "name" : "Aldeno",
   "istat" : "3",
   "lat" : 45.9767795,
   "lon" : 11.0908573,
-  "index" : 63
+  "index" : 64
 }, {
   "name" : "Novaledo",
   "istat" : "129",
   "lat" : 46.0228177,
   "lon" : 11.3664341,
-  "index" : 64
+  "index" : 65
 }, {
   "name" : "Avio",
   "istat" : "7",
   "lat" : 45.733793,
   "lon" : 10.937181,
-  "index" : 65
+  "index" : 66
 }, {
   "name" : "Giovo",
   "istat" : "92",
   "lat" : 46.1563433,
   "lon" : 11.1525627,
-  "index" : 66
+  "index" : 67
 }, {
   "name" : "Primiero San Martino Di Castrozza",
   "istat" : "245",
   "lat" : 46.1770955,
   "lon" : 11.8294692,
-  "index" : 67
+  "index" : 68
 }, {
   "name" : "Porte Di Rendena",
   "istat" : "244",
   "lat" : 46.0617,
   "lon" : 10.71107,
-  "index" : 68
+  "index" : 69
 }, {
   "name" : "Lona-lases",
   "istat" : "108",
   "lat" : 46.144206,
   "lon" : 11.21958,
-  "index" : 69
+  "index" : 70
 }, {
   "name" : "Sella Giudicarie",
   "istat" : "246",
   "lat" : 45.9826962,
   "lon" : 10.6681785,
-  "index" : 70
+  "index" : 71
 }, {
   "name" : "Cembra Lisignago",
   "istat" : "241",
   "lat" : 46.1744128,
   "lon" : 11.2205888,
-  "index" : 71
+  "index" : 72
 }, {
   "name" : "Castel Ivano",
   "istat" : "240",
   "lat" : 46.066304,
   "lon" : 11.5230655,
-  "index" : 72
+  "index" : 73
 }, {
   "name" : "Madruzzo",
   "istat" : "243",
   "lat" : 46.025101,
   "lon" : 10.983077,
-  "index" : 73
+  "index" : 74
 }, {
   "name" : "Conta'",
   "istat" : "242",
   "lat" : 46.3093118,
   "lon" : 11.0223784,
-  "index" : 74
+  "index" : 75
 }, {
   "name" : "Lavarone",
   "istat" : "102",
   "lat" : 45.9400548,
   "lon" : 11.2730391,
-  "index" : 75
+  "index" : 76
 }, {
   "name" : "Lavis",
   "istat" : "103",
   "lat" : 46.1397416,
   "lon" : 11.1102267,
-  "index" : 76
+  "index" : 77
 }, {
   "name" : "Livo",
   "istat" : "106",
   "lat" : 46.404711,
   "lon" : 11.019271,
-  "index" : 77
+  "index" : 78
 }, {
   "name" : "Vallelaghi",
   "istat" : "248",
   "lat" : 46.0787914,
   "lon" : 10.9994069,
-  "index" : 78
+  "index" : 79
 }, {
   "name" : "Levico Terme",
   "istat" : "104",
   "lat" : 46.0099722,
   "lon" : 11.2988278,
-  "index" : 79
-}, {
-  "name" : "Canazei",
-  "istat" : "39",
-  "lat" : 46.47688809,
-  "lon" : 11.7710748,
   "index" : 80
 }, {
   "name" : "Canal San Bovo",
