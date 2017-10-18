@@ -64,6 +64,9 @@ $(document).ready(function() {
 	    	});
         }
     });
+	$("input[name='distanza']").change(function(){
+		drawMarkerInDistance(parseInt($('#distanza').val()));
+	});
 	//plus in distanza
 	$('.qtyplus').click(function(e){
         // Stop acting like a button
@@ -218,8 +221,71 @@ function initMap(markers) {
 				if(userlocation){
 					var fromPosition=new google.maps.LatLng(userlocation['lat'],userlocation['lng']);
 					var toPositation=new google.maps.LatLng(val['lat'],val['lng']);
-					
 					var distance = (google.maps.geometry.spherical.computeDistanceBetween(fromPosition, toPositation)/1000).toFixed(2);
+					/*
+					var directionsService = new google.maps.DirectionsService();
+					var requestDriving = {
+							  origin      : fromPosition, 
+							  destination : toPositation,
+							  travelMode  : google.maps.DirectionsTravelMode.DRIVING
+							};
+					directionsService.route(requestDriving, function(response, status) {
+						if ( status == google.maps.DirectionsStatus.OK ) {
+						    console.log("requestDriving distance:", response.rows[0].elements[0].distance.text ); // the distance in metres
+							carDistance={
+										distance: response.rows[0].elements[0].distance.text,
+										duration: response.routes[0].legs[0].duration.text
+									};
+						}
+						else {
+							console.log("there's no route between these two locations");
+						    // oops, there's no route between these two locations
+						    // every time this happens, a kitten dies
+							// so please, ensure your address is formatted properly
+						}
+					});
+					*/
+					//call for driving
+					var service = new google.maps.DistanceMatrixService();
+				    service.getDistanceMatrix({
+				        origins: [fromPosition],
+				        destinations: [toPositation],
+				        //travelMode: google.maps.TravelMode['TRANSIT','DRIVING'],
+				        travelMode: google.maps.TravelMode.DRIVING,
+				        unitSystem: google.maps.UnitSystem.METRIC,
+				        avoidHighways: false,
+				        avoidTolls: false
+				    }, function (response, status) {
+				    	console.log("response",response);
+				        if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+				            var carDistance = response.rows[0].elements[0].distance.text;
+				            var carDuration = response.rows[0].elements[0].duration.text;
+				            
+							//call for Transit
+							var serviceTransit = new google.maps.DistanceMatrixService();
+							serviceTransit.getDistanceMatrix({
+						        origins: [fromPosition],
+						        destinations: [toPositation],
+						        travelMode: google.maps.TravelMode.TRANSIT,
+						    }, function (responseTransit, statusTransit) {
+						    	if (statusTransit == google.maps.DistanceMatrixStatus.OK && responseTransit.rows[0].elements[0].status != "ZERO_RESULTS"){
+						    		var transitDistance= responseTransit.rows[0].elements[0].distance.text;
+									var transitDuration= responseTransit.rows[0].elements[0].duration.text;
+									infoWindowMarkers.setPosition({lat:val['lat'],lng:val['lng']});
+									infoWindowMarkers.setContent("<b>"+val['name']+".</b><br/>Indirizzo: "+val['address']+"<br/>Descrizione: "
+					                		+val['description']+"<br/><p>Distanza in "+distance
+					                		+"KM</p><i class='material-icons'>directions_car</i>"+carDistance
+					                		+" and "+carDuration+".<br/><i class='material-icons'>directions_bus</i>"+transitDistance+" and "+transitDuration+".");
+									//infoWindowMarkers.setContent("<i class='material-icons'>directions_bus</i>"+transitDistance+" and "+transitDuration+".");
+									infoWindowMarkers.open(map, marker);
+						    	}
+						    });
+				            
+							
+				        } else {
+				            alert("Unable to find the distance via road.");
+				        }
+				    });
 					/*
 					var dataSend={
 							  "to": {
@@ -268,11 +334,9 @@ function initMap(markers) {
 						failure: function() {console.log("error from api:");}
 					});
 					*/
-					infoWindowMarkers.setPosition({lat:val['lat'],lng:val['lng']});
-					infoWindowMarkers.setContent("<b>"+val['name']+".</b><br/>Indirizzo: "+val['address']+"<br/>Descrizione: "
-	                		+val['description']+"<br/><p>Distanza in "+distance
-	                		+"KM</p><i class='material-icons'>directions_car</i><br/><i class='material-icons'>directions_bus</i><br/><i class='material-icons'>directions_railway</i>");
-					infoWindowMarkers.open(map, marker);
+				    //console.log("carDistance Array:",carDistance);
+				    
+					
 				} 
             });
 		});
