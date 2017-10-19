@@ -358,12 +358,12 @@ function initMap(markers) {
 			icon:"../images/marker_green.png"
 		});
 		
-        map.setCenter(userlocation);
-        marker.addListener('click', function() {
-        	infoWindow.setPosition(userlocation);
-            infoWindow.setContent("<b>La Tua Posizione.</b><br/>Lat: "+userlocation['lat']+"<br/>Lng: "+userlocation['lng']);
-            infoWindow.open(map, marker);
-        });
+//        map.setCenter(userlocation);
+//        marker.addListener('click', function() {
+//        	infoWindow.setPosition(userlocation);
+//            infoWindow.setContent("<b>La Tua Posizione.</b><br/>Lat: "+userlocation['lat']+"<br/>Lng: "+userlocation['lng']);
+//            infoWindow.open(map, marker);
+//        });
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
       });
