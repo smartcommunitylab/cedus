@@ -272,10 +272,12 @@ function initMap(markers) {
 						    		var transitDistance= responseTransit.rows[0].elements[0].distance.text;
 									var transitDuration= responseTransit.rows[0].elements[0].duration.text;
 									infoWindowMarkers.setPosition({lat:val['lat'],lng:val['lng']});
-									infoWindowMarkers.setContent("<b>"+val['name']+".</b><br/>Indirizzo: "+val['address']+"<br/>Descrizione: "
-					                		+val['description']+"<br/><p>Distanza in "+distance
-					                		+"KM</p><i class='material-icons'>directions_car</i>"+carDistance
-					                		+" and "+carDuration+".<br/><i class='material-icons'>directions_bus</i>"+transitDistance+" and "+transitDuration+".");
+									infoWindowMarkers.setContent("<div class='row markersTXT'><b>"+val['name']+".</b></div><div class='row markersTXT'>Indirizzo: "
+											+val['address']+"</div><div class='row markersTXT'>Descrizione: "
+					                		+val['description']+"</div><div class='row markersTXT'><p>Distanza in "+distance
+					                		+"KM</p></div><div class='row markersTXT'><div class='col-md-2'><i class='material-icons'>directions_car</i></div><div class='col-md-10' style='font-size: 16px;'>"
+					                		+carDistance+" con "+carDuration+".</div></div><div class='row markersTXT'><div class='col-md-2 text-left'><i class='material-icons'>directions_bus</i></div><div class='col-md-10' style='font-size: 16px;'>"
+					                		+transitDistance+" con "+transitDuration+".</div></div>");
 									//infoWindowMarkers.setContent("<i class='material-icons'>directions_bus</i>"+transitDistance+" and "+transitDuration+".");
 									infoWindowMarkers.open(map, marker);
 						    	}
