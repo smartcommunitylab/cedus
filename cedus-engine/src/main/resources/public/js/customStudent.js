@@ -15,7 +15,7 @@ $(document).ready(function() {
 			type: "GET",
 			//dataType : 'json',
 			//url: 'https://dev.smartcommunitylab.it/cedus/api/params/ordini',
-			url:'http://localhost:6050/cedus/api/params/ordini',
+			url:'../api/params/ordini',
 			data: '' ,
 			success: function (data) {
 			console.log("data name:",data);
@@ -42,7 +42,7 @@ $(document).ready(function() {
 	    		type: "GET",
 	    		//dataType : 'json',
 	    		//url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
-	    		url:'http://localhost:6050/cedus/api/cover/education',
+	    		url:'../api/cover/education',
 	    		data: {ordine:$('#levelText').text(),tipologia:$(this).val(),filter:'TRANSIT_DISTANCE'} ,
 	    		success: function (data) {
 	    		//console.log("data name:",data['tuList']);
@@ -117,7 +117,7 @@ function change_div(level_text){
 		type: "GET",
 		//dataType : 'json',
 		//url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
-		url:'http://localhost:6050/cedus/api/cover/education',
+		url:'../api/cover/education',
 		data: {ordine:level_text,filter:'TRANSIT_DISTANCE'} ,
 		success: function (data) {
 			//console.log("data :",data);
@@ -141,7 +141,7 @@ function change_div(level_text){
 				type: "GET",
 				//dataType : 'json',
 				//url: 'https://dev.smartcommunitylab.it/cedus/api/params/Tipologie',
-				url:'http://localhost:6050/cedus/api/params/tipologie',
+				url:'../api/params/tipologie',
 				data: '' ,
 				success: function (data) {
 				//console.log("data tipologia:",data);
@@ -360,12 +360,12 @@ function initMap(markers) {
 			icon:"../images/marker_green.png"
 		});
 		
-        map.setCenter(userlocation);
-        marker.addListener('click', function() {
-        	infoWindow.setPosition(userlocation);
-            infoWindow.setContent("<b>La Tua Posizione.</b><br/>Lat: "+userlocation['lat']+"<br/>Lng: "+userlocation['lng']);
-            infoWindow.open(map, marker);
-        });
+//        map.setCenter(userlocation);
+//        marker.addListener('click', function() {
+//        	infoWindow.setPosition(userlocation);
+//            infoWindow.setContent("<b>La Tua Posizione.</b><br/>Lat: "+userlocation['lat']+"<br/>Lng: "+userlocation['lng']);
+//            infoWindow.open(map, marker);
+//        });
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
       });
