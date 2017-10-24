@@ -58,6 +58,7 @@ public class TUManager {
 	private TownsData townsData;
 
 	private List<TeachingUnit> tuAll = null; 
+	private List<TeachingUnit> tuAllForOrdine = null;
 	
 	private static final Logger logger = LoggerFactory.getLogger(TUManager.class);
 
@@ -65,6 +66,7 @@ public class TUManager {
 	private Set<String> ordini = new HashSet<>();
 	private Set<String> tipologie = new HashSet<>();
 	private Set<String> indirizzi = new HashSet<>();
+	private Set<String> tipologieForOrdini = new HashSet<>();
 	
 	@PostConstruct
 	public void init(){
@@ -87,7 +89,11 @@ public class TUManager {
 			} else {
 				indirizzi.add(tu.getClassifications().get("INDIRIZZO").getName());
 			}
+			
+			
 		});
+		
+		
 	}
 	
 	
@@ -104,7 +110,7 @@ public class TUManager {
 		url += "ordine=" + ((ordine != null) ? ordine : "");
 		url += "&tipologia=" + ((tipologia != null) ? tipologia : "");
 		url += "&indirizzo=" + ((indirizzo != null) ? indirizzo : "");
-		ResponseEntity<List<TeachingUnit>> res = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<Object>(null, createHeaders()), new ParameterizedTypeReference<List<TeachingUnit>>(){});	
+		ResponseEntity<List<TeachingUnit>> res = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<Object>(createHeaders()), new ParameterizedTypeReference<List<TeachingUnit>>(){});	
 		List<TeachingUnit> tuList = res.getBody();
 		
 		townsData.fillTeachingUnitCoords(tuList);
@@ -130,7 +136,22 @@ public class TUManager {
 	public Set<String> getIndirizzi() {
 		return Collections.unmodifiableSet(indirizzi);
 	}
-
+	/**
+	 * @return list of TIPOLOGIA for ORDINE classification values
+	 */
+	public Set<String> getTipologieForOrdine(String ordine) {
+		//Set<String> result = new HashSet<>();
+		for (TeachingUnit tu : tuAll) {
+			if(tu.getClassifications().get("ORDINE") != null) {
+				if ( tu.getClassifications().get("ORDINE").getName().equals(ordine)) {
+					tipologieForOrdini.add(tu.getClassifications().get("TIPOLOGIA").getName());
+				}
+			}
+		}
+		logger.debug("tipologieForOrdini(student): "+tipologieForOrdini);
+		//return Collections.unmodifiableSet(tipologieForOrdini);
+		return tipologieForOrdini;
+	}
 	@SuppressWarnings("serial")
 	private HttpHeaders createHeaders() {
 		return new HttpHeaders() {

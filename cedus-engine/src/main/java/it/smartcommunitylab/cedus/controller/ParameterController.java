@@ -17,9 +17,15 @@ package it.smartcommunitylab.cedus.controller;
 
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.smartcommunitylab.cedus.manager.TUManager;
@@ -42,9 +48,21 @@ public class ParameterController {
 	public @ResponseBody Set<String> getIndirizzi() {
 		return tuManager.getIndirizzi();
 	}
+	
 	@GetMapping(value = "/api/params/tipologie")
 	public @ResponseBody Set<String> getTipologie() {
 		return tuManager.getTipologie();
 	}
-
+	
+	
+	@GetMapping(value = "/api/params/tipologieForOrdine")
+	public @ResponseBody Set<String> getTipologieForOrdine(@RequestParam(required=false) String ordine) {
+		return tuManager.getTipologieForOrdine(ordine);
+	}
+	/*
+	@RequestMapping(value = "/api/params/tipologie", method = RequestMethod.GET)
+	public @ResponseBody Set<String> getTipologieForOrdine(@RequestParam(required=false) String ordine, HttpServletRequest request) throws Exception {
+		return tuManager.getTipologieForOrdine(ordine);
+	}
+	*/
 }
