@@ -58,7 +58,6 @@ public class TUManager {
 	private TownsData townsData;
 
 	private List<TeachingUnit> tuAll = null; 
-	private List<TeachingUnit> tuAllForOrdine = null;
 	
 	private static final Logger logger = LoggerFactory.getLogger(TUManager.class);
 
@@ -66,7 +65,6 @@ public class TUManager {
 	private Set<String> ordini = new HashSet<>();
 	private Set<String> tipologie = new HashSet<>();
 	private Set<String> indirizzi = new HashSet<>();
-	private Set<String> tipologieForOrdini = new HashSet<>();
 	
 	@PostConstruct
 	public void init(){
@@ -140,17 +138,17 @@ public class TUManager {
 	 * @return list of TIPOLOGIA for ORDINE classification values
 	 */
 	public Set<String> getTipologieForOrdine(String ordine) {
-		//Set<String> result = new HashSet<>();
+		Set<String> result = new HashSet<>();
 		for (TeachingUnit tu : tuAll) {
 			if(tu.getClassifications().get("ORDINE") != null) {
 				if ( tu.getClassifications().get("ORDINE").getName().equals(ordine)) {
-					tipologieForOrdini.add(tu.getClassifications().get("TIPOLOGIA").getName());
+					result.add(tu.getClassifications().get("TIPOLOGIA").getName());
 				}
 			}
 		}
-		logger.debug("tipologieForOrdini(student): "+tipologieForOrdini);
+		//logger.debug("tipologieForOrdini(student): "+tipologieForOrdini);
 		//return Collections.unmodifiableSet(tipologieForOrdini);
-		return tipologieForOrdini;
+		return result;
 	}
 	@SuppressWarnings("serial")
 	private HttpHeaders createHeaders() {
