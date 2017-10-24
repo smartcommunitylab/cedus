@@ -60,6 +60,7 @@
         window.location.hash = '/';
         window.location.reload();
     }
+    initMapPointer();
   } 
 /*]]>*/
 </script>  
@@ -93,7 +94,7 @@
 		</nav>
 		<div class="tab-content">
 			<!--tab1 for Percorso Formativo -->
-    		<div id="tabs_1" class="tab-pane fade in active" onload="initMapPointer()">
+    		<div id="tabs_1" class="tab-pane fade in active" >
     			<div class="row">
 					<div class="col-md-8">
 						<div id="mapPointer" >
@@ -152,7 +153,7 @@
 							
 							<div class='row'>
 								<div class="col-md-2"  >
-									<a href='#'><span class="glyphicon glyphicon-arrow-left" onclick="back_div()" ></span></a>
+									<a href='#' class="btn btn-success btn-sm"><span class="glyphicon glyphicon-arrow-left" onclick="back_div()" ></span></a>
 								</div>
 								<div class="col-md-10"  >
 									<b><p id='levelText'></p></b>

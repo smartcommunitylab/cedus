@@ -4,7 +4,7 @@ var globalCurrentMarkers = [];
 $(document).ready(function() {
 	$('#pill1').click(function(e) {
 		//initMapPointer();
-		setTimeout(initMapPointer, 300);
+		setTimeout(initMapPointer, 200);
 		console.log("call initMapPointer");
 	});
 	$('#pill2').click(function(e) {
@@ -141,10 +141,10 @@ function change_div(level_text){
 				type: "GET",
 				//dataType : 'json',
 				//url: 'https://dev.smartcommunitylab.it/cedus/api/params/Tipologie',
-				url:'../api/params/tipologie',
-				data: '' ,
+				url:'../api/params/tipologieForOrdine',
+				data: {ordine:level_text} ,
 				success: function (data) {
-				//console.log("data tipologia:",data);
+				console.log("data tipologia:",data);
 				$("#dropdownList").append("<option value=''>Tipologia di selezione</option>");
 				$.each(data,function(key, val){
 					//console.log("data geocode:",val);
@@ -222,29 +222,7 @@ function initMap(markers) {
 					var fromPosition=new google.maps.LatLng(userlocation['lat'],userlocation['lng']);
 					var toPositation=new google.maps.LatLng(val['lat'],val['lng']);
 					var distance = (google.maps.geometry.spherical.computeDistanceBetween(fromPosition, toPositation)/1000).toFixed(2);
-					/*
-					var directionsService = new google.maps.DirectionsService();
-					var requestDriving = {
-							  origin      : fromPosition, 
-							  destination : toPositation,
-							  travelMode  : google.maps.DirectionsTravelMode.DRIVING
-							};
-					directionsService.route(requestDriving, function(response, status) {
-						if ( status == google.maps.DirectionsStatus.OK ) {
-						    console.log("requestDriving distance:", response.rows[0].elements[0].distance.text ); // the distance in metres
-							carDistance={
-										distance: response.rows[0].elements[0].distance.text,
-										duration: response.routes[0].legs[0].duration.text
-									};
-						}
-						else {
-							console.log("there's no route between these two locations");
-						    // oops, there's no route between these two locations
-						    // every time this happens, a kitten dies
-							// so please, ensure your address is formatted properly
-						}
-					});
-					*/
+					
 					//call for driving
 					var service = new google.maps.DistanceMatrixService();
 				    service.getDistanceMatrix({
@@ -278,7 +256,7 @@ function initMap(markers) {
 					                		+"KM</p></div><div class='row markersTXT'><div class='col-md-2'><i class='material-icons'>directions_car</i></div><div class='col-md-10' style='font-size: 16px;'>"
 					                		+carDistance+" con "+carDuration+".</div></div><div class='row markersTXT'><div class='col-md-2 text-left'><i class='material-icons'>directions_bus</i></div><div class='col-md-10' style='font-size: 16px;'>"
 					                		+transitDistance+" con "+transitDuration+".</div></div>");
-									//infoWindowMarkers.setContent("<i class='material-icons'>directions_bus</i>"+transitDistance+" and "+transitDuration+".");
+									
 									infoWindowMarkers.open(map, marker);
 						    	}
 						    });
@@ -289,52 +267,52 @@ function initMap(markers) {
 				        }
 				    });
 					/*
-					var dataSend={
-							  "to": {
-								    "lon": "",
-								    "lat": ""
-								  },
-								  "routeType": "fastest",
-								  "resultsNumber": 1,
-								  "departureTime": "04:25PM",
-								  "from": {
-								    "lon": "",
-								    "lat": ""
-								  },
-								  "date": "",
-								  "transportTypes": [
-								    "TRANSIT",
-								    "CAR"
-								  ]
-								};
-					dataSend['to']['lon']=val['lng'];
-					dataSend['to']['lat']=val['lat'];
-					dataSend['from']['lon']=userlocation['lng'];
-					dataSend['from']['lat']=userlocation['lat'];
-					var d = new Date();
-					d.setDate(d.getDate() + (1 + 7 - d.getDay()) % 7);
-					//dataSend['date']=d.getMonth()+"/"+d.getDate()+"/"+d.getFullYear();
-					dataSend['date']=moment(d).format("MM/DD/YYYY");
-					console.log("Date:",dataSend['date']);
-					//ajax call for collect distance
-					$.ajax
-					({
-						type: "POST",
-						contentType: "application/json;charset=UTF-8",
-						url:"https://os.smartcommunitylab.it/core.mobility/plansinglejourney",
-						data: JSON.stringify(dataSend),
-						dataType : "json",
-						//async: false,
-						success: function (data) {
-							console.log("data from api:",data);
-							infoWindow.setPosition({lat:val['lat'],lng:val['lng']});
-			                infoWindow.setContent("<b>"+val['name']+".</b><br/>Indirizzo: "+val['address']+"<br/>Descrizione: "
-			                		+val['description']+"<br/><p>Distanza in "+data[0]['leg'][0]['legGeometery']['length']
-			                		+"KM</p><i class='material-icons'>directions_car</i><br/><i class='material-icons'>directions_bus</i><br/><i class='material-icons'>directions_railway</i>");
-			                infoWindow.open(map, marker);
-						},
-						failure: function() {console.log("error from api:");}
-					});
+						var dataSend={
+								  "to": {
+									    "lon": "",
+									    "lat": ""
+									  },
+									  "routeType": "fastest",
+									  "resultsNumber": 1,
+									  "departureTime": "04:25PM",
+									  "from": {
+									    "lon": "",
+									    "lat": ""
+									  },
+									  "date": "",
+									  "transportTypes": [
+									    "TRANSIT",
+									    "CAR"
+									  ]
+									};
+						dataSend['to']['lon']=val['lng'];
+						dataSend['to']['lat']=val['lat'];
+						dataSend['from']['lon']=userlocation['lng'];
+						dataSend['from']['lat']=userlocation['lat'];
+						var d = new Date();
+						d.setDate(d.getDate() + (1 + 7 - d.getDay()) % 7);
+						//dataSend['date']=d.getMonth()+"/"+d.getDate()+"/"+d.getFullYear();
+						dataSend['date']=moment(d).format("MM/DD/YYYY");
+						console.log("Date:",dataSend['date']);
+						//ajax call for collect distance
+						$.ajax
+						({
+							type: "POST",
+							contentType: "application/json;charset=UTF-8",
+							url:"https://os.smartcommunitylab.it/core.mobility/plansinglejourney",
+							data: JSON.stringify(dataSend),
+							dataType : "json",
+							//async: false,
+							success: function (data) {
+								console.log("data from api:",data);
+								infoWindow.setPosition({lat:val['lat'],lng:val['lng']});
+				                infoWindow.setContent("<b>"+val['name']+".</b><br/>Indirizzo: "+val['address']+"<br/>Descrizione: "
+				                		+val['description']+"<br/><p>Distanza in "+data[0]['leg'][0]['legGeometery']['length']
+				                		+"KM</p><i class='material-icons'>directions_car</i><br/><i class='material-icons'>directions_bus</i><br/><i class='material-icons'>directions_railway</i>");
+				                infoWindow.open(map, marker);
+							},
+							failure: function() {console.log("error from api:");}
+						});
 					*/
 				    //console.log("carDistance Array:",carDistance);
 				    
