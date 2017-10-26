@@ -107,10 +107,10 @@ function change_div(level_text){
 		url:'../api/params/tipologieForOrdine',
 		data: {ordine:level_text} ,
 		success: function (data) {
-		$("#dropdownList").append("<option value=''>Tipologia di selezione</option>");
-		$.each(data,function(key, val){
-			$("#dropdownList").append("<option value='"+val+"'>"+val+"</option>");
-		});
+			$("#dropdownList").append("<option value=''>Tipologia di selezione</option>");
+			$.each(data,function(key, val){
+				$("#dropdownList").append("<option value='"+val+"'>"+val+"</option>");
+			});
 			
 		},
 		failure: function() {console.log("Error!");}
@@ -271,18 +271,34 @@ function getPolyColor(districtMap){
 		distMap="transitTime";
 	}
 	if(districtMap){
-		if(districtMap[distMap]<=20){
-			polyColor="#40C144";
-		}else if(districtMap[distMap]>20 && districtMap[distMap]<=40){
-			polyColor="#E4EA19";
-		}else if(districtMap[distMap]>40 && districtMap[distMap]<=100){
-			polyColor="#FFA500";
-		}else if(districtMap[distMap]>100 ){
-			polyColor="#FF0000";
-		}else{
-			console.log("districtMap:",districtMap);
-			polyColor="#999999";
+		if(radioVal=="CAR_DISTANCE" || radioVal=="TRANSIT_DISTANCE"){
+			if(districtMap[distMap]<=20){
+				polyColor="#40C144";
+			}else if(districtMap[distMap]>20 && districtMap[distMap]<=40){
+				polyColor="#E4EA19";
+			}else if(districtMap[distMap]>40 && districtMap[distMap]<=100){
+				polyColor="#FFA500";
+			}else if(districtMap[distMap]>100 ){
+				polyColor="#FF0000";
+			}else{
+				console.log("districtMap:",districtMap);
+				polyColor="#999999";
+			}
+		}else if(radioVal=="CAR_TIME" || radioVal=="TRANSIT_TIME"){
+			if(districtMap[distMap]<=60){
+				polyColor="#40C144";
+			}else if(districtMap[distMap]>60 && districtMap[distMap]<=120){
+				polyColor="#E4EA19";
+			}else if(districtMap[distMap]>120 && districtMap[distMap]<=300){
+				polyColor="#FFA500";
+			}else if(districtMap[distMap]>300 ){
+				polyColor="#FF0000";
+			}else{
+				console.log("districtMap:",districtMap);
+				polyColor="#999999";
+			}
 		}
+		
 	}else{
 		//close to white color
 		polyColor="#FFFFFF";
