@@ -18,14 +18,14 @@ $(document).ready(function() {
 			url:'../api/params/ordini',
 			data: '' ,
 			success: function (data) {
-			console.log("data name:",data);
-			$.each(data,function(key, val){
-				var strVal="\"change_div('"+val+"')\"";
-				//console.log('strVal:',strVal)
-				$('#select_btn').append("<div class='row'><button type='button' class='btn btn-success btn-block' style='width:90%' onclick="+strVal+" >"+val+"</button></div><br/>");
-			});
-			
-			//initMap(markers);	
+				console.log("data name:",data);
+				$.each(data,function(key, val){
+					var strVal="\"change_div('"+val+"')\"";
+					//console.log('strVal:',strVal)
+					$('#select_btn').append("<div class='row'><button type='button' class='btn btn-success btn-block' style='width:90%' onclick="+strVal+" >"+val+"</button></div><br/>");
+				});
+				
+				//initMap(markers);	
 			},
 			failure: function() {console.log("Error!");}
 		});
@@ -45,20 +45,20 @@ $(document).ready(function() {
 	    		url:'../api/cover/education',
 	    		data: {ordine:$('#levelText').text(),tipologia:$(this).val(),filter:'TRANSIT_DISTANCE'} ,
 	    		success: function (data) {
-	    		//console.log("data name:",data['tuList']);
-	    		$.each(data['tuList'],function(key, val){
-	    			//console.log("data geocode:",val['geocode'][0]);
-	    			globalCurrentMarkers.push({
-	    			  lat: val['geocode'][1],
-	    			  lng: val['geocode'][0],
-	    			  name: val['name'],
-	    			  codiceIstat: val['codiceIstat'],
-	    			  address: val['address'],
-	    			  description: val['description']
-	    			});
-	    		});
-	    		drawMarkerInDistance(30);
-	    		//initMap(markers);	
+		    		//console.log("data name:",data['tuList']);
+		    		$.each(data['tuList'],function(key, val){
+		    			//console.log("data geocode:",val['geocode'][0]);
+		    			globalCurrentMarkers.push({
+		    			  lat: val['geocode'][1],
+		    			  lng: val['geocode'][0],
+		    			  name: val['name'],
+		    			  codiceIstat: val['codiceIstat'],
+		    			  address: val['address'],
+		    			  description: val['description']
+		    			});
+		    		});
+		    		drawMarkerInDistance(30);
+		    		//initMap(markers);	
 	    		},
 	    		failure: function() {console.log("Error!");}
 	    	});
@@ -99,66 +99,30 @@ $(document).ready(function() {
         }
     });
 });
-/*
-$('.selectpicker').selectpicker({
-	liveSearch: true, 
-	showTick: true, 
-	width: 'auto'
-});
-*/
+
 function change_div(level_text){
 	var markers = [];
 	$('#select_btn').hide();
 	$('#select_type').show();
 	$('#levelText').text(level_text);
-	//ajax call for markers (filter by level)
+	$('select#dropdownList').empty();
+	$("#dropdownList").append("<option value=''>Tipologia di selezione</option>");
+	//ajax call for tipologia in dropdown box
 	$.ajax
 	({
 		type: "GET",
-		//dataType : 'json',
-		//url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
-		url:'../api/cover/education',
-		data: {ordine:level_text,filter:'TRANSIT_DISTANCE'} ,
+		//url: 'https://dev.smartcommunitylab.it/cedus/api/params/Tipologie',
+		url:'../api/params/tipologieForOrdine',
+		data: {ordine:level_text} ,
 		success: function (data) {
-			//console.log("data :",data);
-			$.each(data['tuList'],function(key, val){
-				//console.log("data geocode:",val['geocode'][0]);
-				markers.push({
-				  lat: val['geocode'][1],
-				  lng: val['geocode'][0],
-				  name: val['name'],
-				  codiceIstat: val['codiceIstat'],
-				  address: val['address'],
-				  description: val['description']
-				});
+			//console.log("data tipologia:",data);
+			$.each(data,function(key, val){
+				$("#dropdownList").append("<option value='"+val+"'>"+val+"</option>");
 			});
-			//var $select = $('select#dropdownList');
-			$('select#dropdownList').empty();
-			//initMap(markers);
-			//ajax call for tipologia in dropdown box
-			$.ajax
-			({
-				type: "GET",
-				//dataType : 'json',
-				//url: 'https://dev.smartcommunitylab.it/cedus/api/params/Tipologie',
-				url:'../api/params/tipologieForOrdine',
-				data: {ordine:level_text} ,
-				success: function (data) {
-				console.log("data tipologia:",data);
-				$("#dropdownList").append("<option value=''>Tipologia di selezione</option>");
-				$.each(data,function(key, val){
-					//console.log("data geocode:",val);
-					//$("#dropdownList").append("<li><a href='#'>"+val+"</a></li>");
-					$("#dropdownList").append("<option value='"+val+"'>"+val+"</option>");
-				});
-					
-				},
-				failure: function() {console.log("Error!");}
-			});
+			
 		},
 		failure: function() {console.log("Error!");}
-	});
-	
+	});	
 }
 function back_div(){
 	$('#select_btn').show();
@@ -389,6 +353,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 function initMapPointer(){
+	getActivityList();
 	mapPointer = new google.maps.Map(document.getElementById('mapPointer'), {
 	    zoom: 09,
 	    center: {
@@ -422,6 +387,52 @@ function initMapPointer(){
   	polygons.setMap(mapPointer);
   	google.maps.event.trigger(mapPointer, 'resize');
 }
-
+/*
+* get "studentId" from "profile" in API,
+* then get student all registration from registration in API,
+* and show in page
+* get the instituteId from registration 
+* get institute information with instituteId from TU
+* and show marker in Map
+*/
+function getActivityList(){
+	console.log("token:",token);
+	$.ajax
+	({
+		type: "GET",
+		url: 'https://api-dev.smartcommunitylab.it/t/sco.cartella/cartella/1.0/api/profile',
+		data: '' ,
+		//contentType:'application/json;charset=UTF-8',
+		beforeSend: function (xhr) {
+		    xhr.setRequestHeader('Authorization', 'Bearer '+token);
+		},
+		success: function (dataPro) {
+			console.log("profile data(studentId):",dataPro['studentId']);
+			var urlRegistration="https://api-dev.smartcommunitylab.it/t/sco.cartella/cartella/1.0/api/student/"+dataPro['studentId']+"/registration";
+			$.ajax
+			({
+				type: "GET",
+				url: urlRegistration,
+				data: '' ,
+				beforeSend: function (xhr) {
+				    xhr.setRequestHeader('Authorization', 'Bearer '+token);
+				},
+				success: function (dataReg) {
+					
+					$.each(dataReg,function(key, val){
+						console.log("registration data:",val['registrations']);
+						$.each(val['registrations'],function(key, val){
+							console.log("course:",val['course']);
+							console.log("institute:",val['institute']['name']);
+							$("#trainingList").append("<div class='row'><p><b>Course:</b>"+val['course']+"</p><p><b>Institute:</b>"+val['institute']['name']+"</p></div>");
+						});
+					});
+				},
+				failure: function() {console.log("Error!");}
+			});
+		},
+		failure: function() {console.log("Error!");}
+	});
+}
 
 

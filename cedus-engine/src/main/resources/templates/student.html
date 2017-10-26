@@ -33,7 +33,7 @@
   var redirectUri = [[${redirectUri}]];
   
   var apiUri = [[${apiUri}]];
-	
+  var token;
   function init() {
     var queryString = location.hash.substring(1);
     var params = {};
@@ -51,7 +51,7 @@
     }
     
     if (passedToken == null) {
-   	   var token = sessionStorage.access_token;
+   	    token = sessionStorage.access_token;
    	    if (!token || token == 'null' || token == 'undefined') {
    	        window.location = aacUrl + '/eauth/authorize?client_id='+clientId+'&redirect_uri='+redirectUri+'&response_type=token';      
    	    }
@@ -100,7 +100,8 @@
 						<div id="mapPointer" >
 						</div>
 					</div>
-					<div class="col-md-4"  >
+					<div class="col-md-4"  id="trainingList">
+						<!-- 
 						<div class='row'>
 							<p><b>Il tuo percorso formativo su mappa</b></p>
 						</div><br/>
@@ -116,6 +117,7 @@
 						<div class='row'>
 							<p><b>Nome Istituto Superiore4</b></p>
 						</div>
+						 -->
 					</div>
 				</div>
     		</div>
