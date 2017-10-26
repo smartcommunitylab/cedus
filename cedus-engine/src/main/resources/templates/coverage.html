@@ -70,7 +70,8 @@
 				<div class="row" id="select_type"  style="display: none">
 					<div class='row'>
 						<div class="col-md-2"  >
-							<a href='#'><span class="glyphicon glyphicon-arrow-left" onclick="back_div()" ></span></a>
+							<!--  <a href='#'><span class="glyphicon glyphicon-arrow-left" onclick="back_div()" ></span></a> -->
+							<a href='#' class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-arrow-left" onclick="back_div()" ></span></a>
 						</div>
 						<div class="col-md-10"  >
 							<b><p id='levelText'></p></b>
@@ -91,26 +92,66 @@
 								</ul>
 							</div>
 							-->
-							<select id="dropdownList" class="selectpicker" data-live-search="true">
+							<select id="dropdownList" class="selectpicker" data-live-search="true" style="max-width:250px">
 							</select>
 						</div>
 					</div>
-					<div class='row' id="colorMark">
+					<div class='row'>
+						<div class="col-md-3">
+						    <label class="radio-inline">
+						      <input class="radioOption" type="radio" name="optradio" value="CAR_DISTANCE" checked="checked"/>Car Distance
+						    </label>
+						</div>
+						<div class="col-md-3">
+						    <label class="radio-inline">
+						      <input class="radioOption" type="radio" name="optradio" value="CAR_TIME"/>Car Time
+						    </label>
+						</div>
+						<div class="col-md-3">
+						    <label class="radio-inline">
+						      <input class="radioOption" type="radio" name="optradio" value="TRANSIT_DISTANCE"/>Transit Distance
+						    </label>
+						</div>
+						<div class="col-md-3">
+						    <label class="radio-inline">
+						      <input class="radioOption" type="radio" name="optradio" value="TRANSIT_TIME"/>Transit Time
+						    </label>
+						</div>
+					</div>
+					<div class='row' id="distanceMark">
 						<div class='row '><!-- margin-left 15px -->
-							<div class="col-md-2 polyColor less50 "></div>
-							<div class="col-md-10">50KM</div>
+							<div class="col-md-2 polyColor less20 "></div>
+							<div class="col-md-10">20KM</div>
+						</div>
+						<div class='row'>
+							<div class="col-md-2 polyColor less40"></div>
+							<div class="col-md-10">40KM</div>
 						</div>
 						<div class='row'>
 							<div class="col-md-2 polyColor less100"></div>
 							<div class="col-md-10">100KM</div>
 						</div>
 						<div class='row'>
-							<div class="col-md-2 polyColor less150"></div>
-							<div class="col-md-10">150KM</div>
+							<div class="col-md-2 polyColor greater100"></div>
+							<div class="col-md-10">>100KM</div>
+						</div>
+					</div>
+					<div class='row' id="timeMark" style="display: none">
+						<div class='row '><!-- margin-left 15px -->
+							<div class="col-md-2 polyColor less20 "></div>
+							<div class="col-md-10">1h</div>
 						</div>
 						<div class='row'>
-							<div class="col-md-2 polyColor less200"></div>
-							<div class="col-md-10">200KM</div>
+							<div class="col-md-2 polyColor less40"></div>
+							<div class="col-md-10">2h</div>
+						</div>
+						<div class='row'>
+							<div class="col-md-2 polyColor less100"></div>
+							<div class="col-md-10">5h</div>
+						</div>
+						<div class='row'>
+							<div class="col-md-2 polyColor greater100"></div>
+							<div class="col-md-10">>5h</div>
 						</div>
 					</div>
 				</div>

@@ -5,7 +5,10 @@
 	height:100%;
 }
 
-#colorMark{
+#distanceMark{
+	margin-left:15px;
+}
+#timeMark{
 	margin-left:15px;
 }
 .polyColor {
@@ -17,18 +20,18 @@
   border: 1px solid rgba(0, 0, 0, .2);
 }
 
-.less50 {
-  background: #000000;
+.less20 {
+  background: #40C144;
+}
+
+.less40 {
+  background: #E4EA19;
 }
 
 .less100 {
-  background: #555555;
+  background: #FFA500;
 }
 
-.less150 {
-  background: #777777;
-}
-
-.less200 {
-  background: #999999;
+.greater100 {
+  background: #FF0000;
 }
