@@ -24,7 +24,6 @@ $(document).ready(function() {
 	//change the map on change of dropdown value
 	$("#dropdownList").change(function(){
 		var markers = [];
-        //console.log("level data:", $('#levelText').text());
         //ajax call for markers (filter by tipologia)
 		if($(this).val()){
 	    	$.ajax
@@ -97,32 +96,8 @@ function change_div(level_text){
 	$('#select_btn').hide();
 	$('#select_type').show();
 	$('#levelText').text(level_text);
-	/*
-	//ajax call for markers filter by level(on click level button)
-	$.ajax
-	({
-		type: "GET",
-		//dataType : 'json',
-		//url: 'https://dev.smartcommunitylab.it/cedus/api/cover/education',
-		url:'../api/cover/education',
-		data: {ordine:level_text,tipologia:$("#dropdownList").val(),filter:'TRANSIT_DISTANCE'} ,
-		success: function (data) {
-		//console.log("data name:",data['tuList']);
-		$.each(data['tuList'],function(key, val){
-			//console.log("data geocode:",val['geocode'][0]);
-			markers.push({
-			  lat: val['geocode'][1],
-			  lng: val['geocode'][0],
-			  name: val['name']
-			});
-		});
-		
-		//initMap(markers,data['districtMap']);	
-		},
-		failure: function() {alert("Error!");}
-	});
-	*/
 	$('select#dropdownList').empty();
+	
 	//ajax call for tipologia (fullfill the dropdown box)
 	$.ajax
 	({
@@ -259,41 +234,13 @@ function initMap(markers,districtMap) {
 		}
 		if(districtMap){
 			var codiceIstat="0"+val['PRO_COM'];
-			polyColor=getPolyColor(districtMap[codiceIstat]);
-			/*
-			var radioVal=$( "input.radioOption:checked" ).val();
-			var distMap;
-			if(radioVal=="CAR_DISTANCE"){
-				distMap="carDistance";
-			}else if(radioVal=="CAR_TIME"){
-				distMap="carTime";
-			}else if(radioVal=="TRANSIT_DISTANCE"){
-				distMap="transitDistance";
-			}else if(radioVal=="TRANSIT_TIME"){
-				distMap="transitTime";
-			}
-			//console.log("data 4 local file:",val['PRO_COM']);
-			//console.log("districtMap:",districtMap[codiceIstat]);
 			if(districtMap[codiceIstat]){
-				if(districtMap[codiceIstat][distMap]<=20){
-					polyColor="#40C144";
-				}else if(districtMap[codiceIstat][distMap]>20 && districtMap[codiceIstat][distMap]<=40){
-					polyColor="#E4EA19";
-				}else if(districtMap[codiceIstat][distMap]>40 && districtMap[codiceIstat][distMap]<=100){
-					polyColor="#FFA500";
-				}else if(districtMap[codiceIstat][distMap]>100 ){
-					polyColor="#FF0000";
-				}else{
-					console.log("districtMap:",districtMap[codiceIstat]);
-					polyColor="#999999";
-				}
+				polyColor=getPolyColor(districtMap[codiceIstat]);
 			}else{
 				//close to white color
 				polyColor="#FFFFFF";
-			}
-			*/
+			}	
 		}
-		
 		
 		polygons[key] = new google.maps.Polygon({
 		    paths: decodePaths,
@@ -323,8 +270,6 @@ function getPolyColor(districtMap){
 	}else if(radioVal=="TRANSIT_TIME"){
 		distMap="transitTime";
 	}
-	//console.log("data 4 local file:",val['PRO_COM']);
-	//console.log("districtMap:",districtMap[codiceIstat]);
 	if(districtMap){
 		if(districtMap[distMap]<=20){
 			polyColor="#40C144";
