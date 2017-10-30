@@ -352,8 +352,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.open(map);
 }
 
-function initMapPointer(){
-	getActivityList();
+function initMapPointer(markers){
+	
 	mapPointer = new google.maps.Map(document.getElementById('mapPointer'), {
 	    zoom: 09,
 	    center: {
@@ -362,7 +362,18 @@ function initMapPointer(){
 	    },		
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	});
-	
+	if(markers){		
+		$.each(markers,function(key, val){
+			var marker = new google.maps.Marker({
+				animation: google.maps.Animation.DROP,
+				position: {lat:val['lat'],lng:val['lng']},
+				map: mapPointer,
+				title: val['name']
+			});
+			
+		});
+		
+	}
 	// Define the LatLng coordinates for the polygon's path.
 	var decode=[];
 
@@ -397,6 +408,7 @@ function initMapPointer(){
 */
 function getActivityList(){
 	console.log("token:",token);
+	
 	$.ajax
 	({
 		type: "GET",
@@ -418,13 +430,29 @@ function getActivityList(){
 				    xhr.setRequestHeader('Authorization', 'Bearer '+token);
 				},
 				success: function (dataReg) {
-					
-					$.each(dataReg,function(key, val){
-						console.log("registration data:",val['registrations']);
-						$.each(val['registrations'],function(key, val){
-							console.log("course:",val['course']);
-							console.log("institute:",val['institute']['name']);
-							$("#trainingList").append("<div class='row'><p><b>Course:</b>"+val['course']+"</p><p><b>Institute:</b>"+val['institute']['name']+"</p></div>");
+					//
+					$.each(dataReg,function(keyReg, valReg){
+						$.each(valReg['registrations'],function(key, val){
+							var marker = [];
+							$.ajax
+							({
+								type: "GET",
+								url:'../api/params/teachingunit/'+val['teachingUnitId'],
+								success: function (data) {
+									marker.push({
+						    			  lat: data['geocode'][1],
+						    			  lng: data['geocode'][0],
+						    			  name: val['institute']['name']
+						    			});
+									$("#trainingList").append("<div class='well' id='training"+keyReg+"' style='cursor: pointer;' ><p><b>Institute: </b>"+val['institute']['name']+"</p><p><b>Course: </b>"+val['course']+"</p></div>");
+									if (typeof window.addEventListener==='function'){
+										document.getElementById("training"+keyReg).addEventListener('click',function(){
+						                    initMapPointer(marker);
+										});
+									}
+								},
+								failure: function() {console.log("Error!");}
+							});	
 						});
 					});
 				},
@@ -433,6 +461,8 @@ function getActivityList(){
 		},
 		failure: function() {console.log("Error!");}
 	});
+	//setTimeout(initMapPointer(markers), 200);
+	initMapPointer();
 }
 
 

@@ -208,6 +208,12 @@ public class TownsData {
 		tu.forEach(x -> {
 			if (x.getCodiceIstat() == null) {
 				logger.error("No Comune ISTAT code: "+x.getName());
+				//return;
+				//temporary codata provite
+				Double[] coord = new Double[2];
+				coord[0] = 11.12022;
+				coord[1] = 46.07361;
+				x.setGeocode(coord);
 				return;
 			}
 			Town town = townsByIstat.get(x.getCodiceIstat());

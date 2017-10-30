@@ -90,8 +90,6 @@ public class TUManager {
 			
 			
 		});
-		
-		
 	}
 	
 	
@@ -149,6 +147,19 @@ public class TUManager {
 		//logger.debug("tipologieForOrdini(student): "+tipologieForOrdini);
 		//return Collections.unmodifiableSet(tipologieForOrdini);
 		return result;
+	}
+	/**
+	 * @return list of TeachingUnit values with InstituteId
+	 */
+	public TeachingUnit getTeachingUnitWithID(String tuID) {
+		for (TeachingUnit tu : tuAll) {
+			if(tu.getId() != null) {
+				if(tu.getId().equals(tuID)) {
+					return tu;
+				}
+			}
+		}
+		return null;
 	}
 	@SuppressWarnings("serial")
 	private HttpHeaders createHeaders() {

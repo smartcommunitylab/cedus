@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.smartcommunitylab.cedus.manager.TUManager;
-
+import it.smartcommunitylab.cedus.model.TeachingUnit;
 /**
  * @author raman
  *
@@ -59,10 +59,10 @@ public class ParameterController {
 	public @ResponseBody Set<String> getTipologieForOrdine(@RequestParam(required=false) String ordine) {
 		return tuManager.getTipologieForOrdine(ordine);
 	}
-	/*
-	@RequestMapping(value = "/api/params/tipologie", method = RequestMethod.GET)
-	public @ResponseBody Set<String> getTipologieForOrdine(@RequestParam(required=false) String ordine, HttpServletRequest request) throws Exception {
-		return tuManager.getTipologieForOrdine(ordine);
-	}
-	*/
+	
+	@GetMapping(value = "/api/params/teachingunit/{tuId}")
+	public @ResponseBody TeachingUnit getTeachingUnitWithID(@PathVariable String tuId) throws Exception {
+		return tuManager.getTeachingUnitWithID(tuId);
+	} 
+	
 }
