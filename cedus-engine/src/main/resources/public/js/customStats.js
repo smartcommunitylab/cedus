@@ -9,7 +9,11 @@ var globalModifyData={
 		tab2:[],
 		tab3:[]
 	};
-
+var globalLevelList={
+		tab1:[],
+		tab2:[],
+		tab3:[]
+};
 google.charts.load("current", {packages:["corechart"]});
 google.charts.setOnLoadCallback(drawPieChartCall);
 
@@ -129,11 +133,12 @@ function drawBarChart() {
 		type: "GET",
 		//dataType : 'json',
 		url: 'https://dev.smartcommunitylab.it/cedus/api/stats/registration',
+		//url: '../api/stats/registration',
 		data: {ordine:1} ,
 		success: function (data) {
 			globalMasterData['tab1'].push(data);
 			globalModifyData['tab1'].push(data);
-			console.log("data for tab1:",data);
+			console.log("push globalMasterData:",globalMasterData);
 			$.each(data,function(key, val){
 				dataTest.addColumn('number', val['year']);
 				dataTest.addColumn({type:'string',role: 'annotation' });
@@ -141,9 +146,15 @@ function drawBarChart() {
 				$("#tab1AnniList").append("<div class='row' id='tab1Anni"+val['year']+"'> <p><b>"+val['year']+"</b></p></div>");
 				$.each(val['values'],function(key2,val2){
 					if(key == 0){
-						//dataTest.addRow([val2['name'],val2['value']]);
+						//add row header in google datatest for drawing google barChart
 						dataTest.addRow([val2['name'],val2['value'],val['year'].toString()]);
-						//levelList['tab1'].push(val2['name']);
+						//save the level(ordine) and write the level
+						globalLevelList['tab1'].push(val2['name']);
+						var i=key2+1;
+						var id="tab1checkbox"+i;
+						var tab='"'+'tab1'+'"';
+						var name='"'+val2['name']+'"';
+						$("#tab1level").append("<div class='checkbox'><label><input type='checkbox' name='' value='' id='"+id+"' checked='checked'  onchange='levelModification(this,"+tab+","+name+")'/><i class='helper'></i>"+val2['name']+"</label> </div>");
 					}else{
 						dataTest.setValue(key2, key+key+1, val2['value']);
 						dataTest.setValue(key2, key+key+2, val['year'].toString());
@@ -152,10 +163,10 @@ function drawBarChart() {
 				});
 				
 			});
-			
+			console.log("globalLevelList:",globalLevelList);
 			var chart = new google.visualization.BarChart(document.getElementById('tab1_barChart1'));
 			chart.draw(dataTest, options);
-			//console.log("dataTest:",dataTest);
+			
 		},
 		failure: function() {alert("Error!");}
 	});
@@ -326,24 +337,51 @@ function anniModification(tab, type){
 }
 
 //levelModification
-function levelModification(obj,tab, checkboxID){ 
+function levelModification(obj,tab, modifyLevel){ 
+	console.log('globalMasterData(levelModification)',globalMasterData);
+	console.log('globalModifyData(levelModification)',globalModifyData);
 	if($(obj).is(":checked")){
-		console.log('checked');
-		globalModifyData[tab][0][0]['values'].push(globalMasterData[tab][0][0]['values'][0]);
-		globalModifyData[tab][0][1]['values'].push(globalMasterData[tab][0][1]['values'][0]);
+		//add data 
+		console.log('modifyLevel',modifyLevel);
+		//globalModifyData[tab][0][0]['values'].push(globalMasterData[tab][0][0]['values'][0]);
+		//globalModifyData[tab][0][1]['values'].push(globalMasterData[tab][0][1]['values'][0]);
+		
+		$.each(globalMasterData[tab][0],function(key, val){
+			$.each(val['values'],function(key2,val2){
+				console.log('val2 name:',val2['name']);
+				if(val2['name'] == modifyLevel){
+					globalModifyData[tab][0][key]['values'].push(val2);
+					console.log("push val:",val2);
+				}
+			});
+			
+		});
+		console.log('after plus level globalModifyData',globalModifyData);
 		drawBarChartOnRequest('anni');
 	}else{
-		var minusLevel ='Primaria';
+		//minus data
+		//var minusLevel ='Primaria';
 		//2016
-		globalModifyData[tab][0][0]['values'] = globalModifyData[tab][0][0]['values'].filter(function(el) {
+		/*globalModifyData[tab][0][0]['values'] = globalModifyData[tab][0][0]['values'].filter(function(el) {
 		    return el.name !== minusLevel;
 		});
 		//2017
 		globalModifyData[tab][0][1]['values'] = globalModifyData[tab][0][1]['values'].filter(function(el) {
 		    return el.name !== minusLevel;
+		});*/
+		
+		$.each(globalModifyData[tab][0],function(key, val){
+			
+			globalModifyData[tab][0][key]['values'] = globalModifyData[tab][0][key]['values'].filter(function(el) {
+			    return el.name !== modifyLevel;
+			});
+			
+			
 		});
+		
+		console.log('after minus level globalMasterData',globalMasterData);
 		drawBarChartOnRequest('anni');
-		console.log('after level globalModifyData',globalModifyData)
+		
 	}
 	
 }

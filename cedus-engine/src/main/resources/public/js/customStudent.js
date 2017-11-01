@@ -5,7 +5,6 @@ $(document).ready(function() {
 	$('#pill1').click(function(e) {
 		//initMapPointer();
 		setTimeout(initMapPointer, 200);
-		console.log("call initMapPointer");
 	});
 	$('#pill2').click(function(e) {
 		$('#select_btn').empty();
@@ -18,10 +17,8 @@ $(document).ready(function() {
 			url:'../api/params/ordini',
 			data: '' ,
 			success: function (data) {
-				console.log("data name:",data);
 				$.each(data,function(key, val){
 					var strVal="\"change_div('"+val+"')\"";
-					//console.log('strVal:',strVal)
 					$('#select_btn').append("<div class='row'><button type='button' class='btn btn-success btn-block' style='width:90%' onclick="+strVal+" >"+val+"</button></div><br/>");
 				});
 				
@@ -34,7 +31,6 @@ $(document).ready(function() {
 	//change the map on change of dropdown value
 	$("#dropdownList").change(function(){
 		globalCurrentMarkers=[];
-        //console.log("level data:", $('#levelText').text());
         if($(this).val()){
 	        //ajax call for markers (filter by tipologia)
 	    	$.ajax
@@ -45,9 +41,7 @@ $(document).ready(function() {
 	    		url:'../api/cover/education',
 	    		data: {ordine:$('#levelText').text(),tipologia:$(this).val(),filter:'TRANSIT_DISTANCE'} ,
 	    		success: function (data) {
-		    		//console.log("data name:",data['tuList']);
 		    		$.each(data['tuList'],function(key, val){
-		    			//console.log("data geocode:",val['geocode'][0]);
 		    			globalCurrentMarkers.push({
 		    			  lat: val['geocode'][1],
 		    			  lng: val['geocode'][0],
@@ -115,7 +109,6 @@ function change_div(level_text){
 		url:'../api/params/tipologieForOrdine',
 		data: {ordine:level_text} ,
 		success: function (data) {
-			//console.log("data tipologia:",data);
 			$.each(data,function(key, val){
 				$("#dropdownList").append("<option value='"+val+"'>"+val+"</option>");
 			});
@@ -133,7 +126,6 @@ function back_div(){
 
 function drawMarkerInDistance(distance){
 	var validmarker =[];
-	//console.log("distance:",distance);
 	if(userlocation){
 		$.each(globalCurrentMarkers,function(key,val){
 			var fromPosition=new google.maps.LatLng(userlocation['lat'],userlocation['lng']);
@@ -172,7 +164,6 @@ function initMap(markers) {
 	});
 	infoWindow = new google.maps.InfoWindow;
 	if(markers){
-		console.log("markers:",markers);
 		$.each(markers,function(key, val){
 			var infoWindowMarkers = new google.maps.InfoWindow;
 			var marker = new google.maps.Marker({
@@ -198,7 +189,6 @@ function initMap(markers) {
 				        avoidHighways: false,
 				        avoidTolls: false
 				    }, function (response, status) {
-				    	console.log("response",response);
 				        if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
 				            var carDistance = response.rows[0].elements[0].distance.text;
 				            var carDuration = response.rows[0].elements[0].duration.text;
@@ -324,7 +314,6 @@ function initMap(markers) {
 		decode.push(google.maps.geometry.encoding.decodePath(val['enString'][0]));
 		if(val['enString'][1]){
 			decode.push(google.maps.geometry.encoding.decodePath(val['enString'][1]));
-			//console.log('key: ',key,'.enString: ',val['enString'][1]);
 		}
 		
 	});
@@ -394,7 +383,6 @@ function initMapPointer(markers){
 	    fillColor: "#494949",
 	    fillOpacity: 0.35
   	});
-  	//console.log("decode polygons:",polygons);
   	polygons.setMap(mapPointer);
   	google.maps.event.trigger(mapPointer, 'resize');
 }
@@ -407,7 +395,6 @@ function initMapPointer(markers){
 * and show marker in Map
 */
 function getActivityList(){
-	console.log("token:",token);
 	
 	$.ajax
 	({
@@ -419,7 +406,6 @@ function getActivityList(){
 		    xhr.setRequestHeader('Authorization', 'Bearer '+token);
 		},
 		success: function (dataPro) {
-			console.log("profile data(studentId):",dataPro['studentId']);
 			var urlRegistration="https://api-dev.smartcommunitylab.it/t/sco.cartella/cartella/1.0/api/student/"+dataPro['studentId']+"/registration";
 			$.ajax
 			({
