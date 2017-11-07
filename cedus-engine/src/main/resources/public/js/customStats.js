@@ -14,6 +14,12 @@ var globalLevelList={
 		tab2:[],
 		tab3:[]
 };
+var unaddedMinusVal={
+	tab1:[],
+	tab2:[],
+	tab3:[]
+};
+var trackYear=3;
 google.charts.load("current", {packages:["corechart"]});
 google.charts.setOnLoadCallback(drawPieChartCall);
 
@@ -59,12 +65,20 @@ function drawBarChartOnRequest(modifyType){
 			    colors: ['#67C169','#2F9232','#073308'],
 			    is3D:true
 			};
+		//it should come from param api
+		var staLevelList=['Primaria', 'Secondaria di secondo grado', 'Secondaria di primo grado', 'Formazione professionale'];
+		//here  loop is for insert level values into 'dataTest' and checkbox div in html
+		$.each(staLevelList,function(key, val){
+			dataTable.addRow([val]);
+		});
 		//console.log("globalMasterData:",globalModifyData['tab1']);
 		$.each(globalModifyData['tab1'][0],function(key, val){
+			if (key>trackYear || key > 3) { return false; }
 			dataTable.addColumn('number', val['year']);
 			dataTable.addColumn({type:'string',role: 'annotation' });
 			//anniList['tab1'].push(val['year']);
 			$.each(val['values'],function(key2,val2){
+				/*
 				if(key == 0){
 					//dataTest.addRow([val2['name'],val2['value']]);
 					dataTable.addRow([val2['name'],val2['value'],val['year'].toString()]);
@@ -72,6 +86,24 @@ function drawBarChartOnRequest(modifyType){
 				}else{
 					dataTable.setValue(key2, key+key+1, val2['value']);
 					dataTable.setValue(key2, key+key+2, val['year'].toString());
+				}
+				*/
+				//insert values in dataTest
+				if(val2['name']==staLevelList[0]){
+					dataTable.setValue(0, key+key+1, val2['value']);
+					dataTable.setValue(0, key+key+2, val['year'].toString());
+				}else if(val2['name']==staLevelList[1]){
+					dataTable.setValue(1, key+key+1, val2['value']);
+					dataTable.setValue(1, key+key+2, val['year'].toString());
+				}else if(val2['name']==staLevelList[2]){
+					dataTable.setValue(2, key+key+1, val2['value']);
+					dataTable.setValue(2, key+key+2, val['year'].toString());
+				}else if(val2['name']==staLevelList[3]){
+					dataTable.setValue(3, key+key+1, val2['value']);
+					dataTable.setValue(3, key+key+2, val['year'].toString());
+				}else {
+					//dataTest.setValue(1, key+key+1, 0);
+					//dataTest.setValue(1, key+key+2, 0);
 				}
 				
 			});
@@ -127,24 +159,52 @@ function drawBarChart() {
 		    colors: ['#67C169','#2F9232','#073308'],
 		    is3D:true
 		};
+	
+	var pathData="schoolYears=2002-03";
+	var currentYear=new Date().getFullYear();
+	for (i = 2003; i < currentYear; i++) {
+		var yy=i % 100;
+		if(yy<9){
+			var tempYear=yy+1;
+			pathData += "&schoolYears=" + i + "-0"+tempYear;
+		}else{
+			var tempYear=yy+1;
+			pathData += "&schoolYears=" + i + "-"+tempYear;
+		}
+	}
+	//it should come from param api
+	var staLevelList=['Primaria', 'Secondaria di secondo grado', 'Secondaria di primo grado', 'Formazione professionale'];
+	//here  loop is for insert level values into 'dataTest' and checkbox div in html
+	$.each(staLevelList,function(key, val){
+		dataTest.addRow([val]);
+		var i=key+1;
+		var id="tab1checkbox"+i;
+		var tab='"'+'tab1'+'"';
+		var name='"'+val+'"';
+		$("#tab1level").append("<div class='checkbox'><label><input type='checkbox' name='' value='' id='"+id+"' checked='checked'  onchange='levelModification(this,"+tab+","+name+")'/><i class='helper'></i>"+val+"</label> </div>");
+	});
 	// this ajax call for tab1
 	$.ajax
 	({
 		type: "GET",
 		//dataType : 'json',
-		url: 'https://dev.smartcommunitylab.it/cedus/api/stats/registration',
+		//url: 'https://dev.smartcommunitylab.it/cedus/api/stats/registration',
 		//url: '../api/stats/registration',
-		data: {ordine:1} ,
+		url:'http://192.168.42.60:6010/cs-engine/api/stats/registration/ordine?'+pathData,
+		//data: {ordine:1} ,
 		success: function (data) {
-			globalMasterData['tab1'].push(data);
-			globalModifyData['tab1'].push(data);
+			var revData=data.reverse();
+			globalMasterData['tab1'].push(revData);
+			globalModifyData['tab1'].push(revData);
 			console.log("push globalMasterData:",globalMasterData);
-			$.each(data,function(key, val){
+			$.each(revData,function(key, val){
+				if (key>trackYear || key > 3) { return false; }
 				dataTest.addColumn('number', val['year']);
 				dataTest.addColumn({type:'string',role: 'annotation' });
 				
 				$("#tab1AnniList").append("<div class='row' id='tab1Anni"+val['year']+"'> <p><b>"+val['year']+"</b></p></div>");
 				$.each(val['values'],function(key2,val2){
+					/*
 					if(key == 0){
 						//add row header in google datatest for drawing google barChart
 						dataTest.addRow([val2['name'],val2['value'],val['year'].toString()]);
@@ -155,22 +215,48 @@ function drawBarChart() {
 						var tab='"'+'tab1'+'"';
 						var name='"'+val2['name']+'"';
 						$("#tab1level").append("<div class='checkbox'><label><input type='checkbox' name='' value='' id='"+id+"' checked='checked'  onchange='levelModification(this,"+tab+","+name+")'/><i class='helper'></i>"+val2['name']+"</label> </div>");
-					}else{
+					}//add else if() here for new level that not in globalLevelList[]
+					else if(globalLevelList['tab1'].indexOf(val2['name']) == -1){
+						dataTest.addRow([val2['name'],val2['value'],val['year'].toString()]);
+						//globalLevelList['tab1'].push(val2['name']);
+						var i=key2+1;
+						var id="tab1checkbox"+i;
+						var tab='"'+'tab1'+'"';
+						var name='"'+val2['name']+'"';
+						$("#tab1level").append("<div class='checkbox'><label><input type='checkbox' name='' value='' id='"+id+"' checked='checked'  onchange='levelModification(this,"+tab+","+name+")'/><i class='helper'></i>"+val2['name']+"</label> </div>");
+					}
+					else{
 						dataTest.setValue(key2, key+key+1, val2['value']);
 						dataTest.setValue(key2, key+key+2, val['year'].toString());
 					}
-					
+					*/
+					//insert values in dataTest
+					if(val2['name']==staLevelList[0]){
+						dataTest.setValue(0, key+key+1, val2['value']);
+						dataTest.setValue(0, key+key+2, val['year'].toString());
+					}else if(val2['name']==staLevelList[1]){
+						dataTest.setValue(1, key+key+1, val2['value']);
+						dataTest.setValue(1, key+key+2, val['year'].toString());
+					}else if(val2['name']==staLevelList[2]){
+						dataTest.setValue(2, key+key+1, val2['value']);
+						dataTest.setValue(2, key+key+2, val['year'].toString());
+					}else if(val2['name']==staLevelList[3]){
+						dataTest.setValue(3, key+key+1, val2['value']);
+						dataTest.setValue(3, key+key+2, val['year'].toString());
+					}else {
+						//dataTest.setValue(1, key+key+1, 0);
+						//dataTest.setValue(1, key+key+2, 0);
+					}
 				});
 				
 			});
-			console.log("globalLevelList:",globalLevelList);
+			console.log("dataTest:",dataTest);
 			var chart = new google.visualization.BarChart(document.getElementById('tab1_barChart1'));
 			chart.draw(dataTest, options);
 			
 		},
 		failure: function() {alert("Error!");}
 	});
-
 }
 
 function drawPieChartCall(){
@@ -282,9 +368,17 @@ function anniModification(tab, type){
 	if(type=='plus'){
 		//globalMasterData array length is greater means the array have some values that can be "plus" 
 		if(globalMasterData[tab][0].length > globalModifyData[tab][0].length){
-			var plusAnni=globalMasterData[tab][0][globalModifyData[tab][0].length]['year'];
+			//plusAnni is last one
+			//var plusAnni=globalMasterData[tab][0][globalModifyData[tab][0].length]['year'];
+			//plusAnni is one
+			
+			trackYear=trackYear+1;
+			var plusAnni=globalModifyData[tab][0][trackYear]['year'];
+			
 			//add data to globalModifyData array
-			globalModifyData[tab][0].push(globalMasterData[tab][0][globalModifyData[tab][0].length]);
+			globalModifyData[tab][0].push(unaddedMinusVal[tab][0]);
+			//unaddedMinusVal[tab]=unaddedMinusVal[tab]
+			//globalModifyData[tab][0].push(globalMasterData[tab][0][0]);
 			//call for draw chart and add div in the List
 			if(tab=='tab1'){
 				$("#tab1AnniList").append("<div class='row' id='tab1Anni"+plusAnni+"'> <p><b>"+plusAnni+"</b></p></div>");
@@ -296,6 +390,7 @@ function anniModification(tab, type){
 				$("#tab3AnniList").append("<div class='row' id='tab3Anni"+plusAnni+"'> <p><b>"+plusAnni+"</b></p></div>");
 				drawPieChartOnRequest('anni','tab3');
 			}
+			console.log("globalModifyData after plus:",globalModifyData);
 		}else{
 			console.log("no more year for plus!");
 		}
@@ -303,9 +398,14 @@ function anniModification(tab, type){
 	}else if(type=='minus'){
 		// globalModifyData array length greater then 0 means the array have minimum values that can be "minus"
 		if(globalModifyData[tab][0].length > 0){
-			var minusAnni = globalModifyData[tab][0][globalModifyData[tab][0].length-1]['year'];
-			
-			
+			//minusAnni is last one
+			//var minusAnni = globalModifyData[tab][0][globalModifyData[tab][0].length-1]['year'];
+			//minusAnni is first one
+			var minusAnni = globalModifyData[tab][0][0]['year'];
+			trackYear=trackYear-1;
+			//add to unaddedMinusVal
+			unaddedMinusVal[tab].push(globalModifyData[tab][0].filter(function(el) {return el.year === minusAnni;}));
+			console.log("unaddedMinusVal",unaddedMinusVal[tab])
 			//minus data from globalModifyData array
 			globalModifyData[tab][0] = globalModifyData[tab][0].filter(function(el) {
 			    return el.year !== minusAnni;
@@ -328,6 +428,7 @@ function anniModification(tab, type){
 				$('#tab3Anni'+minusAnni).remove();
 				drawPieChartOnRequest('anni','tab3');
 			}
+			console.log("globalModifyData after minus:",globalModifyData);
 		}else{
 			console.log("no more year for minus!");
 		}
@@ -338,8 +439,7 @@ function anniModification(tab, type){
 
 //levelModification
 function levelModification(obj,tab, modifyLevel){ 
-	console.log('globalMasterData(levelModification)',globalMasterData);
-	console.log('globalModifyData(levelModification)',globalModifyData);
+	
 	if($(obj).is(":checked")){
 		//add data 
 		console.log('modifyLevel',modifyLevel);
@@ -360,27 +460,33 @@ function levelModification(obj,tab, modifyLevel){
 		drawBarChartOnRequest('anni');
 	}else{
 		//minus data
-		//var minusLevel ='Primaria';
+		/*
 		//2016
-		/*globalModifyData[tab][0][0]['values'] = globalModifyData[tab][0][0]['values'].filter(function(el) {
-		    return el.name !== minusLevel;
+		globalModifyData[tab][0][0]['values'] = globalModifyData[tab][0][0]['values'].filter(function(el) {
+		    return el.name !== modifyLevel;
 		});
 		//2017
 		globalModifyData[tab][0][1]['values'] = globalModifyData[tab][0][1]['values'].filter(function(el) {
-		    return el.name !== minusLevel;
-		});*/
-		
+		    return el.name !== modifyLevel;
+		});
+		*/
 		$.each(globalModifyData[tab][0],function(key, val){
+			/*
+			$.each(val['values'],function(key2, val2){
+				if(val2["name"]==modifyLevel){
+					globalModifyData[tab][0][key]['values'].splice(key2,1);
+				}
+			});
+			*/
 			
 			globalModifyData[tab][0][key]['values'] = globalModifyData[tab][0][key]['values'].filter(function(el) {
-			    return el.name !== modifyLevel;
+			    return el.name != modifyLevel;
 			});
-			
 			
 		});
 		
 		console.log('after minus level globalMasterData',globalMasterData);
-		drawBarChartOnRequest('anni');
+		//drawBarChartOnRequest('anni');
 		
 	}
 	
