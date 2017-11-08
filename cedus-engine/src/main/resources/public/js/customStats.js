@@ -22,6 +22,7 @@ var unaddedMinusVal={
 var trackYearTab1=3;
 var trackYearTab2=2;
 var trackYearTab3=2;
+var staLevelList;
 $(document).ready(function() {
 
 	google.charts.load('current', {'packages': ['corechart', 'bar']});
@@ -89,7 +90,7 @@ function drawBarChartOnRequest(modifyType){
 			    is3D:true
 			};
 		//it should come from param api
-		var staLevelList=['Primaria', 'Secondaria di secondo grado', 'Secondaria di primo grado', 'Formazione professionale'];
+		//var staLevelList=['Primaria', 'Secondaria di secondo grado', 'Secondaria di primo grado', 'Formazione professionale'];
 		//here  loop is for insert level values into 'dataTest' and checkbox div in html
 		$.each(staLevelList,function(key, val){
 			dataTable.addRow([val]);
@@ -196,16 +197,30 @@ function drawBarChart() {
 		}
 	}
 	//it should come from param api
-	var staLevelList=['Primaria', 'Secondaria di secondo grado', 'Secondaria di primo grado', 'Formazione professionale'];
-	//here  loop is for insert level values into 'dataTest' and checkbox div in html
-	$.each(staLevelList,function(key, val){
-		dataTest.addRow([val]);
-		var i=key+1;
-		var id="tab1checkbox"+i;
-		var tab='"'+'tab1'+'"';
-		var name='"'+val+'"';
-		$("#tab1level").append("<div class='checkbox'><label><input type='checkbox' name='' value='' id='"+id+"' checked='checked'  onchange='levelModification(this,"+tab+","+name+")'/><i class='helper'></i>"+val+"</label> </div>");
+	$.ajax
+	({
+		type: "GET",
+		url: '../api/params/ordini',
+		success: function (data) {
+			console.log("list of ordini from api:",data);
+			staLevelList=data;
+			//here  loop is for insert level values into 'dataTest' and level checkbox div in html (tab1 and tab2)
+			$.each(staLevelList,function(key, val){
+				dataTest.addRow([val]);
+				var i=key+1;
+				var id1="tab1checkbox"+i;
+				var id2="tab2checkbox"+i;
+				var tab1='"'+'tab1'+'"';
+				var tab2='"'+'tab2'+'"';
+				var name='"'+val+'"';
+				$("#tab1level").append("<div class='checkbox'><label><input type='checkbox' name='' value='' id='"+id1+"' checked='checked'  onchange='levelModification(this,"+tab1+","+name+")'/><i class='helper'></i>"+val+"</label> </div>");
+				$("#tab2level").append("<div class='checkbox'><label><input type='checkbox' name='' value='' id='"+id2+"' checked='checked'  onchange='levelModification(this,"+tab2+","+name+")'/><i class='helper'></i>"+val+"</label> </div>");
+			});
+		},
+		failure: function() {alert("Error!");}
 	});
+	//var staLevelList=['Primaria', 'Secondaria di secondo grado', 'Secondaria di primo grado', 'Formazione professionale'];
+	
 	// this ajax call for tab1
 	$.ajax
 	({
@@ -218,9 +233,9 @@ function drawBarChart() {
 		success: function (data) {
 			var revData=data.reverse();
 			globalMasterData['tab1'].push(revData);
-			globalModifyData['tab1'].push(revData);
-			globalMasterData['tab2'].push(revData);
-			globalModifyData['tab2'].push(revData);
+			globalModifyData['tab1'].push($.extend(true, [], revData));
+			globalMasterData['tab2'].push( revData);
+			globalModifyData['tab2'].push($.extend(true, [], revData));
 			//call for tab2 and tab3 after load data
 			google.charts.load("current", {packages:["corechart"]});
 			google.charts.setOnLoadCallback(drawPieChartCall);
@@ -359,7 +374,28 @@ function drawPieChartCall(){
 			pathData += "&schoolYears=" + i + "-"+tempYear;
 		}
 	}
-	// this ajax call for tab3
+	//this ajax call for add level in tab3
+	$.ajax
+	({
+		type: "GET",
+		url: '../api/params/indirizzi',
+		success: function (data) {
+			console.log("list of ordini from api:",data);
+			
+			//here  loop is for  level checkbox div in html (tab3)
+			$.each(data,function(key, val){
+				
+				var i=key+1;
+				var id="tab3checkbox"+i;
+				var tab='"'+'tab3'+'"';
+				var name='"'+val+'"';
+				$("#tab3level").append("<div class='checkbox'><label><input type='checkbox' name='' value='' id='"+id+"' checked='checked'  onchange='levelModification(this,"+tab+","+name+")'/><i class='helper'></i>"+val+"</label> </div>");
+				
+			});
+		},
+		failure: function() {alert("Error!");}
+	});
+	// this ajax call for store data in tab3 
 	$.ajax
 	({
 		type: "GET",
@@ -569,7 +605,7 @@ function levelModification(obj,tab, modifyLevel){
 		
 		console.log('after minus level globalMasterData',globalMasterData);
 		console.log('after minus level globalModifyData',globalModifyData);
-		//drawBarChartOnRequest('anni');
+		drawBarChartOnRequest('anni');
 		
 	}
 	
