@@ -156,7 +156,7 @@ function drawBarChart() {
 		        color: '#848484'
 		      }
 		    },
-		    colors: ['#67C169','#2F9232','#073308'],
+		    colors: ['#67C169','#2F9232','#0b4f0c','#021e03'],
 		    is3D:true
 		};
 	
@@ -368,17 +368,16 @@ function anniModification(tab, type){
 	if(type=='plus'){
 		//globalMasterData array length is greater means the array have some values that can be "plus" 
 		if(globalMasterData[tab][0].length > globalModifyData[tab][0].length){
-			//plusAnni is last one
-			//var plusAnni=globalMasterData[tab][0][globalModifyData[tab][0].length]['year'];
-			//plusAnni is one
-			
 			trackYear=trackYear+1;
 			var plusAnni=globalModifyData[tab][0][trackYear]['year'];
+			var pushAnniModifyData=unaddedMinusVal[tab][0]['year'];
 			
 			//add data to globalModifyData array
 			globalModifyData[tab][0].push(unaddedMinusVal[tab][0]);
-			//unaddedMinusVal[tab]=unaddedMinusVal[tab]
-			//globalModifyData[tab][0].push(globalMasterData[tab][0][0]);
+			unaddedMinusVal[tab]=unaddedMinusVal[tab].filter(function(el){
+				return el.year !== pushAnniModifyData;
+			})
+			
 			//call for draw chart and add div in the List
 			if(tab=='tab1'){
 				$("#tab1AnniList").append("<div class='row' id='tab1Anni"+plusAnni+"'> <p><b>"+plusAnni+"</b></p></div>");
@@ -390,7 +389,8 @@ function anniModification(tab, type){
 				$("#tab3AnniList").append("<div class='row' id='tab3Anni"+plusAnni+"'> <p><b>"+plusAnni+"</b></p></div>");
 				drawPieChartOnRequest('anni','tab3');
 			}
-			console.log("globalModifyData after plus:",globalModifyData);
+			//console.log("globalModifyData after plus:",globalModifyData);
+			//console.log("unaddedMinusVal after plus:",unaddedMinusVal);
 		}else{
 			console.log("no more year for plus!");
 		}
@@ -398,16 +398,14 @@ function anniModification(tab, type){
 	}else if(type=='minus'){
 		// globalModifyData array length greater then 0 means the array have minimum values that can be "minus"
 		if(globalModifyData[tab][0].length > 0){
-			//minusAnni is last one
-			//var minusAnni = globalModifyData[tab][0][globalModifyData[tab][0].length-1]['year'];
-			//minusAnni is first one
+			//minusAnni is first one of the globalModifyData
 			var minusAnni = globalModifyData[tab][0][0]['year'];
 			trackYear=trackYear-1;
-			//add to unaddedMinusVal
-			unaddedMinusVal[tab].push(globalModifyData[tab][0].filter(function(el) {return el.year === minusAnni;}));
-			console.log("unaddedMinusVal",unaddedMinusVal[tab])
-			//minus data from globalModifyData array
+			//add to unaddedMinusVal array and minus data from globalModifyData array
 			globalModifyData[tab][0] = globalModifyData[tab][0].filter(function(el) {
+				if(el.year === minusAnni){
+					unaddedMinusVal[tab].push(el);
+				}
 			    return el.year !== minusAnni;
 			});
 			
@@ -428,7 +426,8 @@ function anniModification(tab, type){
 				$('#tab3Anni'+minusAnni).remove();
 				drawPieChartOnRequest('anni','tab3');
 			}
-			console.log("globalModifyData after minus:",globalModifyData);
+			//console.log("globalModifyData after minus:",globalModifyData);
+			//console.log("unaddedMinusVal after minus:",unaddedMinusVal);
 		}else{
 			console.log("no more year for minus!");
 		}
