@@ -11,7 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -29,6 +35,7 @@ import it.smartcommunitylab.cedus.common.Utils;
 import it.smartcommunitylab.cedus.exception.EntityNotFoundException;
 import it.smartcommunitylab.cedus.exception.StorageException;
 import it.smartcommunitylab.cedus.exception.UnauthorizedException;
+import it.smartcommunitylab.cedus.model.TeachingUnit;
 import it.smartcommunitylab.cedus.model.stats.RegistrationStats;
 import it.smartcommunitylab.cedus.storage.RepositoryManager;
 
@@ -39,6 +46,10 @@ public class StatisticsController {
 	@Autowired
 	@Value("${mockup.dir}")	
 	private String mockupDir;
+	
+	@Autowired
+	@Value("${cedusToken}")	
+	private String token;
 	
 	@Autowired
 	private RepositoryManager dataManager;
@@ -65,8 +76,17 @@ public class StatisticsController {
 	}
 
 	private List<RegistrationStats> getMockupStatsByOrder(String ordine) throws Exception {
-		String path = mockupDir + "/registration_stats_order.json";
-		return getRegistrationStatsFromJson(path);
+		// data come from a json file
+		//String path = mockupDir + "/registration_stats_order.json";
+		//return getRegistrationStatsFromJson(path);
+		
+		//data come from api call
+		RestTemplate restTemplate = new RestTemplate();
+		String url = "http://192.168.42.60:6010/cs-engine/api/stats/registration/";
+		url += "ordine?" + ((ordine != null) ? ordine : "");
+		ResponseEntity<List<RegistrationStats>> res = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<RegistrationStats>>(){});
+		
+		return res.getBody();
 	}
 	
 	private List<RegistrationStats> getMockupStatsByTypology(String tipologia) throws Exception {
@@ -74,9 +94,18 @@ public class StatisticsController {
 		return getRegistrationStatsFromJson(path);
 	}
 	
-	private List<RegistrationStats> getMockupStatsBySpecialization(String tipologia) throws Exception {
-		String path = mockupDir + "/registration_stats_specialization.json";
-		return getRegistrationStatsFromJson(path);
+	private List<RegistrationStats> getMockupStatsBySpecialization(String indirizzo) throws Exception {
+		// data come from a json file
+		//String path = mockupDir + "/registration_stats_specialization.json";
+		//return getRegistrationStatsFromJson(path);
+		
+		//data come from api call
+		RestTemplate restTemplate = new RestTemplate();
+		String url = "http://192.168.42.60:6010/cs-engine/api/stats/registration/";
+		url += "indirizzo?" + ((indirizzo != null) ? indirizzo : "");
+		ResponseEntity<List<RegistrationStats>> res = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<RegistrationStats>>(){});
+		
+		return res.getBody();
 	}
 	
 	private List<RegistrationStats> getRegistrationStatsFromJson(String path) throws Exception {
@@ -110,6 +139,14 @@ public class StatisticsController {
 	public Map<String,String> handleGenericError(HttpServletRequest request, Exception exception) {
 		logger.error(exception.getMessage());
 		return Utils.handleError(exception);
-	}	
+	}
+	
+	HttpHeaders createHeaders() {
+		return new HttpHeaders() {
+			{
+				set("Authorization", "Bearer " + token);
+			}
+		};
+	}
 	
 }

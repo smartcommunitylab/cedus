@@ -202,7 +202,6 @@ function drawBarChart() {
 		type: "GET",
 		url: '../api/params/ordini',
 		success: function (data) {
-			console.log("list of ordini from api:",data);
 			staLevelList=data;
 			//here  loop is for insert level values into 'dataTest' and level checkbox div in html (tab1 and tab2)
 			$.each(staLevelList,function(key, val){
@@ -227,9 +226,9 @@ function drawBarChart() {
 		type: "GET",
 		//dataType : 'json',
 		//url: 'https://dev.smartcommunitylab.it/cedus/api/stats/registration',
-		//url: '../api/stats/registration',
-		url:'http://192.168.42.60:6010/cs-engine/api/stats/registration/ordine?'+pathData,
-		//data: {ordine:1} ,
+		url: '../api/stats/registration',
+		//url:'http://192.168.42.60:6010/cs-engine/api/stats/registration/ordine?'+pathData,
+		data: {ordine:pathData} ,
 		success: function (data) {
 			var revData=data.reverse();
 			globalMasterData['tab1'].push(revData);
@@ -294,7 +293,6 @@ function drawBarChart() {
 				});
 				
 			});
-			console.log("dataTest:",dataTest);
 			var chart = new google.visualization.BarChart(document.getElementById('tab1_barChart1'));
 			chart.draw(dataTest, options);
 			
@@ -379,9 +377,7 @@ function drawPieChartCall(){
 	({
 		type: "GET",
 		url: '../api/params/indirizzi',
-		success: function (data) {
-			console.log("list of ordini from api:",data);
-			
+		success: function (data) {			
 			//here  loop is for  level checkbox div in html (tab3)
 			$.each(data,function(key, val){
 				
@@ -401,13 +397,13 @@ function drawPieChartCall(){
 		type: "GET",
 		//dataType : 'json',
 		//url: 'https://dev.smartcommunitylab.it/cedus/api/stats/registration',
-		//data: {indirizzo:1} ,
-		url:'http://192.168.42.60:6010/cs-engine/api/stats/registration/indirizzo?'+pathData,
+		//url:'http://192.168.42.60:6010/cs-engine/api/stats/registration/indirizzo?'+pathData,
+		url: '../api/stats/registration',
+		data: {indirizzo:pathData} ,
 		success: function (data) {
 			var revData=data.reverse();
 			globalMasterData['tab3'].push(revData);
 			globalModifyData['tab3'].push(revData);
-			console.log("data for tab3 :",revData);
 			$.each(data,function(key, val){
 				if (key>trackYearTab3 || key > 2) { return false; }
 				var dataSet=[['Task', ' ']];
@@ -566,7 +562,7 @@ function levelModification(obj,tab, modifyLevel){
 			});
 			
 		});
-		//console.log('after plus level globalModifyData',globalModifyData);
+		console.log('after plus level globalModifyData',globalModifyData);
 		if(tab=="tab1"){
 			drawBarChartOnRequest('anni');
 		}else if(tab == "tab2"){
@@ -587,7 +583,7 @@ function levelModification(obj,tab, modifyLevel){
 		});
 		
 		//console.log('after minus level globalMasterData',globalMasterData);
-		//console.log('after minus level globalModifyData',globalModifyData);
+		console.log('after minus level globalModifyData',globalModifyData);
 		if(tab=="tab1"){
 			drawBarChartOnRequest('anni');
 		}else if(tab == "tab2"){
