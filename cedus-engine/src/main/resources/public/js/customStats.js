@@ -556,10 +556,6 @@ function levelModification(obj,tab, modifyLevel){
 	
 	if($(obj).is(":checked")){
 		//add data 
-		console.log('modifyLevel',modifyLevel);
-		//globalModifyData[tab][0][0]['values'].push(globalMasterData[tab][0][0]['values'][0]);
-		//globalModifyData[tab][0][1]['values'].push(globalMasterData[tab][0][1]['values'][0]);
-		
 		$.each(globalMasterData[tab][0],function(key, val){
 			$.each(val['values'],function(key2,val2){
 				//console.log('val2 name:',val2['name']);
@@ -570,42 +566,35 @@ function levelModification(obj,tab, modifyLevel){
 			});
 			
 		});
-		console.log('after plus level globalModifyData',globalModifyData);
-		drawBarChartOnRequest('anni');
+		//console.log('after plus level globalModifyData',globalModifyData);
+		if(tab=="tab1"){
+			drawBarChartOnRequest('anni');
+		}else if(tab == "tab2"){
+			drawPieChartOnRequest('anni','tab2');
+		}else if(tab == "tab3"){
+			drawPieChartOnRequest('anni','tab3');
+		}
+		
 	}else{
 		//minus data
-		/*
-		//2016
-		globalModifyData[tab][0][0]['values'] = globalModifyData[tab][0][0]['values'].filter(function(el) {
-		    return el.name !== modifyLevel;
-		});
-		//2017
-		globalModifyData[tab][0][1]['values'] = globalModifyData[tab][0][1]['values'].filter(function(el) {
-		    return el.name !== modifyLevel;
-		});
-		*/
 		var tempglobalModifyData=globalModifyData;
 		$.each(tempglobalModifyData[tab][0],function(key, val){
-			/*
-			$.each(val['values'],function(key2, val2){
-				
-				if(val2["name"]==modifyLevel){
-					globalModifyData[tab][0][key]['values'].splice(key2,1);
-					//val2.splice(key2,1);
-					break;
-				}
-				
-			});
-			*/
+			
 			globalModifyData[tab][0][key]['values'] = val['values'].filter(function(el) {
 			    return el.name !== modifyLevel;
 			});
 			
 		});
 		
-		console.log('after minus level globalMasterData',globalMasterData);
-		console.log('after minus level globalModifyData',globalModifyData);
-		drawBarChartOnRequest('anni');
+		//console.log('after minus level globalMasterData',globalMasterData);
+		//console.log('after minus level globalModifyData',globalModifyData);
+		if(tab=="tab1"){
+			drawBarChartOnRequest('anni');
+		}else if(tab == "tab2"){
+			drawPieChartOnRequest('anni','tab2');
+		}else if(tab == "tab3"){
+			drawPieChartOnRequest('anni','tab3');
+		}
 		
 	}
 	
