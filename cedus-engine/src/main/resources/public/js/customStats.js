@@ -455,7 +455,7 @@ function drawPieChart(divID,chartTitle,dataSet) {
 			width:230,height:230,
 			fontFamily: 'Arial', fontSize: 13,
 			pieHole: 0.3,
-			legend:'none'
+			legend:'left'
 	};
 
 	// Display the chart inside the <div> element with id=""

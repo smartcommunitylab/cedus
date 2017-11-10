@@ -48,6 +48,10 @@ public class StatisticsController {
 	private String mockupDir;
 	
 	@Autowired
+	@Value("${csUrl}")	
+	private String csUrl;
+	
+	@Autowired
 	@Value("${cedusToken}")	
 	private String token;
 	
@@ -82,9 +86,10 @@ public class StatisticsController {
 		
 		//data come from api call
 		RestTemplate restTemplate = new RestTemplate();
-		String url = "http://192.168.42.60:6010/cs-engine/api/stats/registration/";
+		//String url = "http://192.168.42.60:6010/cs-engine/api/stats/registration/";
+		String url = csUrl+"/api/stats/registration/";
 		url += "ordine?" + ((ordine != null) ? ordine : "");
-		ResponseEntity<List<RegistrationStats>> res = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<RegistrationStats>>(){});
+		ResponseEntity<List<RegistrationStats>> res = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<Object>(createHeaders()), new ParameterizedTypeReference<List<RegistrationStats>>(){});
 		
 		return res.getBody();
 	}
@@ -101,9 +106,10 @@ public class StatisticsController {
 		
 		//data come from api call
 		RestTemplate restTemplate = new RestTemplate();
-		String url = "http://192.168.42.60:6010/cs-engine/api/stats/registration/";
+		//String url = "http://192.168.42.60:6010/cs-engine/api/stats/registration/";
+		String url = csUrl+"/api/stats/registration/";
 		url += "indirizzo?" + ((indirizzo != null) ? indirizzo : "");
-		ResponseEntity<List<RegistrationStats>> res = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<RegistrationStats>>(){});
+		ResponseEntity<List<RegistrationStats>> res = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<Object>(createHeaders()), new ParameterizedTypeReference<List<RegistrationStats>>(){});
 		
 		return res.getBody();
 	}
@@ -140,7 +146,7 @@ public class StatisticsController {
 		logger.error(exception.getMessage());
 		return Utils.handleError(exception);
 	}
-	
+	@SuppressWarnings("serial")
 	HttpHeaders createHeaders() {
 		return new HttpHeaders() {
 			{
