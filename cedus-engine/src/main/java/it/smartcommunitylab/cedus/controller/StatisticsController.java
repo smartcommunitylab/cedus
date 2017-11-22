@@ -81,9 +81,9 @@ public class StatisticsController {
 
 	private List<RegistrationStats> getMockupStatsByOrder(String ordine) throws Exception {
 		// data come from a json file
-		//String path = mockupDir + "/registration_stats_order.json";
-		//return getRegistrationStatsFromJson(path);
-		
+		String path = mockupDir + "/registration_stats_order.json";
+		return getRegistrationStatsFromJson(path);
+		/*
 		//data come from api call
 		RestTemplate restTemplate = new RestTemplate();
 		//String url = "http://192.168.42.60:6010/cs-engine/api/stats/registration/";
@@ -92,6 +92,7 @@ public class StatisticsController {
 		ResponseEntity<List<RegistrationStats>> res = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<Object>(createHeaders()), new ParameterizedTypeReference<List<RegistrationStats>>(){});
 		
 		return res.getBody();
+		*/
 	}
 	
 	private List<RegistrationStats> getMockupStatsByTypology(String tipologia) throws Exception {
@@ -100,10 +101,10 @@ public class StatisticsController {
 	}
 	
 	private List<RegistrationStats> getMockupStatsBySpecialization(String indirizzo) throws Exception {
-		// data come from a json file
-		//String path = mockupDir + "/registration_stats_specialization.json";
-		//return getRegistrationStatsFromJson(path);
-		
+		// data come from a local json file
+		String path = mockupDir + "/registration_stats_specialization.json";
+		return getRegistrationStatsFromJson(path);
+		/*
 		//data come from api call
 		RestTemplate restTemplate = new RestTemplate();
 		//String url = "http://192.168.42.60:6010/cs-engine/api/stats/registration/";
@@ -112,6 +113,7 @@ public class StatisticsController {
 		ResponseEntity<List<RegistrationStats>> res = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<Object>(createHeaders()), new ParameterizedTypeReference<List<RegistrationStats>>(){});
 		
 		return res.getBody();
+		*/
 	}
 	
 	private List<RegistrationStats> getRegistrationStatsFromJson(String path) throws Exception {

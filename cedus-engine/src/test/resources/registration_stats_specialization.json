@@ -1,36 +1,538 @@
 [
-	{
-		"year": "2016",
-		"values": [
-			{
-				"name": "LICEO DELLE SCIENZE SOCIALI",
-				"value": 100
-			},
-			{
-				"name": "TECNOLOGICO",
-				"value": 200
-			},
-			{
-				"name": "CFP",
-				"value": 300
-			}
-		]
-	},
-	{
-		"year": "2017",
-		"values": [
-			{
-				"name": "ISTITUTO ENOTECNICO",
-				"value": 300
-			},
-			{
-				"name": "ARTISTICO",
-				"value": 200
-			},
-			{
-				"name": "ECONOMICO",
-				"value": 100
-			}
-		]
-	}
+    {
+        "year": "2000-01",
+        "values": []
+    },
+    {
+        "year": "2001-02",
+        "values": [
+            {
+                "name": "Scuola primaria",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "year": "2002-03",
+        "values": [
+            {
+                "name": "Scuola primaria",
+                "value": 208
+            },
+            {
+                "name": "ECONOMICO",
+                "value": 0
+            },
+            {
+                "name": "Scuola secondaria di primo grado",
+                "value": 25
+            },
+            {
+                "name": "LICEO",
+                "value": 2
+            },
+            {
+                "name": "PROFESSIONALE",
+                "value": 0
+            },
+            {
+                "name": "TECNOLOGICO",
+                "value": 1
+            },
+            {
+                "name": "ARTISTICO",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "year": "2003-04",
+        "values": [
+            {
+                "name": "Scuola primaria",
+                "value": 748
+            },
+            {
+                "name": "Scuola secondaria di primo grado",
+                "value": 30
+            },
+            {
+                "name": "CFP",
+                "value": 4
+            },
+            {
+                "name": "PROFESSIONALE",
+                "value": 1
+            },
+            {
+                "name": "LICEO",
+                "value": 4
+            },
+            {
+                "name": "TECNOLOGICO",
+                "value": 2
+            },
+            {
+                "name": "ECONOMICO",
+                "value": 1
+            },
+            {
+                "name": "ARTISTICO",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "year": "2004-05",
+        "values": [
+            {
+                "name": "Scuola primaria",
+                "value": 3467
+            },
+            {
+                "name": "ECONOMICO",
+                "value": 3
+            },
+            {
+                "name": "Scuola secondaria di primo grado",
+                "value": 36
+            },
+            {
+                "name": "CFP",
+                "value": 4
+            },
+            {
+                "name": "ARTISTICO",
+                "value": 0
+            },
+            {
+                "name": "PROFESSIONALE",
+                "value": 3
+            },
+            {
+                "name": "TECNOLOGICO",
+                "value": 3
+            },
+            {
+                "name": "LICEO",
+                "value": 4
+            }
+        ]
+    },
+    {
+        "year": "2005-06",
+        "values": [
+            {
+                "name": "Scuola primaria",
+                "value": 3513
+            },
+            {
+                "name": "PROFESSIONALE",
+                "value": 5
+            },
+            {
+                "name": "Scuola secondaria di primo grado",
+                "value": 43
+            },
+            {
+                "name": "CFP",
+                "value": 7
+            },
+            {
+                "name": "ECONOMICO",
+                "value": 2
+            },
+            {
+                "name": "TECNOLOGICO",
+                "value": 2
+            },
+            {
+                "name": "LICEO",
+                "value": 9
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 0
+            },
+            {
+                "name": "ARTISTICO",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "year": "2006-07",
+        "values": [
+            {
+                "name": "Scuola primaria",
+                "value": 3673
+            },
+            {
+                "name": "ECONOMICO",
+                "value": 4
+            },
+            {
+                "name": "Scuola secondaria di primo grado",
+                "value": 76
+            },
+            {
+                "name": "PROFESSIONALE",
+                "value": 7
+            },
+            {
+                "name": "CFP",
+                "value": 5
+            },
+            {
+                "name": "LICEO",
+                "value": 13
+            },
+            {
+                "name": "TECNOLOGICO",
+                "value": 4
+            },
+            {
+                "name": "ARTISTICO",
+                "value": 1
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "year": "2007-08",
+        "values": [
+            {
+                "name": "Scuola primaria",
+                "value": 3560
+            },
+            {
+                "name": "Scuola secondaria di primo grado",
+                "value": 221
+            },
+            {
+                "name": "ECONOMICO",
+                "value": 4
+            },
+            {
+                "name": "CFP",
+                "value": 8
+            },
+            {
+                "name": "PROFESSIONALE",
+                "value": 11
+            },
+            {
+                "name": "LICEO",
+                "value": 20
+            },
+            {
+                "name": "TECNOLOGICO",
+                "value": 9
+            },
+            {
+                "name": "ARTISTICO",
+                "value": 2
+            },
+            {
+                "name": "PRIMO CICLO - EDUCAZIONE ADULTI",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "year": "2008-09",
+        "values": [
+            {
+                "name": "Scuola primaria",
+                "value": 2970
+            },
+            {
+                "name": "TECNOLOGICO",
+                "value": 14
+            },
+            {
+                "name": "Scuola secondaria di primo grado",
+                "value": 821
+            },
+            {
+                "name": "LICEO",
+                "value": 17
+            },
+            {
+                "name": "PROFESSIONALE",
+                "value": 10
+            },
+            {
+                "name": "ECONOMICO",
+                "value": 7
+            },
+            {
+                "name": "CFP",
+                "value": 12
+            },
+            {
+                "name": "ARTISTICO",
+                "value": 3
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "year": "2009-10",
+        "values": [
+            {
+                "name": "Scuola secondaria di primo grado",
+                "value": 3802
+            },
+            {
+                "name": "LICEO",
+                "value": 32
+            },
+            {
+                "name": "ECONOMICO",
+                "value": 14
+            },
+            {
+                "name": "CFP",
+                "value": 22
+            },
+            {
+                "name": "PROFESSIONALE",
+                "value": 17
+            },
+            {
+                "name": "ARTISTICO",
+                "value": 2
+            },
+            {
+                "name": "TECNOLOGICO",
+                "value": 22
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "year": "2010-11",
+        "values": [
+            {
+                "name": "Scuola secondaria di primo grado",
+                "value": 3630
+            },
+            {
+                "name": "ARTISTICO",
+                "value": 9
+            },
+            {
+                "name": "LICEO",
+                "value": 96
+            },
+            {
+                "name": "CFP",
+                "value": 37
+            },
+            {
+                "name": "ECONOMICO",
+                "value": 50
+            },
+            {
+                "name": "TECNOLOGICO",
+                "value": 51
+            },
+            {
+                "name": "PROFESSIONALE",
+                "value": 14
+            }
+        ]
+    },
+    {
+        "year": "2011-12",
+        "values": [
+            {
+                "name": "Scuola secondaria di primo grado",
+                "value": 3035
+            },
+            {
+                "name": "ARTISTICO",
+                "value": 54
+            },
+            {
+                "name": "TECNOLOGICO",
+                "value": 227
+            },
+            {
+                "name": "ECONOMICO",
+                "value": 145
+            },
+            {
+                "name": "LICEO",
+                "value": 384
+            },
+            {
+                "name": "PROFESSIONALE",
+                "value": 22
+            },
+            {
+                "name": "CFP",
+                "value": 78
+            }
+        ]
+    },
+    {
+        "year": "2012-13",
+        "values": [
+            {
+                "name": "LICEO",
+                "value": 2067
+            },
+            {
+                "name": "ECONOMICO",
+                "value": 632
+            },
+            {
+                "name": "TECNOLOGICO",
+                "value": 867
+            },
+            {
+                "name": "ARTISTICO",
+                "value": 240
+            },
+            {
+                "name": "CFP",
+                "value": 219
+            },
+            {
+                "name": "PROFESSIONALE",
+                "value": 86
+            }
+        ]
+    },
+    {
+        "year": "2013-14",
+        "values": [
+            {
+                "name": "TECNOLOGICO",
+                "value": 883
+            },
+            {
+                "name": "CFP",
+                "value": 201
+            },
+            {
+                "name": "ECONOMICO",
+                "value": 662
+            },
+            {
+                "name": "LICEO",
+                "value": 2002
+            },
+            {
+                "name": "ARTISTICO",
+                "value": 249
+            },
+            {
+                "name": "PROFESSIONALE",
+                "value": 101
+            },
+            {
+                "name": "PRIMO CICLO - EDUCAZIONE ADULTI",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "year": "2014-15",
+        "values": [
+            {
+                "name": "LICEO",
+                "value": 1956
+            },
+            {
+                "name": "ARTISTICO",
+                "value": 252
+            },
+            {
+                "name": "TECNOLOGICO",
+                "value": 900
+            },
+            {
+                "name": "ECONOMICO",
+                "value": 721
+            },
+            {
+                "name": "CFP",
+                "value": 173
+            },
+            {
+                "name": "PROFESSIONALE",
+                "value": 122
+            }
+        ]
+    },
+    {
+        "year": "2015-16",
+        "values": [
+            {
+                "name": "TECNOLOGICO",
+                "value": 903
+            },
+            {
+                "name": "LICEO",
+                "value": 1959
+            },
+            {
+                "name": "ECONOMICO",
+                "value": 756
+            },
+            {
+                "name": "PROFESSIONALE",
+                "value": 126
+            },
+            {
+                "name": "CFP",
+                "value": 130
+            },
+            {
+                "name": "ARTISTICO",
+                "value": 254
+            }
+        ]
+    },
+    {
+        "year": "2016-17",
+        "values": [
+            {
+                "name": "LICEO",
+                "value": 1968
+            },
+            {
+                "name": "PROFESSIONALE",
+                "value": 130
+            },
+            {
+                "name": "TECNOLOGICO",
+                "value": 933
+            },
+            {
+                "name": "ECONOMICO",
+                "value": 784
+            },
+            {
+                "name": "CFP",
+                "value": 111
+            },
+            {
+                "name": "ARTISTICO",
+                "value": 255
+            }
+        ]
+    }
 ]

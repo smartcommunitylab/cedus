@@ -453,7 +453,7 @@ function drawPieChart(divID,chartTitle,dataSet) {
 	var options = {
 			title:chartTitle, 
 			width:230,height:230,
-			fontFamily: 'Arial', fontSize: 13,
+			//fontFamily: 'Arial', fontSize: 13,
 			pieHole: 0.3,
 			legend:'left'
 	};

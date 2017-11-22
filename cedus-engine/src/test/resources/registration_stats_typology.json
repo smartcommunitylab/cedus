@@ -1,36 +1,802 @@
 [
-	{
-		"year": "2016",
-		"values": [
-			{
-				"name": "LICEO LINGUISTICO",
-				"value": 100
-			},
-			{
-				"name": "ISTITUTO D'ARTE",
-				"value": 200
-			},
-			{
-				"name": "ISTITUTO TECNICO INDUSTRIALE",
-				"value": 300
-			}
-		]
-	},
-	{
-		"year": "2017",
-		"values": [
-			{
-				"name": "IST.PROF.PER L'AGRICOLTURA",
-				"value": 300
-			},
-			{
-				"name": "LICEO SCIENTIFICO",
-				"value": 200
-			},
-			{
-				"name": "ISTITUTO TECNICO AGRARIO",
-				"value": 100
-			}
-		]
-	}
+    {
+        "year": "2000-01",
+        "values": []
+    },
+    {
+        "year": "2001-02",
+        "values": [
+            {
+                "name": "SCUOLA PRIMARIA",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "year": "2002-03",
+        "values": [
+            {
+                "name": "SCUOLA PRIMARIA",
+                "value": 208
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE E PER GEOMETRI ",
+                "value": 1
+            },
+            {
+                "name": "SCUOLA SECONDARIA DI PRIMO GRADO",
+                "value": 25
+            },
+            {
+                "name": "ISTITUTO TECNICO INDUSTRIALE",
+                "value": 1
+            },
+            {
+                "name": "ISTITUTO PROFESSIONALE PER IL COMMERCIO",
+                "value": 0
+            },
+            {
+                "name": "LICEO CLASSICO",
+                "value": 0
+            },
+            {
+                "name": "ISTITUTO MAGISTRALE",
+                "value": 0
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "year": "2003-04",
+        "values": [
+            {
+                "name": "SCUOLA PRIMARIA",
+                "value": 748
+            },
+            {
+                "name": "SCUOLA SECONDARIA DI PRIMO GRADO",
+                "value": 30
+            },
+            {
+                "name": "FORMAZIONE PROFESSIONALE",
+                "value": 4
+            },
+            {
+                "name": "ISTITUTO PROFESSIONALE PER IL COMMERCIO",
+                "value": 1
+            },
+            {
+                "name": "ISTITUTO TECNICO INDUSTRIALE",
+                "value": 1
+            },
+            {
+                "name": "ISTITUTO MAGISTRALE",
+                "value": 2
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE E PER GEOMETRI ",
+                "value": 3
+            },
+            {
+                "name": "LICEO CLASSICO",
+                "value": 0
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "year": "2004-05",
+        "values": [
+            {
+                "name": "SCUOLA PRIMARIA",
+                "value": 3467
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE E PER GEOMETRI ",
+                "value": 6
+            },
+            {
+                "name": "SCUOLA SECONDARIA DI PRIMO GRADO",
+                "value": 36
+            },
+            {
+                "name": "FORMAZIONE PROFESSIONALE",
+                "value": 4
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 0
+            },
+            {
+                "name": "ISTITUTO PROFESSIONALE PER IL COMMERCIO",
+                "value": 3
+            },
+            {
+                "name": "ISTITUTO TECNICO INDUSTRIALE",
+                "value": 1
+            },
+            {
+                "name": "ISTITUTO MAGISTRALE",
+                "value": 2
+            },
+            {
+                "name": "LICEO SCIENTIFICO",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "year": "2005-06",
+        "values": [
+            {
+                "name": "SCUOLA PRIMARIA",
+                "value": 3513
+            },
+            {
+                "name": "ISTITUTO PROFESSIONALE PER IL COMMERCIO",
+                "value": 5
+            },
+            {
+                "name": "SCUOLA SECONDARIA DI PRIMO GRADO",
+                "value": 43
+            },
+            {
+                "name": "FORMAZIONE PROFESSIONALE",
+                "value": 7
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE E PER GEOMETRI ",
+                "value": 3
+            },
+            {
+                "name": "ISTITUTO TECNICO INDUSTRIALE",
+                "value": 2
+            },
+            {
+                "name": "ISTITUTO MAGISTRALE",
+                "value": 4
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE ",
+                "value": 0
+            },
+            {
+                "name": "LICEO SCIENTIFICO",
+                "value": 2
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "year": "2006-07",
+        "values": [
+            {
+                "name": "SCUOLA PRIMARIA",
+                "value": 3673
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE E PER GEOMETRI ",
+                "value": 5
+            },
+            {
+                "name": "SCUOLA SECONDARIA DI PRIMO GRADO",
+                "value": 76
+            },
+            {
+                "name": "ISTITUTO PROFESSIONALE PER IL COMMERCIO",
+                "value": 7
+            },
+            {
+                "name": "FORMAZIONE PROFESSIONALE",
+                "value": 5
+            },
+            {
+                "name": "ISTITUTO MAGISTRALE",
+                "value": 6
+            },
+            {
+                "name": "ISTITUTO TECNICO INDUSTRIALE",
+                "value": 3
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 2
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE ",
+                "value": 1
+            },
+            {
+                "name": "LICEO SCIENTIFICO",
+                "value": 2
+            },
+            {
+                "name": "LICEO CLASSICO",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "year": "2007-08",
+        "values": [
+            {
+                "name": "SCUOLA PRIMARIA",
+                "value": 3560
+            },
+            {
+                "name": "SCUOLA SECONDARIA DI PRIMO GRADO",
+                "value": 221
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE E PER GEOMETRI ",
+                "value": 9
+            },
+            {
+                "name": "FORMAZIONE PROFESSIONALE",
+                "value": 8
+            },
+            {
+                "name": "ISTITUTO PROFESSIONALE PER IL COMMERCIO",
+                "value": 11
+            },
+            {
+                "name": "LICEO SCIENTIFICO",
+                "value": 6
+            },
+            {
+                "name": "ISTITUTO MAGISTRALE",
+                "value": 7
+            },
+            {
+                "name": "LICEO CLASSICO",
+                "value": 3
+            },
+            {
+                "name": "ISTITUTO TECNICO INDUSTRIALE",
+                "value": 4
+            },
+            {
+                "name": "ISTITUTO TECNICO PER IL TURISMO",
+                "value": 0
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 2
+            },
+            {
+                "name": "PRIMO CICLO - EDUCAZIONE ADULTI",
+                "value": 0
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE ",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "year": "2008-09",
+        "values": [
+            {
+                "name": "SCUOLA PRIMARIA",
+                "value": 2970
+            },
+            {
+                "name": "ISTITUTO TECNICO INDUSTRIALE",
+                "value": 10
+            },
+            {
+                "name": "SCUOLA SECONDARIA DI PRIMO GRADO",
+                "value": 821
+            },
+            {
+                "name": "ISTITUTO MAGISTRALE",
+                "value": 6
+            },
+            {
+                "name": "LICEO CLASSICO",
+                "value": 2
+            },
+            {
+                "name": "LICEO SCIENTIFICO",
+                "value": 5
+            },
+            {
+                "name": "ISTITUTO PROFESSIONALE PER IL COMMERCIO",
+                "value": 10
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE E PER GEOMETRI ",
+                "value": 10
+            },
+            {
+                "name": "FORMAZIONE PROFESSIONALE",
+                "value": 12
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 3
+            },
+            {
+                "name": "LICEO MUSICALE SPERIMENTALE",
+                "value": 0
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE ",
+                "value": 1
+            },
+            {
+                "name": "ISTITUTO TECNICO PER IL TURISMO",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "year": "2009-10",
+        "values": [
+            {
+                "name": "SCUOLA SECONDARIA DI PRIMO GRADO",
+                "value": 3802
+            },
+            {
+                "name": "ISTITUTO MAGISTRALE",
+                "value": 8
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE E PER GEOMETRI ",
+                "value": 21
+            },
+            {
+                "name": "LICEO CLASSICO",
+                "value": 7
+            },
+            {
+                "name": "LICEO SCIENTIFICO",
+                "value": 13
+            },
+            {
+                "name": "FORMAZIONE PROFESSIONALE",
+                "value": 22
+            },
+            {
+                "name": "ISTITUTO PROFESSIONALE PER IL COMMERCIO",
+                "value": 17
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE ",
+                "value": 4
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 3
+            },
+            {
+                "name": "ISTITUTO TECNICO INDUSTRIALE",
+                "value": 10
+            },
+            {
+                "name": "ISTITUTO TECNICO AGRARIO",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "year": "2010-11",
+        "values": [
+            {
+                "name": "SCUOLA SECONDARIA DI PRIMO GRADO",
+                "value": 3630
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 8
+            },
+            {
+                "name": "LICEO SCIENTIFICO",
+                "value": 66
+            },
+            {
+                "name": "FORMAZIONE PROFESSIONALE",
+                "value": 37
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE ",
+                "value": 44
+            },
+            {
+                "name": "LICEO CLASSICO",
+                "value": 9
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE E PER GEOMETRI ",
+                "value": 10
+            },
+            {
+                "name": "ISTITUTO TECNICO INDUSTRIALE",
+                "value": 32
+            },
+            {
+                "name": "ISTITUTO PROFESSIONALE PER IL COMMERCIO",
+                "value": 14
+            },
+            {
+                "name": "ISTITUTO MAGISTRALE",
+                "value": 9
+            },
+            {
+                "name": "LICEO LINGUISTICO",
+                "value": 8
+            },
+            {
+                "name": "ISTITUTO TECNICO PER GEOMETRI ",
+                "value": 8
+            },
+            {
+                "name": "LICEO ARTISTICO",
+                "value": 0
+            },
+            {
+                "name": "ISTITUTO TECNICO AGRARIO",
+                "value": 5
+            }
+        ]
+    },
+    {
+        "year": "2011-12",
+        "values": [
+            {
+                "name": "SCUOLA SECONDARIA DI PRIMO GRADO",
+                "value": 3035
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 51
+            },
+            {
+                "name": "ISTITUTO TECNICO INDUSTRIALE",
+                "value": 138
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE ",
+                "value": 138
+            },
+            {
+                "name": "LICEO SCIENTIFICO",
+                "value": 277
+            },
+            {
+                "name": "LICEO CLASSICO",
+                "value": 36
+            },
+            {
+                "name": "ISTITUTO TECNICO AGRARIO",
+                "value": 33
+            },
+            {
+                "name": "ISTITUTO TECNICO PER GEOMETRI ",
+                "value": 49
+            },
+            {
+                "name": "ISTITUTO PROFESSIONALE PER IL COMMERCIO",
+                "value": 22
+            },
+            {
+                "name": "FORMAZIONE PROFESSIONALE",
+                "value": 78
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE E PER GEOMETRI ",
+                "value": 11
+            },
+            {
+                "name": "LICEO LINGUISTICO",
+                "value": 60
+            },
+            {
+                "name": "ISTITUTO MAGISTRALE",
+                "value": 8
+            },
+            {
+                "name": "LICEO ARTISTICO",
+                "value": 2
+            }
+        ]
+    },
+    {
+        "year": "2012-13",
+        "values": [
+            {
+                "name": "LICEO LINGUISTICO",
+                "value": 374
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE ",
+                "value": 624
+            },
+            {
+                "name": "LICEO SCIENTIFICO",
+                "value": 1457
+            },
+            {
+                "name": "ISTITUTO TECNICO INDUSTRIALE",
+                "value": 563
+            },
+            {
+                "name": "LICEO CLASSICO",
+                "value": 221
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 211
+            },
+            {
+                "name": "FORMAZIONE PROFESSIONALE",
+                "value": 219
+            },
+            {
+                "name": "ISTITUTO TECNICO PER GEOMETRI ",
+                "value": 178
+            },
+            {
+                "name": "ISTITUTO TECNICO AGRARIO",
+                "value": 120
+            },
+            {
+                "name": "ISTITUTO PROFESSIONALE PER IL COMMERCIO",
+                "value": 86
+            },
+            {
+                "name": "LICEO ARTISTICO",
+                "value": 28
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE E PER GEOMETRI ",
+                "value": 11
+            },
+            {
+                "name": "ISTITUTO MAGISTRALE",
+                "value": 12
+            }
+        ]
+    },
+    {
+        "year": "2013-14",
+        "values": [
+            {
+                "name": "ISTITUTO TECNICO AGRARIO",
+                "value": 119
+            },
+            {
+                "name": "FORMAZIONE PROFESSIONALE",
+                "value": 201
+            },
+            {
+                "name": "ISTITUTO TECNICO INDUSTRIALE",
+                "value": 581
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE ",
+                "value": 640
+            },
+            {
+                "name": "LICEO SCIENTIFICO",
+                "value": 1410
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 221
+            },
+            {
+                "name": "ISTITUTO TECNICO PER GEOMETRI ",
+                "value": 178
+            },
+            {
+                "name": "LICEO ARTISTICO",
+                "value": 27
+            },
+            {
+                "name": "ISTITUTO PROFESSIONALE PER IL COMMERCIO",
+                "value": 101
+            },
+            {
+                "name": "LICEO CLASSICO",
+                "value": 204
+            },
+            {
+                "name": "LICEO LINGUISTICO",
+                "value": 372
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE E PER GEOMETRI ",
+                "value": 24
+            },
+            {
+                "name": "ISTITUTO MAGISTRALE",
+                "value": 13
+            },
+            {
+                "name": "PRIMO CICLO - EDUCAZIONE ADULTI",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "year": "2014-15",
+        "values": [
+            {
+                "name": "LICEO SCIENTIFICO",
+                "value": 1380
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 222
+            },
+            {
+                "name": "ISTITUTO TECNICO PER GEOMETRI ",
+                "value": 159
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE ",
+                "value": 676
+            },
+            {
+                "name": "FORMAZIONE PROFESSIONALE",
+                "value": 173
+            },
+            {
+                "name": "LICEO ARTISTICO",
+                "value": 29
+            },
+            {
+                "name": "ISTITUTO PROFESSIONALE PER IL COMMERCIO",
+                "value": 122
+            },
+            {
+                "name": "ISTITUTO TECNICO INDUSTRIALE",
+                "value": 621
+            },
+            {
+                "name": "LICEO LINGUISTICO",
+                "value": 363
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE E PER GEOMETRI ",
+                "value": 47
+            },
+            {
+                "name": "ISTITUTO TECNICO AGRARIO",
+                "value": 115
+            },
+            {
+                "name": "LICEO CLASSICO",
+                "value": 193
+            },
+            {
+                "name": "ISTITUTO MAGISTRALE",
+                "value": 17
+            }
+        ]
+    },
+    {
+        "year": "2015-16",
+        "values": [
+            {
+                "name": "ISTITUTO TECNICO INDUSTRIALE",
+                "value": 627
+            },
+            {
+                "name": "LICEO LINGUISTICO",
+                "value": 362
+            },
+            {
+                "name": "ISTITUTO MAGISTRALE",
+                "value": 22
+            },
+            {
+                "name": "LICEO SCIENTIFICO",
+                "value": 1388
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE ",
+                "value": 678
+            },
+            {
+                "name": "ISTITUTO PROFESSIONALE PER IL COMMERCIO",
+                "value": 126
+            },
+            {
+                "name": "FORMAZIONE PROFESSIONALE",
+                "value": 130
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE E PER GEOMETRI ",
+                "value": 80
+            },
+            {
+                "name": "LICEO CLASSICO",
+                "value": 184
+            },
+            {
+                "name": "ISTITUTO TECNICO AGRARIO",
+                "value": 114
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 225
+            },
+            {
+                "name": "ISTITUTO TECNICO PER GEOMETRI ",
+                "value": 157
+            },
+            {
+                "name": "LICEO ARTISTICO",
+                "value": 28
+            }
+        ]
+    },
+    {
+        "year": "2016-17",
+        "values": [
+            {
+                "name": "LICEO LINGUISTICO",
+                "value": 361
+            },
+            {
+                "name": "ISTITUTO PROFESSIONALE PER IL COMMERCIO",
+                "value": 130
+            },
+            {
+                "name": "ISTITUTO TECNICO INDUSTRIALE",
+                "value": 724
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE ",
+                "value": 686
+            },
+            {
+                "name": "LICEO SCIENTIFICO",
+                "value": 1388
+            },
+            {
+                "name": "FORMAZIONE PROFESSIONALE",
+                "value": 111
+            },
+            {
+                "name": "ISTITUTO TECNICO PER GEOMETRI ",
+                "value": 94
+            },
+            {
+                "name": "LICEO CLASSICO",
+                "value": 183
+            },
+            {
+                "name": "ISTITUTO TECNICO COMMERCIALE E PER GEOMETRI ",
+                "value": 97
+            },
+            {
+                "name": "ISTITUTO TECNICO AGRARIO",
+                "value": 113
+            },
+            {
+                "name": "ISTITUTO D'ARTE",
+                "value": 226
+            },
+            {
+                "name": "ISTITUTO MAGISTRALE",
+                "value": 33
+            },
+            {
+                "name": "LICEO ARTISTICO",
+                "value": 28
+            }
+        ]
+    }
 ]

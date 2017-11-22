@@ -1,36 +1,278 @@
 [
-	{
-		"year": "2016",
-		"values": [
-			{
-				"name": "Primaria",
-				"value": 100
-			},
-			{
-				"name": "Secondaria di primo grado",
-				"value": 200
-			},
-			{
-				"name": "Secondaria di secondo grado",
-				"value": 300
-			}
-		]
-	},
-	{
-		"year": "2017",
-		"values": [
-			{
-				"name": "Primaria",
-				"value": 300
-			},
-			{
-				"name": "Secondaria di primo grado",
-				"value": 200
-			},
-			{
-				"name": "Secondaria di secondo grado",
-				"value": 100
-			}
-		]
-	}
+    {
+        "year": "2000-01",
+        "values": []
+    },
+    {
+        "year": "2001-02",
+        "values": [
+            {
+                "name": "Primaria",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "year": "2002-03",
+        "values": [
+            {
+                "name": "Primaria",
+                "value": 208
+            },
+            {
+                "name": "Secondaria di secondo grado",
+                "value": 7
+            },
+            {
+                "name": "Secondaria di primo grado",
+                "value": 25
+            }
+        ]
+    },
+    {
+        "year": "2003-04",
+        "values": [
+            {
+                "name": "Primaria",
+                "value": 748
+            },
+            {
+                "name": "Secondaria di primo grado",
+                "value": 30
+            },
+            {
+                "name": "Formazione professionale",
+                "value": 4
+            },
+            {
+                "name": "Secondaria di secondo grado",
+                "value": 12
+            }
+        ]
+    },
+    {
+        "year": "2004-05",
+        "values": [
+            {
+                "name": "Primaria",
+                "value": 3467
+            },
+            {
+                "name": "Secondaria di secondo grado",
+                "value": 17
+            },
+            {
+                "name": "Secondaria di primo grado",
+                "value": 36
+            },
+            {
+                "name": "Formazione professionale",
+                "value": 4
+            }
+        ]
+    },
+    {
+        "year": "2005-06",
+        "values": [
+            {
+                "name": "Primaria",
+                "value": 3513
+            },
+            {
+                "name": "Secondaria di secondo grado",
+                "value": 23
+            },
+            {
+                "name": "Secondaria di primo grado",
+                "value": 43
+            },
+            {
+                "name": "Formazione professionale",
+                "value": 7
+            }
+        ]
+    },
+    {
+        "year": "2006-07",
+        "values": [
+            {
+                "name": "Primaria",
+                "value": 3673
+            },
+            {
+                "name": "Secondaria di secondo grado",
+                "value": 34
+            },
+            {
+                "name": "Secondaria di primo grado",
+                "value": 76
+            },
+            {
+                "name": "Formazione professionale",
+                "value": 5
+            }
+        ]
+    },
+    {
+        "year": "2007-08",
+        "values": [
+            {
+                "name": "Primaria",
+                "value": 3560
+            },
+            {
+                "name": "Secondaria di primo grado",
+                "value": 222
+            },
+            {
+                "name": "Secondaria di secondo grado",
+                "value": 50
+            },
+            {
+                "name": "Formazione professionale",
+                "value": 8
+            }
+        ]
+    },
+    {
+        "year": "2008-09",
+        "values": [
+            {
+                "name": "Primaria",
+                "value": 2970
+            },
+            {
+                "name": "Secondaria di secondo grado",
+                "value": 56
+            },
+            {
+                "name": "Secondaria di primo grado",
+                "value": 821
+            },
+            {
+                "name": "Formazione professionale",
+                "value": 12
+            }
+        ]
+    },
+    {
+        "year": "2009-10",
+        "values": [
+            {
+                "name": "Secondaria di primo grado",
+                "value": 3802
+            },
+            {
+                "name": "Secondaria di secondo grado",
+                "value": 92
+            },
+            {
+                "name": "Formazione professionale",
+                "value": 22
+            }
+        ]
+    },
+    {
+        "year": "2010-11",
+        "values": [
+            {
+                "name": "Secondaria di primo grado",
+                "value": 3630
+            },
+            {
+                "name": "Secondaria di secondo grado",
+                "value": 224
+            },
+            {
+                "name": "Formazione professionale",
+                "value": 37
+            }
+        ]
+    },
+    {
+        "year": "2011-12",
+        "values": [
+            {
+                "name": "Secondaria di primo grado",
+                "value": 3035
+            },
+            {
+                "name": "Secondaria di secondo grado",
+                "value": 836
+            },
+            {
+                "name": "Formazione professionale",
+                "value": 78
+            }
+        ]
+    },
+    {
+        "year": "2012-13",
+        "values": [
+            {
+                "name": "Secondaria di secondo grado",
+                "value": 3896
+            },
+            {
+                "name": "Formazione professionale",
+                "value": 219
+            }
+        ]
+    },
+    {
+        "year": "2013-14",
+        "values": [
+            {
+                "name": "Secondaria di secondo grado",
+                "value": 3901
+            },
+            {
+                "name": "Formazione professionale",
+                "value": 201
+            },
+            {
+                "name": "Secondaria di primo grado",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "year": "2014-15",
+        "values": [
+            {
+                "name": "Secondaria di secondo grado",
+                "value": 3955
+            },
+            {
+                "name": "Formazione professionale",
+                "value": 173
+            }
+        ]
+    },
+    {
+        "year": "2015-16",
+        "values": [
+            {
+                "name": "Secondaria di secondo grado",
+                "value": 4002
+            },
+            {
+                "name": "Formazione professionale",
+                "value": 130
+            }
+        ]
+    },
+    {
+        "year": "2016-17",
+        "values": [
+            {
+                "name": "Secondaria di secondo grado",
+                "value": 4074
+            },
+            {
+                "name": "Formazione professionale",
+                "value": 111
+            }
+        ]
+    }
 ]
