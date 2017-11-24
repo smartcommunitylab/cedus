@@ -27,26 +27,7 @@ $(document).ready(function() {
 
 	google.charts.load('current', {'packages': ['corechart', 'bar']});
 	google.charts.setOnLoadCallback(drawBarChart);
-	/*
-	var oneTimeClickTab2=0;
-	var oneTimeClickTab3=0;
-	$('#pill2').click(function(e) {
-		if(oneTimeClickTab2==0){
-			oneTimeClickTab2=oneTimeClickTab2+1;
-			setTimeout(function(){
-				google.charts.load("current", {packages:["corechart"]});
-				google.charts.setOnLoadCallback(drawPieChartCall);
-			}, 200);
-		}
-		
-	});
-	$('#pill3').click(function(e) {
-		setTimeout(function(){
-			google.charts.load("current", {packages:["corechart"]});
-			google.charts.setOnLoadCallback(drawPieChartCall);
-		}, 200);
-	});
-	*/
+
 	
 });
 
@@ -202,7 +183,7 @@ function drawBarChart() {
 		type: "GET",
 		url: '../api/params/ordini',
 		success: function (data) {
-			staLevelList=data;
+			staLevelList=data.sort();
 			//here  loop is for insert level values into 'dataTest' and level checkbox div in html (tab1 and tab2)
 			$.each(staLevelList,function(key, val){
 				dataTest.addRow([val]);
@@ -353,8 +334,6 @@ function drawPieChartCall(){
 		});
 		var i=key+1;
 		var divID='tab2_pieChart'+i;
-		//console.log("divID:",divID);
-		//console.log("dataSet:",dataSet);
 		var chartTitle='tot.classi '+val['year'];
 		drawPieChart(divID,chartTitle,dataSet);
 	});
@@ -379,7 +358,7 @@ function drawPieChartCall(){
 		url: '../api/params/indirizzi',
 		success: function (data) {			
 			//here  loop is for  level checkbox div in html (tab3)
-			$.each(data,function(key, val){
+			$.each(data.sort(),function(key, val){
 				
 				var i=key+1;
 				var id="tab3checkbox"+i;
@@ -389,7 +368,7 @@ function drawPieChartCall(){
 				
 			});
 		},
-		failure: function() {alert("Error!");}
+		failure: function() {console.log("data load problem by ajax!");}
 	});
 	// this ajax call for store data in tab3 
 	$.ajax
@@ -403,7 +382,7 @@ function drawPieChartCall(){
 		success: function (data) {
 			var revData=data.reverse();
 			globalMasterData['tab3'].push(revData);
-			globalModifyData['tab3'].push(revData);
+			globalModifyData['tab3'].push($.extend(true, [], revData));
 			$.each(data,function(key, val){
 				if (key>trackYearTab3 || key > 2) { return false; }
 				var dataSet=[['Task', ' ']];
@@ -418,7 +397,7 @@ function drawPieChartCall(){
 				drawPieChart(divID,chartTitle,dataSet);
 			});
 		},
-		failure: function() {alert("Error!");}
+		failure: function() {console.log("data load problem by ajax!");}
 	});
 
 }
@@ -537,8 +516,8 @@ function anniModification(tab, type){
 				$('#tab3Anni'+minusAnni).remove();
 				drawPieChartOnRequest('anni','tab3');
 			}
-			console.log("globalModifyData after minus:",globalModifyData);
-			console.log("globalMasterData after minus:",globalMasterData);
+			//console.log("globalModifyData after minus:",globalModifyData);
+			//console.log("globalMasterData after minus:",globalMasterData);
 			//console.log("unaddedMinusVal after minus:",unaddedMinusVal);
 		}else{
 			console.log("no more year for minus!");
@@ -563,7 +542,7 @@ function levelModification(obj,tab, modifyLevel){
 			});
 			
 		});
-		console.log('after plus level globalModifyData',globalModifyData);
+		//console.log('after plus level globalModifyData',globalModifyData);
 		if(tab=="tab1"){
 			drawBarChartOnRequest('anni');
 		}else if(tab == "tab2"){
@@ -584,7 +563,7 @@ function levelModification(obj,tab, modifyLevel){
 		});
 		
 		//console.log('after minus level globalMasterData',globalMasterData);
-		console.log('after minus level globalModifyData',globalModifyData);
+		//console.log('after minus level globalModifyData',globalModifyData);
 		if(tab=="tab1"){
 			drawBarChartOnRequest('anni');
 		}else if(tab == "tab2"){
