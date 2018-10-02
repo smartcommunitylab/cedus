@@ -1,32 +1,141 @@
-<html xmlns:th="http://www.thymeleaf.org"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.thymeleaf.org">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Studente</title>
-	
-	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
-	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="../css/customStudent.css" />
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-	<!-- Latest compiled and minified CSS 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css"/>
-	-->
-	
-	<script type="text/javascript" src="../js/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
-	<script type="text/javascript" src="../js/jquery-ui.js"></script>
-	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="../js/moment.min.js"></script>
-	<!-- Latest compiled and minified JavaScript 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-	-->
-	<script type="text/javascript" src="../js/allGeoEnString.js"></script>	
-	<script type="text/javascript" src="../js/customStudent.js"></script>
-<script th:inline="javascript">
-/*<![CDATA[*/
+<!DOCTYPE html>
+<html>
+<head> 
+	<title>Cedus4School - IL MIO PERCORSO</title> 
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+	<link rel="stylesheet" href="lib/bootstrap.min.css" />
+	<link rel="stylesheet" href="main.css" />
+</head> 
+
+<body id="page_index">
+
+<header class="navbar navbar-expand flex-column flex-md-row bd-navbar">
+
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link " href="../osm4schools/index.html">SCUOLA</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="index.html">IL MIO PERCORSO</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="search.html">ASPIRAZIONI</a>
+      </li>
+    </ul>
+  </div>
+
+  <ul id="profile" class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+    <li class="nav-item">
+      <a class="nav-item nav-link mr-md-2" href="#" id="username" aria-haspopup="true" aria-expanded="false">
+        NOME STUDENTE
+      </a>
+    </li>
+    <li class="nav-item logout">
+      <a class="nav-item nav-link mr-md-2 orange-text" href="#" id="logout" aria-haspopup="true" aria-expanded="false">
+        LOGOUT
+      </a>
+    </li>    
+	<li class="nav-item">
+		<a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
+			<img src="images/cedus_logo.png" />
+		</a>
+    </li>
+  </ul>
+
+</header>
+
+<div id="version"></div>
+
+<div class="container-fluid">
+	<div class="row">
+	    <div class="col-md-2 blue-bg">
+
+			<br />
+
+			<label>Le mie competenze</label>
+			<div id="skills">
+			</div>
+
+			<br />
+
+			<form id="searchjobs_wrap" role="form float-right">
+				<label>Cerca Professioni</label>
+				<div class="form-group">
+					<input class="form-control grey-bg" id="searchjobs" type="search" placeholder="Inserisci il nome..." />
+				</div>
+				<div id="searchlist" class="list-group">
+					
+				</div>
+			</form>
+
+	    	<div id="jobs">
+				<label>Professioni suggerite</label>
+				<!--<select id="selectjobs" size="20" class="grey-bg">
+				</select>-->
+				<div id="selectjobs" class="list-group">
+				</div>
+			</div>
+		</div>		
+		<div class="col-md-10">
+			
+			<div id="tree">
+				<h4 id="tree_loader"><span></span>SELEZIONA UNA PROFESSIONE</h4>
+			</div>
+
+			<br /><br />
+			
+			<div id="tree_selection">
+				
+			</div>
+
+			<br />
+
+			<div class="row" id="results" style="display:none">
+				<div class="col-md-3">
+					<h4>Professioni Simili</h4>
+					<div id="table">
+					</div>
+				</div>
+				<div class="col-md-9">
+					<h4>Competenze Mancanti</h4>
+					<div id="table2">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="pt-4 my-md-5 pt-md-5 border-top">
+	    <div class="row">
+	      <div class="col-md col-md">
+	        <img class="mb-2" src="images/fbk_logo.png" alt="" >
+	      </div>
+	      <div class="col-md align-bottom">
+	        <a href="#">&copy; 2018 Smart Cities and Communities</a>
+	      </div>
+	      <div class="col-md align-bottom">
+	        <a href="#">Assistenza</a>
+	      </div>
+	      <div class="col-md align-bottom">
+	        <a href="#">Condizioni e Privacy</a>
+	      </div>
+	    </div>
+	</footer>
+
+</div>
+<script id="tmpl_tooltip" type="text/x-handlebars-template">
+<h4 class="title">{{#if name}} {{name}} {{else}} <i>unamed</i> {{/if}}</h4>
+<div class="desc">
+	{{desc}}
+	<br >
+	<a class="isfol" target="_blank" href="http://fabbisogni.isfol.it/scheda.php?limite=1&amp;id={{id}}">ISFOL {{id}}</a>
+	<br />
+</div>
+</script>
+<script>
 	
   var aacUrl = [[${aacUrl}]];	
   var clientId = [[${clientId}]];
@@ -34,202 +143,8 @@
   
   var apiUri = [[${apiUri}]];
   var token;
-  
-  function init() {
-    var queryString = location.hash.substring(1);
-    var params = {};
-    var regex = /([^&=]+)=([^&]*)/g, m;
-    
-    var passedToken = null;
-    
-    while (m = regex.exec(queryString)) {
-      params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
-      // Try to exchange the param values for an access token.
-      if (params['access_token']) {
-    	  passedToken = params['access_token'];
-    	  break;
-      }
-    }
-    
-    if (passedToken == null) {
-   	    token = sessionStorage.access_token;
-   	    if (!token || token == 'null' || token == 'undefined') {
-   	        window.location = aacUrl + '/eauth/authorize?client_id='+clientId+'&redirect_uri='+redirectUri+'&response_type=token';      
-   	    }
-    } else {
-        sessionStorage.access_token = passedToken;
-        window.location.hash = '/';
-        window.location.reload();
-    }
-    getActivityList();
-  } 
-/*]]>*/
-</script>  
-</head>
 
-<body onload="init()">
-    <div class="container">
-	
-		<nav class="navbar navbar-inverse" style='background-color: #3AAF3E;border-color: #3AAF3E;'>
-			
-	    	<div class="row"  >
-	    		
-			  	<div class="col-md-3">
-			  		<img th:src="@{../images/logo.png}"  style="max-width: 150px; max-height: 80px"/>
-			  	</div>
-			  	<div class="col-md-6" style='padding-top: 3%;'> 
-			  		<ul class="nav nav-pills orange1">
-					    <li class="active"><a data-toggle="pill" href="#tabs_1" id='pill1'>Percorso Formativo</a></li>
-					    <li><a data-toggle="pill" href="#tabs_2" id='pill2'>Offerta Formativa</a></li>
-					</ul>
-			  	</div>
-			  	<div class="col-md-3" style='padding-top: 3%;'> 
-			  		<p>
-				        <a href="#" class="btn btn-success btn-lg">
-				        	<span class="glyphicon glyphicon-user"></span> User 
-				        </a>
-				    </p>
-			  	</div>
-			</div>
-			   
-		</nav>
-		<div class="tab-content">
-			<!--tab1 for Percorso Formativo -->
-    		<div id="tabs_1" class="tab-pane fade in active" >
-    			<div class="row">
-					<div class="col-md-8">
-						<div id="mapPointer" >
-						</div>
-					</div>
-					<div class="col-md-4"  id="trainingList">
-						<div class='well well-sm' style="text-align: center;">
-							<p><b>Il tuo percorso formativo su mappa</b></p>
-						</div>
-						<!-- 
-						<br/>
-						<div class='row'>
-							<p><b>Nome Istituto Superiore1</b></p>
-						</div>
-						<div class='row'>
-							<p><b>Nome Istituto Superiore2</b></p>
-						</div>
-						<div class='row'>
-							<p><b>Nome Istituto Superiore3</b></p>
-						</div>
-						<div class='row'>
-							<p><b>Nome Istituto Superiore4</b></p>
-						</div>
-						 -->
-					</div>
-				</div>
-    		</div>
-    		<!--tab2 for Offerta Formativa -->
-    		<div id="tabs_2" class="tab-pane fade">
-    		
-				<div class="row">
-					<div class="col-md-8">
-						<div id="map" >
-						</div>
-					</div>
-					<div class="col-md-4"  >
-						<div class="row" id="select_btn">
-							<p><b>Scopri I'offerta formativa in Trentino</b></p>
-							<!-- 
-							<div class="row">
-								<button type="button" class="btn btn-success btn-block" style="width:90%" onclick="change_div('Istituto Primario')" >
-									Istituto Primario
-								</button>
-							</div><br/>
-							<div class="row">
-								<button type="button" class="btn btn-success btn-block" style="width:90%" onclick="change_div('Istituto Secondario Primo Grado')">
-									Istituto Secondario Primo Grado
-								</button>
-							</div><br/>
-							<div class="row">
-								<button type="button" class="btn btn-success btn-block" style="width:90%" onclick="change_div('Istituto Secondario Secondo Grado')">
-									Istituto Secondario Secondo Grado
-								</button>
-							</div>
-							 -->
-						</div>
-						<div class="row" id="select_type"  style="display: none">
-							
-							
-							<div class='row'>
-								<div class="col-md-2"  >
-									<a href='#' class="btn btn-success btn-sm"><span class="glyphicon glyphicon-arrow-left" onclick="back_div()" ></span></a>
-								</div>
-								<div class="col-md-10"  >
-									<b><p id='levelText'></p></b>
-								</div>
-							</div>
-							<div class='row'>
-								<div class="col-md-2"  >
-									<p>Tipologia:</p>
-								</div>
-								<div class="col-md-10"  >
-									<!-- 
-									<div class="dropdown">
-										<button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Ist. Tecnico
-											<span class="caret"></span>
-										</button>
-										<ul class="dropdown-menu" id="dropdownList">
-											
-										</ul>
-									</div>
-									 -->
-									 <select id="dropdownList" class="selectpicker" data-live-search="true" style="max-width:250px">
-									 </select>
-								</div>
-							</div>
-							<br/>
-							<div class='row'>
-								<div class="col-md-2" style="max-width:70%;" >
-									<p>Distanza:</p>
-								</div>
-								
-								<div class="col-md-6"  style="max-width:50%;">
-									<div class="">
-										<input type='text' name="distanza" value="30" id="distanza"/>
-									</div>
-								</div>
-								 
-								<div class="col-md-4"  style='padding-top: 0%;'  >
-									<span class="input-group-btn">
-						            	<button type="button" class="btn btn-success btn-number qtyplus" data-type="plus" >
-						                  	<span class="glyphicon glyphicon-plus"></span>
-						              	</button>
-						          	</span>
-						          	<span class="input-group-btn">
-						              	<button type="button" class="btn btn-danger btn-number qtyminus"  data-type="minus" >
-						                	<span class="glyphicon glyphicon-minus"></span>
-						            	</button>
-						          	</span>
-								</div>
-							</div>
-							<!-- 
-							<div class='row'>
-								
-								<div class="col-md-2"  >
-									
-								</div>
-								<div class="col-md-6"  >
-									
-								</div>
-								<div class="col-md-4"  >
-									<button type="button" class="btn btn-success " onclick="filter()">
-										Cerca
-									</button>
-								</div>
-							</div>
-							 -->
-						</div>
-					</div>
-					
-				</div>
-			</div>
-		</div>
-	</div>
+</script>
+<script src="bundle.js"></script>
 </body>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYBwhBWAxrWow_1zoXL9dBihEEvg-403k&amp;libraries=geometry" ></script>
 </html>
