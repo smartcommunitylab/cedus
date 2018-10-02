@@ -11,8 +11,8 @@
       },
 			"RollingFile": {
 			  "name": "RollingFile-Appender",
-			  "fileName": "/logs/cedus/cedus.log",
-			  "filePattern": "/logs/cedus/cedus.log.%d{yyyy-MM-dd-hh-mm}",
+			  "fileName": "./logs/cedus/cedus.log",
+			  "filePattern": "./logs/cedus/cedus.log.%d{yyyy-MM-dd-hh-mm}",
 			  "PatternLayout": {
 			    "pattern": "%d{MM-dd@HH:mm:ss} %-5p [%c] - %m%n"
 			  },
