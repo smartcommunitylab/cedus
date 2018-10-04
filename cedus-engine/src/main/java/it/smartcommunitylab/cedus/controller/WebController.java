@@ -42,51 +42,56 @@ public class WebController {
 	@Value("${csUrl}")	
 	private String csUrl;
 
-	@RequestMapping(value="/web/stats", method=RequestMethod.GET)
-	public ModelAndView getStats() {
-		ModelAndView mv = new ModelAndView("stats");
-		return mv;
+	@RequestMapping(value="/", method=RequestMethod.GET)
+	public String getStats() {
+		return "redirect:cedus4school/scuole.html";
 	}
 	
-	@RequestMapping(value="/web/coverage", method=RequestMethod.GET)
-	public ModelAndView getCoverage() {
-		ModelAndView mv = new ModelAndView("coverage");
-		return mv;
-	}
-	@RequestMapping(value="/web/student", method=RequestMethod.GET)
-	public ModelAndView getStudentPage() {
-		ModelAndView mv = new ModelAndView("student");
-		mv.addObject("aacUrl", aacUrl);
-		mv.addObject("clientId", clientId);
-		mv.addObject("redirectUri", redirectUri);
-		mv.addObject("apiUri", csUrl);
-		return mv;
-	}
-	@RequestMapping(value="/web/professioni", method=RequestMethod.GET)
-	public ModelAndView getJobsPage() {
-		ModelAndView mv = new ModelAndView("professioni");
-		mv.addObject("aacUrl", aacUrl);
-		mv.addObject("clientId", clientId);
-		mv.addObject("redirectUri", redirectUri);
-		mv.addObject("apiUri", csUrl);
-		return mv;
-	}
-	@RequestMapping(value="/web/professioni_search", method=RequestMethod.GET)
-	public ModelAndView getJobsSearchPage() {
-		ModelAndView mv = new ModelAndView("professioni_search");
-		mv.addObject("aacUrl", aacUrl);
-		mv.addObject("clientId", clientId);
-		mv.addObject("redirectUri", redirectUri);
-		mv.addObject("apiUri", csUrl);
-		return mv;
-	}
-	@RequestMapping(value="/web/scuole", method=RequestMethod.GET)
-	public ModelAndView getSchoolsPage() {
-		ModelAndView mv = new ModelAndView("scuole");
-		mv.addObject("aacUrl", aacUrl);
-		mv.addObject("clientId", clientId);
-		mv.addObject("redirectUri", redirectUri);
-		mv.addObject("apiUri", csUrl);
-		return mv;
-	}
+//	@RequestMapping(value="/web/stats", method=RequestMethod.GET)
+//	public ModelAndView getStats() {
+//		ModelAndView mv = new ModelAndView("stats");
+//		return mv;
+//	}
+//	
+//	@RequestMapping(value="/web/coverage", method=RequestMethod.GET)
+//	public ModelAndView getCoverage() {
+//		ModelAndView mv = new ModelAndView("coverage");
+//		return mv;
+//	}
+//	@RequestMapping(value="/web/student", method=RequestMethod.GET)
+//	public ModelAndView getStudentPage() {
+//		ModelAndView mv = new ModelAndView("student");
+//		mv.addObject("aacUrl", aacUrl);
+//		mv.addObject("clientId", clientId);
+//		mv.addObject("redirectUri", redirectUri);
+//		mv.addObject("apiUri", csUrl);
+//		return mv;
+//	}
+//	@RequestMapping(value="/web/professioni", method=RequestMethod.GET)
+//	public ModelAndView getJobsPage() {
+//		ModelAndView mv = new ModelAndView("professioni");
+//		mv.addObject("aacUrl", aacUrl);
+//		mv.addObject("clientId", clientId);
+//		mv.addObject("redirectUri", redirectUri);
+//		mv.addObject("apiUri", csUrl);
+//		return mv;
+//	}
+//	@RequestMapping(value="/web/professioni_search", method=RequestMethod.GET)
+//	public ModelAndView getJobsSearchPage() {
+//		ModelAndView mv = new ModelAndView("professioni_search");
+//		mv.addObject("aacUrl", aacUrl);
+//		mv.addObject("clientId", clientId);
+//		mv.addObject("redirectUri", redirectUri);
+//		mv.addObject("apiUri", csUrl);
+//		return mv;
+//	}
+//	@RequestMapping(value="/web/scuole", method=RequestMethod.GET)
+//	public ModelAndView getSchoolsPage() {
+//		ModelAndView mv = new ModelAndView("scuole");
+//		mv.addObject("aacUrl", aacUrl);
+//		mv.addObject("clientId", clientId);
+//		mv.addObject("redirectUri", redirectUri);
+//		mv.addObject("apiUri", csUrl);
+//		return mv;
+//	}
 }
