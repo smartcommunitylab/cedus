@@ -8,9 +8,6 @@
 	<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet" />
 	<link rel="stylesheet" href="lib/bootstrap.min.css" />
 	<link rel="stylesheet" href="professioni.css" />
-    <script>
-    aacRedirectLogout = "https://am-dev.smartcommunitylab.it/aac/logout?target="+window.location.substring(0, window.location.lastIndexOf('/'))+'/login.html';
-    </script>
 </head> 
 
 <body id="page_search">
@@ -141,6 +138,19 @@
 </div>
 </script>
 
+<script>
+    
+//TODO INSIDE cedus  var aacUrl = [[${aacUrl}]];    
+
+//var baseUrlDev = "./data/debug/";
+var baseUrlPro = "https://api-test.smartcommunitylab.it/t/sco.cartella/";
+var aacBaseUrl = "https://am-dev.smartcommunitylab.it/aac/eauth/authorize?";
+var aacRedirect = location.href;
+var aacClientId = '69b61f8f-0562-45fb-ba15-b0a61d4456f0';
+var aacClientSecret = null;
+var aacMatchPath = "/(asl|cs)-stats/"   //domain to send auth heade;
+var aacRedirectLogout = "https://am-dev.smartcommunitylab.it/aac/logout?target="+window.location.href.substring(0, window.location.href.lastIndexOf('/'))+'/login.html';
+</script>
 <script src="professioni.js"></script>
 </body>
 </html>
