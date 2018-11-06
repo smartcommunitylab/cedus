@@ -41567,7 +41567,7 @@ function config (name) {
 },{}],128:[function(require,module,exports){
 module.exports={
   "name": "professioni_istat",
-  "version": "3.0.0",
+  "version": "3.2.0",
   "description": "",
   "main": "professioni.js",
   "repository": {
@@ -41594,6 +41594,7 @@ module.exports={
   },
   "scripts": {
     "build": "browserify src/main.js -o professioni.js",
+    "cpcedus": "cp professioni.js ../cedus/cedus-engine/src/main/resources/public/cedus4school/",
     "start": "watchify -p browserify-livereload src/main.js -o professioni.js"
   },
   "devDependencies": {
@@ -41626,7 +41627,7 @@ var _ = require('underscore');
 
 var urls = {
 		baseUrlDev: window.baseUrlDev || "./data/debug/",
-		baseUrlPro: window.baseUrlPro || "https://api-test.smartcommunitylab.it/t/sco.cartella/",
+		baseUrlPro: window.baseUrlPro || "https://api-dev.smartcommunitylab.it/t/sco.cartella/",
 		aacBaseUrl: window.aacBaseUrl || "https://am-dev.smartcommunitylab.it/aac/eauth/authorize?",
 		aacRedirect: window.aacRedirect || location.href,
 		aacRedirectLogout: window.aacRedirectLogout || 'login.html'
@@ -41724,6 +41725,11 @@ module.exports = {
 		cb = cb || _.noop;
 
 		var self = this;
+
+		if(!config.auth.enabled) {
+			cb();
+			return
+		}
 		/*
 			RESPONSE EXAMPLE:
 			access_token=81fcdw16-cbd3-4bfe-af12-fb23d1de16b4&token_type=bearer&expires_in=42885&scope=default
@@ -41879,6 +41885,7 @@ $(function() {
     var code = $that.data('id');
 
     tree.buildTreeByCode(code);
+    tree.onSelect({level:5, id: code});
 
     table1.reset();
     table2.reset();
@@ -41917,6 +41924,8 @@ $(function() {
     var code = $that.data('id');
     
     tree.buildTreeByCode(code);
+
+    tree.onSelect({level:5, id: code});
 
     table1.reset();
     table2.reset();
@@ -42017,7 +42026,7 @@ $(function() {
             ee = json['Entries']['Entry'],
             res = _.isArray(ee) ? ee : [ee];
 
-        table1.update(_.map(res, function(v) {
+        table1.update(_.map(res, function(v) {  
           return {
             id: v.id,
             name: v.nome
@@ -42692,7 +42701,7 @@ module.exports = {
 
         cb = cb || _.noop;
     
-        var sendAuth = !!url.match(new RegExp(config.auth.matchPath));
+        var sendAuth = config.auth.enabled && !!url.match(new RegExp(config.auth.matchPath));
 
         //cache = _.isUndefined(cache) ? true : cache;
 
