@@ -41567,7 +41567,7 @@ function config (name) {
 },{}],128:[function(require,module,exports){
 module.exports={
   "name": "professioni_istat",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "",
   "main": "professioni.js",
   "repository": {
@@ -41637,6 +41637,9 @@ var urls = {
 		clientId: window.aacClientId || '69b61f8f-0562-45fb-ba15-b0a61d4456f0',
 		//clientSecret: window.aacClientSecret || null,
 		matchPath: window.aacMatchPath || "/(asl|cs)-stats/"	//domain to send auth header
+	},
+	opts = {
+		tablePageSize: window.tablePageSize || 5
 	};
 
 urls.aacUrl = H.compile(urls.aacBaseUrl + 'response_type=token'+
@@ -41685,6 +41688,8 @@ else	//DEBUG API via json files in
 };
 
 module.exports = {
+
+	opts: opts,
 
 	auth: auth,
 	
@@ -41980,6 +41985,7 @@ $(function() {
   var $tree = $('#tree');
 
   var table1 = new table.init('#table', {
+    pageSize: config.opts.tablePageSize,
     columns: [
       { field: 'name', title: 'Nome' },
       {
@@ -41987,16 +41993,19 @@ $(function() {
         cellStyle: function(value, row, index, field) {
           return {
             classes: 'isfol'
-          }
-        },
-      },
+          };
+        }
+      }
     ],
     onSelect: function(row) {
-      location.href = "http://fabbisogni.isfol.it/scheda.php?limite=1&amp;id="+row.id
+      var u = "http://fabbisogni.isfol.it/scheda.php?limite=1&amp;id="+row.id;
+      //location.href = u;
+      window.open(u,'_blank');
     }
   });
 
   var table2 = new table.init('#table2', {
+    pageSize: config.opts.tablePageSize,
     columns: [
         //{ field: 'val', title: 'Importanza' },
         { field: 'name', title: 'Nome' },
@@ -42200,7 +42209,7 @@ module.exports = {
 			onClickRow: opts && opts.onSelect || self.onSelect,
 			//radio:true,
 			pagination: true,
-			pageSize: 5,
+			pageSize: opts.pageSize || 5,
 			pageList: [5],
 			//cardView: true,
 			data: [],
