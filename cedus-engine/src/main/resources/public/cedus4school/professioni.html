@@ -127,6 +127,27 @@
 	</footer>
 
 </div>
+
+<div class="modal fade" id="privacyModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Data Privacy</h5>
+      </div>
+      <div class="modal-body" data-source="./privacy.html">
+        Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum <br />
+        Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum <br />
+        Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum <br />
+        Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum <br />
+      </div>
+      <div class="modal-footer">
+        <button id="btn-accept" type="button" class="btn btn-primary">Accetta</button>
+        <button id="btn-cancel" type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script id="tmpl_tooltip" type="text/x-handlebars-template">
 <h4 class="title">{{#if name}} {{name}} {{else}} <i>unamed</i> {{/if}}</h4>
 <div class="desc">
@@ -136,11 +157,8 @@
 	<br />
 </div>
 </script>
-
-<script>
-	
-//TODO INSIDE cedus  var aacUrl = [[${aacUrl}]];	
-
+<script>	
+//TODO INSIDE cedus  var aacUrl = [[${aacUrl}]];
 //var baseUrlDev = "./data/debug/";
 var baseUrlPro = "https://api-dev.smartcommunitylab.it/t/sco.cartella/";
 var aacBaseUrl = "https://am-dev.smartcommunitylab.it/aac/eauth/authorize?";
@@ -148,8 +166,13 @@ var aacRedirect = location.href;
 var aacClientId = 'c5389529-fe0e-4f67-bf90-c55d9df65b66';
 var aacClientSecret = null;
 var aacMatchPath = "/(asl|cs)-stats/"	//domain to send auth heade;
-var aacRedirectLogout = "https://am-dev.smartcommunitylab.it/aac/logout?target="+window.location.href.substring(0, window.location.href.lastIndexOf('/'))+'/login.html';
 var tablePageSize = 10;
+
+/* testing for localhost urls */
+/*if(location.hostname==='localhost') {
+	baseUrlPro = "https://api-test.smartcommunitylab.it/t/sco.cartella/";
+	aacClientId = '69b61f8f-0562-45fb-ba15-b0a61d4456f0';
+}*/
 </script>
 <script src="professioni.js"></script>
 </body>

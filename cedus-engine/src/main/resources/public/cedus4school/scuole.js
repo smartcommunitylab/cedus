@@ -80389,7 +80389,7 @@ module.exports.POLAR_RADIUS = 6356752.3142;
 },{}],180:[function(require,module,exports){
 module.exports={
   "name": "osm4schools",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "description": "mappa delle scuole",
   "author": {
     "name": "Stefano Cudini",
@@ -81187,7 +81187,7 @@ var urls = {
 	},
 	auth = {
 		enabled: true, 
-		clientId: window.aacClientId || '69b61f8f-0562-45fb-ba15-b0a61d4456f0',
+		clientId: window.aacClientId || 'c5389529-fe0e-4f67-bf90-c55d9df65b66',
 		//clientSecret: window.aacClientSecret || null,
 		matchPath: window.aacMatchPath || "/(asl|cs)-stats/"	//domain to send auth header
 	},
@@ -81196,6 +81196,9 @@ var urls = {
 			name: window.openrouteserviceName || "cedus",
 			key: window.openrouteserviceKey || "5b3ce3597851110001cf624821028834cb684480b8cbfe542d1ce2f9"
 		}
+	},
+	opts = {
+		tablePageSize: window.tablePageSize || 5
 	};
 
 urls.aacUrl = H.compile(urls.aacBaseUrl + 'response_type=token'+
@@ -81245,6 +81248,8 @@ else	//DEBUG API via json files in
 
 module.exports = {
 
+	opts: opts,
+	
 	auth: auth,
 	
 	urls: urls,
@@ -81884,6 +81889,7 @@ $(function() {
 	};
 
 	table.init('#table_selection', {
+		pageSize: config.opts.tablePageSize,
 		onSelect: function(row) {
 
 			if(mapActive.layerData) {
@@ -82700,6 +82706,36 @@ module.exports = {
 			e.preventDefault();
 			self.logout();
 		});
+
+		self.$modal = $('#privacyModal')
+			.on("show.bs.modal", function(e) {
+				var $body = $(this).find(".modal-body");
+				var url = $body.data('source');
+				$body.load( url );
+			})
+			.on('click','#btn-accept', function(e) {
+				//console.log('accept');
+				localStorage.setItem('privacyAccept', 'accept');
+				self.$modal.modal('hide');
+			})
+			.on('click','#btn-cancel', function(e) {
+				//console.log('cancel');
+				self.logout();
+			});
+
+		if(localStorage.privacyAccept!=='accept')
+		{
+			localStorage.setItem('privacyAccept', 'reject');
+			if( self.$modal.length && !self.$modal.hasClass('show') ) {
+				setTimeout(function() {
+					self.$modal.modal({
+						show: true, 
+						backdrop: 'static',
+						keyboard: false
+					});
+				}, 100);
+			}
+		}
 	},
 
 	isLogged: function() {
@@ -82721,6 +82757,7 @@ module.exports = {
 	logout: function() {
 		
 		delete sessionStorage.access_token;
+		delete localStorage.privacyAccept;
 
 		location.href = window.aacRedirectLogout || 'login.html';
 	},
@@ -82822,7 +82859,7 @@ module.exports = {
 
 			height:400,
 			
-			pageSize: 5,
+			pageSize: opts.pageSize || 5,
 			pageList: [5],
 			//showToggle:true,//cardView: true,
 			data: [],

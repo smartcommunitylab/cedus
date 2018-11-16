@@ -42120,6 +42120,36 @@ module.exports = {
 			e.preventDefault();
 			self.logout();
 		});
+
+		self.$modal = $('#privacyModal')
+			.on("show.bs.modal", function(e) {
+				var $body = $(this).find(".modal-body");
+				var url = $body.data('source');
+				$body.load( url );
+			})
+			.on('click','#btn-accept', function(e) {
+				//console.log('accept');
+				localStorage.setItem('privacyAccept', 'accept');
+				self.$modal.modal('hide');
+			})
+			.on('click','#btn-cancel', function(e) {
+				//console.log('cancel');
+				self.logout();
+			});
+
+		if(localStorage.privacyAccept!=='accept')
+		{
+			localStorage.setItem('privacyAccept', 'reject');
+			if( self.$modal.length && !self.$modal.hasClass('show') ) {
+				setTimeout(function() {
+					self.$modal.modal({
+						show: true, 
+						backdrop: 'static',
+						keyboard: false
+					});
+				}, 100);
+			}
+		}
 	},
 
 	isLogged: function() {
@@ -42130,8 +42160,7 @@ module.exports = {
 	logout: function() {
 		
 		delete sessionStorage.access_token;
-
-		//TODO destroy localstorage del accpet coockie
+		delete localStorage.privacyAccept;
 
 		location.href = window.aacRedirectLogout || 'login.html';
 	},
@@ -42191,6 +42220,7 @@ module.exports = {
 		}
 	}
 };
+
 },{"./config":129,"./utils":134,"jquery":40,"underscore":126}],132:[function(require,module,exports){
 
 var $ = jQuery = require('jquery');
