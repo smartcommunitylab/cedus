@@ -41567,7 +41567,7 @@ function config (name) {
 },{}],128:[function(require,module,exports){
 module.exports={
   "name": "professioni_istat",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "description": "",
   "main": "professioni.js",
   "repository": {
@@ -42090,6 +42090,28 @@ $(function() {
     }
   });
 
+
+  //DEBUG
+  if(location.hash=='#debug') {
+
+    window.utils = utils;
+
+    $('header').hide();
+
+    $('#tree > svg').css({
+      border:'3px solid green',
+    });
+
+    var ping = setInterval(function() {
+
+      if($selectjobs.find('a:eq(2)').length) {        
+        $selectjobs.find('a:eq(2)').trigger('click');
+        clearInterval(ping)
+      }
+      
+    },100);
+  }
+
 });  
 
 },{"../package.json":128,"./config":129,"./profile":131,"./table":132,"./tree":133,"./utils":134,"bootstrap":5,"bootstrap-list-filter":2,"d3":8,"handlebars":38,"jquery":40,"popper.js":42,"underscore":126,"underscore.string":80}],131:[function(require,module,exports){
@@ -42430,7 +42452,7 @@ module.exports = {
 
 		self.diagonal = d3.svg.diagonal()
 			.projection(function(d) {
-				return [d.y, d.x];
+				return [d.y+self.leftOffeset, d.x];
 			});
 
 		self.svg = d3.select(self.$tree.get(0)).append("svg")
@@ -42495,6 +42517,12 @@ module.exports = {
 
 		var self = this;
 
+		var w = $('#skills').outerWidth()/2;
+
+		self.leftOffeset = _.max([150, Math.round(w)]);
+
+console.log('skills width',w,self.leftOffeset)
+
 		self.svg.selectAll("*").remove();
 
 		var nodes = self.tree.nodes(source).reverse(),
@@ -42515,7 +42543,7 @@ module.exports = {
 			nodeWidthMax = self.width/(self.config.numLevels)
 
 		nodes.forEach(function(d) {
-			d.y = d.depth * nodeWidthMax - self.height + $('#skills').width();
+			d.y = d.depth * nodeWidthMax - self.height + self.leftOffeset;
 			nodeWidth = Math.abs(Math.min(nodeWidth, d.y - dy));
 			dy = d.y;
 		});
@@ -42531,7 +42559,7 @@ module.exports = {
 		var nodeEnter = node.enter().append("g")
 		.attr({
 			"transform": function(d) { 
-			    return "translate(" + d.y + "," + d.x + ")";
+			    return "translate(" + (d.y+self.leftOffeset )+ "," + (d.x) + ")";
 			},
 			"class": function(d) {
 
@@ -42677,7 +42705,7 @@ module.exports = {
 				self.reformatJSON(l5[0])
 			];
 
-			var data = {
+			self.data = {
 			  id: '0',
 			  level: 0,
 			  name: "",
@@ -42695,10 +42723,14 @@ module.exports = {
 			  }
 			}
 
-			fillTree(data);
+			fillTree(self.data);
 
 			self.$loader.hide();
-			self.draw(data, code);
+			self.draw(self.data, code);
+//TODO
+	/*		$(window).on('resize', function(e) {
+				self.draw(self.data, code);
+			})*/
 		});
 	}
 };

@@ -83,14 +83,18 @@ html {
     display: inline-block;
     margin-right: 10px;
 }
-
+#tree_wrapper {
+  width: auto;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
 #tree {
   height: 500px;
+  width: 1300px;
   position: relative;
 }
 
 #tree_loader {
-  margin-top: 300px;
   color: #36474F;
 }
 #tree_loader:before {
