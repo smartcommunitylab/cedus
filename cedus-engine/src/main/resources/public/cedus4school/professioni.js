@@ -41567,7 +41567,7 @@ function config (name) {
 },{}],128:[function(require,module,exports){
 module.exports={
   "name": "professioni_istat",
-  "version": "3.7.0",
+  "version": "3.8.0",
   "description": "",
   "main": "professioni.js",
   "repository": {
@@ -42475,7 +42475,7 @@ module.exports = {
 			  word,
 			  line,
 			  lineNumber = 0,
-			  lineHeight = 1,
+			  lineHeight = 0.4,
 			  y = parseInt(text.attr('y')),
 			  dy = parseFloat(text.attr('dy')),
 			  tspan;
@@ -42492,7 +42492,7 @@ module.exports = {
 			  tspan = text.append('tspan')
 			  	.attr('x', self.config.circleRadius*2)//self.config.circleRadius+(d.children?-(self.config.circleRadius*3):5) )
 			  	//.attr('y', 0)//+(d.children?-(self.config.circleRadius*3):y) )
-			  	.attr('dy', (++lineNumber) + (dy-0.6) + 'em');
+			  	.attr('dy',  Math.round(dy-lineHeight+lineNumber++, 2) + 'em');
 
 			  while (!!(word = words.pop())) {
 			    line.push(word);
@@ -42504,7 +42504,7 @@ module.exports = {
 			      tspan = text.append('tspan')
 			      	.attr('x', self.config.circleRadius*2)//self.config.circleRadius+(d.children?-(self.config.circleRadius*3):5) )
 			      	//.attr('y',  (d.children?self.config.circleRadius/2:y) )
-			      	.attr('dy', (lineNumber) + (dy+0.6) + 'em')
+			      	.attr('dy', Math.round(dy+lineHeight+lineNumber, 2) + 'em')
 			      	.text( he.decode(word) );
 			    }
 			  }
@@ -42520,8 +42520,6 @@ module.exports = {
 		var w = $('#skills').outerWidth()/2;
 
 		self.leftOffeset = _.max([150, Math.round(w)]);
-
-console.log('skills width',w,self.leftOffeset)
 
 		self.svg.selectAll("*").remove();
 
@@ -42540,10 +42538,10 @@ console.log('skills width',w,self.leftOffeset)
 
 		var nodeWidth = 0,
 			dy = 0,
-			nodeWidthMax = self.width/(self.config.numLevels)
+			nodeWidthMax = (self.width/(self.config.numLevels));
 
 		nodes.forEach(function(d) {
-			d.y = d.depth * nodeWidthMax - self.height + self.leftOffeset;
+			d.y = d.depth * nodeWidthMax - nodeWidthMax- 100;
 			nodeWidth = Math.abs(Math.min(nodeWidth, d.y - dy));
 			dy = d.y;
 		});
@@ -42580,7 +42578,9 @@ console.log('skills width',w,self.leftOffeset)
 		.on("click", function(d) {
 			self.onSelect.call(self, d);
 			d.desc = $('<textarea />').html(d.desc).val();
-			self.$sel.html( self.tmpls.node_tooltip(d) );
+			if(d.level===5) {
+				self.$sel.html( self.tmpls.node_tooltip(d) );
+			}
 		});
 
 		nodeEnter.append("text")
@@ -42601,9 +42601,10 @@ console.log('skills width',w,self.leftOffeset)
 		})
 		.on("click", function(d) {
 			self.onSelect.call(self, d);
-
 			d.desc = $('<textarea />').html(d.desc).val();
-			self.$sel.html(self.tmpls.node_tooltip(d));
+			if(d.level===5) {
+				self.$sel.html(self.tmpls.node_tooltip(d));
+			}
 		})
 		.attr({
 			"dy": 0,
@@ -42612,17 +42613,14 @@ console.log('skills width',w,self.leftOffeset)
 			},
 			"y": function(d) {
 				return self.config.textOffset;
-			},
-/*			"text-anchor": function(d) { 
-				return (d.children || d._children) ? "end" : "start";
-			}*/
+			}
 		})
 		.text(function(d) {
 			return d.name.toLowerCase();
 		})
 		.call(function(d) {
 			
-			var textWidth = Math.round(nodeWidth - 8 - self.config.circleRadius*2);
+			var textWidth = nodeWidth - 8 - self.config.circleRadius*2;
 
 			self.wrapText(d, textWidth);
 		});
