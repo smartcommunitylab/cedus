@@ -1,0 +1,168 @@
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.thymeleaf.org">
+<head> 
+	<title>Cedus4School - TIROCINI</title> 
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<!--link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet" /-->
+	<link rel="stylesheet" href="lib/bootstrap.min.css" />
+	<link rel="stylesheet" href="internships.css" />
+	
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+   <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+   integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+   crossorigin=""></script>
+   
+     <script src="./lib/city-sdk.min.js"></script>
+    <script src="./lib/ce4school-sdk.min.js"></script>
+   
+</head> 
+
+<body id="page_index">
+
+<header class="navbar navbar-expand flex-column flex-md-row bd-navbar">
+
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link active" href="index.html">SCUOLA</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="professioni.html">IL MIO PERCORSO</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="professioni_search.html">ASPIRAZIONI</a>
+      </li>
+    </ul>
+  </div>
+
+  <ul id="profile" class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+<!--     <li class="nav-item">
+      <a class="nav-item nav-link mr-md-2" href="#" id="username" aria-haspopup="true" aria-expanded="false">
+        NOME STUDENTE
+      </a>
+    </li>
+    <li class="nav-item logout">
+      <a class="nav-item nav-link mr-md-2 orange-text" href="#" id="logout" aria-haspopup="true" aria-expanded="false">
+        LOGOUT
+      </a>
+    </li>    
+ -->	<li class="nav-item">
+		<a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
+			<img src="images/cedus_logo.png" />
+		</a>
+    </li>
+  </ul>
+
+</header>
+
+<div id="version"></div>
+ <div id="mapid" class="map"></div>
+
+	<footer class="pt-4 my-md-5 pt-md-5 border-top">
+	    <div class="row">
+	      <div class="col-md col-md">
+	        <img class="mb-2" src="images/fbk_logo.png" alt="" />
+	      </div>
+          <div class="col-md align-bottom">
+            <a href="http://www.smartcommunitylab.it" target="_blank">&copy; 2018 Smart Cities and Communities</a>
+          </div>
+          <div class="col-md align-bottom">
+            <a href="http://www.smartcommunitylab.it" target="_blank">Assistenza</a>
+          </div>
+          <div class="col-md align-bottom">
+            <a href="./privacy.html" target="_blank">Condizioni e Privacy</a>
+          </div>
+	    </div>
+	</footer>
+
+</div>
+
+
+<div class="modal fade" id="privacyModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Data Privacy</h5>
+      </div>
+      <div class="modal-body" data-source="./privacy.html">
+        Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum <br />
+        Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum <br />
+        Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum <br />
+        Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum <br />
+      </div>
+      <div class="modal-footer">
+        <button id="btn-accept" type="button" class="btn btn-primary">Accetta</button>
+        <button id="btn-cancel" type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+
+  var mymap = L.map('mapid').setView([46.074330, 11.122984], 13);
+   L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+   }).addTo(mymap);
+   
+   CE4SchoolSdk.setCORSHelper('../api/proxy');    
+   let Orion4School = new CE4SchoolSdk.Orion4School("http", "217.172.12.177", "1026");
+   let fiwareservice = "trento";
+   let fiwareservicepath = "/trento_school/harmonized";
+
+   let companies = {};
+   let markers = [];
+   let timeout = null;
+   
+   let schedule = () => {
+	   if (timeout != null) {
+		   clearTimeout(timeout);
+	   }
+	   timeout = setTimeout(() => {
+		   var group = new L.featureGroup(markers);
+		   mymap.fitBounds(group.getBounds());
+		   timeout = null;
+	   }, 500);
+   }
+   
+   let createMarker = (intern, company) => {
+	   if (!intern.name) return;
+	   let marker = L.marker(company.location.value.coordinates.reverse()).addTo(mymap);
+	   let body = "<b>"+intern.name.value+"</b><br/>" +
+	              "<div> Posti totali: "+intern.totalPlaces.value+"</div>"+
+                  "<div> Posti disponibili: "+intern.remainingPlaces.value+"</div><br>" +
+	              "<b>"+company.name.value+"</b><br/>" +
+                  (company.address ? "<div> Indirizzo: "+decodeURIComponent(company.address.value.addressLocality)+"</div>" : "");
+       if (company.kpis) {
+           "<p> KPIs:</p><ul>";
+    	   company.kpis.value.forEach((kpi) => {
+               body += "<li>"+kpi.kpiname+": "+kpi.kpivalue+"</li>";    		   
+    	   });
+    	   body += "</ul>";
+       }
+	   
+	   marker.bindPopup(body);
+	   markers.push(marker);
+	   schedule();
+
+   }
+   
+   Orion4School.getInternships(fiwareservice,fiwareservicepath,20).then((interns) => {
+	   interns.forEach((intern) => {
+		   if (companies[intern.companyId.value]) {
+			   createMarker(intern, companies[intern.companyId.value]);
+		   } else {
+			   Orion4School.getEntity(fiwareservice,fiwareservicepath, intern.companyId.value).then((company) => {
+				   companies[intern.companyId.value] = company;
+	               createMarker(intern, companies[intern.companyId.value]);
+			   });
+		   }
+	   });
+   });
+   
+</script>
+</body>
+</html>
