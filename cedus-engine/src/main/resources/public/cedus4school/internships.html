@@ -5,7 +5,7 @@
 	<title>Cedus4School - TIROCINI</title> 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<!--link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet" /-->
+	<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet" />
 	<link rel="stylesheet" href="lib/bootstrap.min.css" />
 	<link rel="stylesheet" href="internships.css" />
 	
@@ -28,7 +28,7 @@
   <div class="navbar-nav-scroll">
     <ul class="navbar-nav bd-navbar-nav flex-row">
       <li class="nav-item">
-        <a class="nav-link active" href="index.html">SCUOLA</a>
+        <a class="nav-link" href="scuole.html">SCUOLA</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="professioni.html">IL MIO PERCORSO</a>
@@ -36,11 +36,14 @@
       <li class="nav-item">
         <a class="nav-link" href="professioni_search.html">ASPIRAZIONI</a>
       </li>
+      <li class="nav-item">
+        <a class="active nav-link" href="internships.html">TIROCINI</a>
+      </li>
     </ul>
   </div>
 
   <ul id="profile" class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
-<!--     <li class="nav-item">
+     <li class="nav-item">
       <a class="nav-item nav-link mr-md-2" href="#" id="username" aria-haspopup="true" aria-expanded="false">
         NOME STUDENTE
       </a>
@@ -50,7 +53,7 @@
         LOGOUT
       </a>
     </li>    
- -->	<li class="nav-item">
+ 	<li class="nav-item">
 		<a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
 			<img src="images/cedus_logo.png" />
 		</a>
@@ -101,6 +104,84 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="privacyModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Data Privacy</h5>
+      </div>
+      <div class="modal-body" data-source="./privacy.html">
+        Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum <br />
+        Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum <br />
+        Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum <br />
+        Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum <br />
+      </div>
+      <div class="modal-footer">
+        <button id="btn-accept" type="button" class="btn btn-primary">Accetta</button>
+        <button id="btn-cancel" type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- DYNAMIC TEMAPLATES -->
+<script id="tmpl_bread_admin" type="text/x-handlebars-template">
+<ol class="breadcrumb blue-bg">
+    <li class="breadcrumb-item">
+        <a href="#" data-country="{{country.properties.id}}">Copertura scolastica {{country.properties.name}}</a>
+    </li>
+    {{#if region}}
+        <li class="breadcrumb-item">
+            <a href="#" data-region="{{region.properties.id}}">{{region.properties.name}}</a>
+        </li>
+        {{#if province}}
+            <li class="breadcrumb-item">
+                <a href="#" data-region="{{region.properties.id}}" data-province="{{province.properties.id}}">{{province.properties.name}}</a>
+            </li>
+            {{#if municipality}}
+            <li class="breadcrumb-item" aria-current="page">
+                <span href="#" data-region="{{region.properties.id}}" data-province="{{province.properties.id}}" data-municipality="{{municipality.properties.id}}">{{municipality.properties.name}}</span>
+            </li>
+            {{/if}}
+        {{/if}}
+    {{/if}}
+</ol>
+</script>
+<script id="tmpl_popup" type="text/x-handlebars-template">
+{{#if label}}<b>{{label}}</b> <br />{{/if}}
+<big>{{#if name}} {{name}} {{/if}}</big>
+{{#if address}} <i>{{address}}</i> <br />{{/if}}
+{{#if time}} distanza: <b>{{time}}</b> minuti <br />{{/if}}
+</script>
+<script id="tmpl_sel_level" type="text/x-handlebars-template">
+    <option selected="selected">Open this select menu</option>
+    <option value="0">Pre-primary</option>
+    <option value="1">Primary education or first stage of basic education</option>
+    <option value="2">Lower secondary or second stage of basic education</option>
+    <option value="3">(Upper) secondary education</option>
+    <option value="4">Post-secondary</option>
+    <option value="5">First stage</option> 
+    <option value="6">Second stage</option>
+</script>
+<script id="tmpl_details" type="text/x-handlebars-template">
+    {{#if name}}<i>Nome:</i> {{name}} <br />{{/if}}
+    {{#if level}}<i>Grado Istruzione:</i> {{level}} <br />{{/if}}
+    {{#if id}}<i>Codice MIUR:</i> <a href="http://cercalatuascuola.istruzione.it/cercalatuascuola/istituti/{{id}}/cedus" target="_blank">{{id}}</a> <br />{{/if}}
+    {{#if address}}<i>Indirizzo:</i> {{address}} <br />{{/if}}
+    {{#if email}}<i>Email:</i> {{email}} <br />{{/if}}
+    {{#if website}}<i>Sito Web:</i> <a href="{{website}}" target="_blank">{{website}}</a> <br />{{/if}}
+</script>
+<script>
+//TODO INSIDE cedus  var aacUrl = [[${aacUrl}]];
+//var baseUrlDev = "./data/debug/";
+var baseUrlPro = "https://api-dev.smartcommunitylab.it/t/sco.cartella/";
+var aacBaseUrl = "https://am-dev.smartcommunitylab.it/aac/eauth/authorize?";
+var aacRedirect = location.href;
+var aacClientId = 'c5389529-fe0e-4f67-bf90-c55d9df65b66';
+var aacClientSecret = null;
+var aacMatchPath = "/(asl|cs)-stats/"   //domain to send auth heade;
+var tablePageSize = 5;
+</script>
+<script src="scuole.js"></script>
 <script>
 
   var mymap = L.map('mapid').setView([46.074330, 11.122984], 13);
